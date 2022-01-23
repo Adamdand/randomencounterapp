@@ -14,7 +14,8 @@ import { makeStyles } from "@mui/styles";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import useLoading from "../Hooks/useLoading";
-// import useHomeInspection from "Hooks/useDnDApp";
+import { IMonster, IMonsterList } from "../Context/Types";
+import monsterAPIs from "../API/monsterAPI";
 
 // import { signInWithEmailAndPassword } from "firebase/auth";
 // import { authenticate } from "API/firebase";
@@ -50,7 +51,12 @@ const MainPage: React.FC = () => {
   const { showLoading, hideLoading, loading } = useLoading();
   const [emailError, setEmailError] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  //   const [monsterList, setMonsterList] = useState<IMonster[]>([]);
+  const [monsterList, setMonsterList] = useState<IMonster[]>([]);
+  const [selectedMonster, setSelectedMonster] = useState<IMonster>({
+    index: "null",
+    name: "null",
+    url: "null",
+  });
   //   const [selectedMonster, setSelectedMonster] = useState<IMonster>({
   //     index: "null",
   //     name: "null",
@@ -58,19 +64,77 @@ const MainPage: React.FC = () => {
   //   });
   // const { state } = useContext(IdContext);
 
-  const newAccountClick = async (): Promise<void> => {
-    // for test purposes make into an async function when have real endpoints
-    // const emailResponseData = InspectionAPI.getemail();
-    // const data = { email } as Iemail;
-    // console.log('ID Data sent to fireBase: ', GetStatus);
-    showLoading();
+  const getAllMonsters = async () => {
+    const tempList = (await monsterAPIs.getAllMonsterAxios()) as IMonsterList;
+    setMonsterList(tempList.results);
+    console.log(tempList.results);
+  };
+
+  const getMonsterDetails = async () => {
+    if (selectedMonster !== null) {
+      const tempString = String(selectedMonster);
+      const tempList = await monsterAPIs.getSpecificMonsterAxios(tempString);
+      console.log(tempList);
+    }
+  };
+
+  const handleMonsterChange = (e: any) => {
+    const tempSelectedMonster = e.target.value;
+    console.log("tempSelectedMonster", tempSelectedMonster);
+    setSelectedMonster(tempSelectedMonster);
   };
 
   return (
     <Grid container={true} item={true} className={classes.root}>
       <Box sx={{ display: "block", textAlign: "center" }}>
         <Box>
-          <Typography variant="h1">Hello</Typography>
+          <Box sx={{ paddingLeft: "16px" }}>
+            <Button
+              variant="main"
+              sx={{ width: "150px" }}
+              onClick={getAllMonsters}
+            >
+              {loading === null && (
+                <Typography variant="h2">getMonsters</Typography>
+              )}
+              {loading !== null && (
+                <CircularProgress color="secondary" size={24} />
+              )}
+            </Button>
+          </Box>
+        </Box>
+        <Box sx={{ width: "250px" }}>
+          <Select
+            fullWidth={true}
+            labelId="monster"
+            id="monster"
+            value={selectedMonster.name}
+            onChange={handleMonsterChange}
+            defaultValue={selectedMonster.name}
+          >
+            {monsterList.map((monster) => (
+              <MenuItem key={monster.index} value={monster.index}>
+                <Typography>{monster.name}</Typography>
+              </MenuItem>
+            ))}
+          </Select>
+        </Box>
+        <Box sx={{ paddingLeft: "16px" }}>
+          <Button
+            variant="main"
+            sx={{ width: "150px" }}
+            onClick={getMonsterDetails}
+          >
+            {loading === null && (
+              <Typography variant="h2">find monster</Typography>
+            )}
+            {loading !== null && (
+              <CircularProgress color="secondary" size={24} />
+            )}
+          </Button>
+        </Box>
+        <Box sx={{ height: "500px", width: "100%" }}>
+          <Typography>{selectedMonster.index}</Typography>
         </Box>
       </Box>
     </Grid>
