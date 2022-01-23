@@ -7,6 +7,8 @@ import {
   Box,
   Select,
   MenuItem,
+  FormControl,
+  InputLabel,
 } from "@mui/material";
 import { LoadingButton, LoadingButtonProps } from "@mui/lab";
 import { getDatabase, ref, onValue } from "firebase/database";
@@ -78,10 +80,10 @@ const MainPage: React.FC = () => {
     }
   };
 
-  const handleMonsterChange = (e: any) => {
-    const tempSelectedMonster = e.target.value;
+  const handleMonsterChange = (event: any) => {
+    const tempSelectedMonster = event.target.value;
     console.log("tempSelectedMonster", tempSelectedMonster);
-    setSelectedMonster(tempSelectedMonster);
+    setSelectedMonster(event.target.value);
   };
 
   return (
@@ -103,38 +105,40 @@ const MainPage: React.FC = () => {
             </Button>
           </Box>
         </Box>
-        <Box sx={{ width: "250px" }}>
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Monster</InputLabel>
           <Select
             fullWidth={true}
             labelId="monster"
             id="monster"
-            value={selectedMonster.name}
+            value={selectedMonster}
             onChange={handleMonsterChange}
-            defaultValue={selectedMonster.name}
           >
             {monsterList.map((monster) => (
-              <MenuItem key={monster.index} value={monster.index}>
+              <MenuItem value={monster.index}>
                 <Typography>{monster.name}</Typography>
               </MenuItem>
             ))}
           </Select>
+        </FormControl>
+        <Box>
+          <Box sx={{ paddingLeft: "16px" }}>
+            <Button
+              variant="main"
+              sx={{ width: "150px" }}
+              onClick={getMonsterDetails}
+            >
+              {loading === null && (
+                <Typography variant="h2">find monster</Typography>
+              )}
+              {loading !== null && (
+                <CircularProgress color="secondary" size={24} />
+              )}
+            </Button>
+          </Box>
         </Box>
-        <Box sx={{ paddingLeft: "16px" }}>
-          <Button
-            variant="main"
-            sx={{ width: "150px" }}
-            onClick={getMonsterDetails}
-          >
-            {loading === null && (
-              <Typography variant="h2">find monster</Typography>
-            )}
-            {loading !== null && (
-              <CircularProgress color="secondary" size={24} />
-            )}
-          </Button>
-        </Box>
-        <Box sx={{ height: "500px", width: "100%" }}>
-          <Typography>{selectedMonster.index}</Typography>
+        <Box sx={{ width: "100%", paddingTop: "16px" }}>
+          <Typography>hello </Typography>
         </Box>
       </Box>
     </Grid>
