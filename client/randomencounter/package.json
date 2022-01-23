@@ -1,0 +1,77 @@
+{
+  "name": "randomencounter",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+      "@date-io/moment": "1.x",
+      "@emotion/react": "^11.1.5",
+      "@emotion/styled": "^11.1.5",
+      "@firebase/database": "^0.12.4",
+      "@mui/icons-material": "^5.1.0",
+      "@mui/lab": "^5.0.0-alpha.54",
+      "@mui/material": "^5.1.0",
+      "@mui/styles": "^5.1.0",
+      "@testing-library/jest-dom": "^5.11.4",
+      "@testing-library/react": "^11.1.0",
+      "@testing-library/user-event": "^12.1.10",
+      "axios": "^0.25.0",
+      "firebase": "^9.4.1",
+      "formik": "^2.2.9",
+      "libphonenumber-js": "^1.9.19",
+      "material-ui-dropzone": "^3.5.0",
+      "moment": "^2.29.1",
+      "react": "^17.0.1",
+      "react-dom": "^17.0.1",
+      "react-formik-ui": "^5.5.3",
+      "react-lottie": "^1.2.3",
+      "react-router-dom": "^5.2.0",
+      "react-scripts": "4.0.3",
+      "typescript": "^4.1.2",
+      "uuid": "^8.3.2",
+      "web-vitals": "^1.0.1",
+      "yup": "^0.32.11"
+  },
+  "scripts": {
+      "start": "react-scripts start",
+      "build": "react-scripts build",
+      "test": "react-scripts test",
+      "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+      "extends": [
+          "react-app",
+          "react-app/jest"
+      ]
+  },
+  "browserslist": {
+      "production": [
+          ">0.2%",
+          "not dead",
+          "not op_mini all"
+      ],
+      "development": [
+          "last 1 chrome version",
+          "last 1 firefox version",
+          "last 1 safari version"
+      ]
+  },
+  "devDependencies": {
+      "@types/jest": "^27.0.2",
+      "@types/node": "^16.10.2",
+      "@types/react": "^17.0.26",
+      "@types/react-dom": "^17.0.9",
+      "@types/react-lottie": "^1.2.6",
+      "@types/react-router-dom": "^5.3.0",
+      "@types/uuid": "^8.3.1",
+      "@typescript-eslint/parser": "^4.32.0",
+      "eslint": "^7.32.0",
+      "eslint-config-airbnb": "^18.2.1",
+      "eslint-config-prettier": "^8.3.0",
+      "eslint-import-resolver-typescript": "^2.5.0",
+      "eslint-plugin-import": "^2.24.2",
+      "eslint-plugin-jsx-a11y": "^6.4.1",
+      "eslint-plugin-prettier": "^4.0.0",
+      "eslint-plugin-react": "^7.26.1",
+      "prettier": "^2.2.1"
+  }
+}
