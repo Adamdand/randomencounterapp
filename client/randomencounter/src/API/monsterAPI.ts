@@ -1,3 +1,4 @@
+import { accordionSummaryClasses } from "@mui/material";
 import axios, { AxiosResponse } from "axios";
 import { IMonsterDetails, IMonsterList } from "../Context/Types";
 
@@ -15,11 +16,24 @@ const monsterAPI = {
   ): Promise<IMonsterDetails> => {
     return axios
       .get<IMonsterDetails>(
-        `https://www.dnd5eapi.co/api//monsters/${monsterName}`
+        `https://www.dnd5eapi.co/api/monsters/${monsterName}`
       )
       .then((response: AxiosResponse) => {
         console.log(response.data);
         return response.data as IMonsterDetails;
+      });
+  },
+
+  getMonstersWithRating: async (
+    monsterRating: number
+  ): Promise<IMonsterList> => {
+    return axios
+      .get<IMonsterList>(
+        `https://www.dnd5eapi.co/api/monsters?challenge_rating=${monsterRating}`
+      )
+      .then((response: AxiosResponse) => {
+        console.log(response.data);
+        return response.data as IMonsterList;
       });
   },
 

@@ -10,20 +10,23 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
-import { LoadingButton, LoadingButtonProps } from "@mui/lab";
-import { getDatabase, ref, onValue } from "firebase/database";
 import { makeStyles } from "@mui/styles";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import useLoading from "../Hooks/useLoading";
-import { IMonster, IMonsterList } from "../Context/Types";
+import { IMonster, IMonsterDetails, IMonsterList } from "../Context/Types";
 import monsterAPIs from "../API/monsterAPI";
+import { defaultMonsterDetails } from "../Context/DefaultTypes";
 
 // import { signInWithEmailAndPassword } from "firebase/auth";
 // import { authenticate } from "API/firebase";
 // import { IMonster, IMonsterDetails, IMonsterList } from "Context/Types";
 // import monsterAPIs from "../API/monsterAPI";
 // import SiteContent from "../SiteContent/SiteContent";
+const monsterRatings = [
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+  23, 24, 25, 26, 27, 28, 29, 30,
+];
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -45,20 +48,19 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 const MainPage: React.FC = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
   const history = useHistory();
   const classes = useStyle();
   // const { searchemail } = useHomeInspection();
   const { showLoading, hideLoading, loading } = useLoading();
-  const [emailError, setEmailError] = useState<boolean>(false);
-  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [monsterList, setMonsterList] = useState<IMonster[]>([]);
   const [selectedMonster, setSelectedMonster] = useState<IMonster>({
     index: "null",
     name: "null",
     url: "null",
   });
+  const [monsterDetails, setMonsterDetails] = useState<IMonsterDetails>(
+    defaultMonsterDetails
+  );
   //   const [selectedMonster, setSelectedMonster] = useState<IMonster>({
   //     index: "null",
   //     name: "null",
@@ -69,42 +71,51 @@ const MainPage: React.FC = () => {
   const getAllMonsters = async () => {
     const tempList = (await monsterAPIs.getAllMonsterAxios()) as IMonsterList;
     setMonsterList(tempList.results);
-    console.log(tempList.results);
   };
 
-  const getMonsterDetails = async () => {
-    if (selectedMonster !== null) {
-      const tempString = String(selectedMonster);
-      const tempList = await monsterAPIs.getSpecificMonsterAxios(tempString);
-      console.log(tempList);
+  useEffect(() => {
+    getAllMonsters();
+  }, []);
+
+  const getMonsterDetails = async (monsterName: string) => {
+    if (monsterName !== null) {
+      const tempList = await monsterAPIs.getSpecificMonsterAxios(monsterName);
+      setMonsterDetails(tempList);
+      console.log("monster details :", tempList);
     }
   };
 
   const handleMonsterChange = (event: any) => {
     const tempSelectedMonster = event.target.value;
-    console.log("tempSelectedMonster", tempSelectedMonster);
+    console.log("set selected Monster", tempSelectedMonster);
     setSelectedMonster(event.target.value);
+    getMonsterDetails(tempSelectedMonster);
   };
+
+  const getMonsterWithRating = async (monsterRating: number) => {
+    await monsterAPIs.getMonstersWithRating(monsterRating);
+  };
+
+  const handleRatingChange = (event: any) => {
+    const tempMonsterRating = event.target.value;
+    console.log("Monster Rating Selected", tempMonsterRating);
+    const monstersWithCR = getMonsterWithRating(tempMonsterRating);
+    console.log("monsterList with CR: ", monstersWithCR);
+  };
+
+  getMonsterWithRating(1);
 
   return (
     <Grid container={true} item={true} className={classes.root}>
-      <Box sx={{ display: "block", textAlign: "center" }}>
-        <Box>
-          <Box sx={{ paddingLeft: "16px" }}>
-            <Button
-              variant="main"
-              sx={{ width: "150px" }}
-              onClick={getAllMonsters}
-            >
-              {loading === null && (
-                <Typography variant="h2">getMonsters</Typography>
-              )}
-              {loading !== null && (
-                <CircularProgress color="secondary" size={24} />
-              )}
-            </Button>
-          </Box>
-        </Box>
+      <Box
+        sx={{
+          display: "block",
+          textAlign: "center",
+          paddingTop: "40px",
+          paddingLeft: "16px",
+          width: "200px",
+        }}
+      >
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Monster</InputLabel>
           <Select
@@ -121,24 +132,34 @@ const MainPage: React.FC = () => {
             ))}
           </Select>
         </FormControl>
-        <Box>
-          <Box sx={{ paddingLeft: "16px" }}>
-            <Button
-              variant="main"
-              sx={{ width: "150px" }}
-              onClick={getMonsterDetails}
-            >
-              {loading === null && (
-                <Typography variant="h2">find monster</Typography>
-              )}
-              {loading !== null && (
-                <CircularProgress color="secondary" size={24} />
-              )}
-            </Button>
-          </Box>
-        </Box>
+
         <Box sx={{ width: "100%", paddingTop: "16px" }}>
-          <Typography>hello </Typography>
+          <Typography>Name = {monsterDetails.name}</Typography>
+          <Typography>
+            Challenge Rating = {monsterDetails.challenge_rating}
+          </Typography>
+          <Typography>AC = {monsterDetails.armor_class}</Typography>
+          <Typography>HitPoints = {monsterDetails.hit_points}</Typography>
+        </Box>
+        <Box sx={{ paddingTop: "40px" }}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">
+              Monster Rating
+            </InputLabel>
+            <Select
+              fullWidth={true}
+              labelId="monster"
+              id="monster"
+              value={selectedMonster}
+              onChange={handleRatingChange}
+            >
+              {monsterRatings.map((rating) => (
+                <MenuItem value={rating}>
+                  <Typography>{rating}</Typography>
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Box>
       </Box>
     </Grid>
