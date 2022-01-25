@@ -1,39 +1,41 @@
 import { accordionSummaryClasses } from "@mui/material";
 import axios, { AxiosResponse } from "axios";
-import { IMonsterDetails, IMonsterList } from "../Context/Types";
+import { IMonster, IMonsterDetails, IMonsterList } from "../Context/Types";
 
 const monsterAPI = {
-  getAllMonsterAxios: async (): Promise<IMonsterList> => {
+  getAllMonsterAxios: async (): Promise<IMonster[]> => {
     return axios
-      .get<IMonsterList>("https://www.dnd5eapi.co/api//monsters")
+      .get("https://www.dnd5eapi.co/api//monsters")
       .then((response: AxiosResponse) => {
-        console.log(response.data);
-        return response.data as IMonsterList;
+        console.log("initial call", response.data);
+        if (response.data.results.length > 0) {
+          return response.data.results as IMonster[];
+        }
+        return [];
+
+        // return response.data as IMonsterList;
       });
   },
   getSpecificMonsterAxios: async (
     monsterName: string
   ): Promise<IMonsterDetails> => {
     return axios
-      .get<IMonsterDetails>(
-        `https://www.dnd5eapi.co/api/monsters/${monsterName}`
-      )
+      .get(`https://www.dnd5eapi.co/api/monsters/${monsterName}`)
       .then((response: AxiosResponse) => {
-        console.log(response.data);
+        console.log("specific monster", response.data);
+
         return response.data as IMonsterDetails;
       });
   },
 
-  getMonstersWithRating: async (
-    monsterRating: number
-  ): Promise<IMonsterList> => {
+  getMonstersWithRating: async (monsterRating: number): Promise<IMonster[]> => {
     return axios
-      .get<IMonsterList>(
+      .get(
         `https://www.dnd5eapi.co/api/monsters?challenge_rating=${monsterRating}`
       )
       .then((response: AxiosResponse) => {
-        console.log(response.data);
-        return response.data as IMonsterList;
+        console.log("monster Rating", response.data.results);
+        return response.data.results as IMonster[];
       });
   },
 

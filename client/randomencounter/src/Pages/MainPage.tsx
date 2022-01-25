@@ -53,6 +53,8 @@ const MainPage: React.FC = () => {
   // const { searchemail } = useHomeInspection();
   const { showLoading, hideLoading, loading } = useLoading();
   const [monsterList, setMonsterList] = useState<IMonster[]>([]);
+  const [monsterRatingList, setMonsterRatingList] = useState<IMonster[]>([]);
+  const [selectedCR, setSelectedCR] = useState<number>();
   const [selectedMonster, setSelectedMonster] = useState<IMonster>({
     index: "null",
     name: "null",
@@ -67,10 +69,19 @@ const MainPage: React.FC = () => {
   //     url: "null",
   //   });
   // const { state } = useContext(IdContext);
-
+  console.log("monsters on main page", monsterList);
+  let tempList: IMonster[];
   const getAllMonsters = async () => {
-    const tempList = (await monsterAPIs.getAllMonsterAxios()) as IMonsterList;
-    setMonsterList(tempList.results);
+    try {
+      tempList = await monsterAPIs.getAllMonsterAxios();
+    } catch (error) {
+      console.log("error: ", error);
+    }
+    if (tempList.length > 0) {
+      setMonsterList(tempList);
+    } else {
+      setMonsterList([]);
+    }
   };
 
   useEffect(() => {
@@ -78,10 +89,17 @@ const MainPage: React.FC = () => {
   }, []);
 
   const getMonsterDetails = async (monsterName: string) => {
+    let tempMonsterDetails: IMonsterDetails;
     if (monsterName !== null) {
-      const tempList = await monsterAPIs.getSpecificMonsterAxios(monsterName);
-      setMonsterDetails(tempList);
-      console.log("monster details :", tempList);
+      try {
+        tempMonsterDetails = await monsterAPIs.getSpecificMonsterAxios(
+          monsterName
+        );
+        setMonsterDetails(tempMonsterDetails);
+        console.log("monster details :", tempMonsterDetails);
+      } catch (error) {
+        console.log("error: ", error);
+      }
     }
   };
 
@@ -93,17 +111,27 @@ const MainPage: React.FC = () => {
   };
 
   const getMonsterWithRating = async (monsterRating: number) => {
-    await monsterAPIs.getMonstersWithRating(monsterRating);
+    let monstersWithCR: IMonster[];
+    monstersWithCR = [];
+    try {
+      monstersWithCR = await monsterAPIs.getMonstersWithRating(monsterRating);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+    if (monstersWithCR.length > 0) {
+      setMonsterRatingList(monstersWithCR);
+    }
   };
 
   const handleRatingChange = (event: any) => {
     const tempMonsterRating = event.target.value;
+    setSelectedCR(tempMonsterRating);
     console.log("Monster Rating Selected", tempMonsterRating);
-    const monstersWithCR = getMonsterWithRating(tempMonsterRating);
-    console.log("monsterList with CR: ", monstersWithCR);
+    if (tempMonsterRating !== undefined) {
+      const monstersWithCR = getMonsterWithRating(tempMonsterRating);
+      console.log("monsterList with CR: ", monstersWithCR);
+    }
   };
-
-  getMonsterWithRating(1);
 
   return (
     <Grid container={true} item={true} className={classes.root}>
@@ -150,7 +178,7 @@ const MainPage: React.FC = () => {
               fullWidth={true}
               labelId="monster"
               id="monster"
-              value={selectedMonster}
+              value={selectedCR}
               onChange={handleRatingChange}
             >
               {monsterRatings.map((rating) => (
@@ -160,6 +188,11 @@ const MainPage: React.FC = () => {
               ))}
             </Select>
           </FormControl>
+        </Box>
+        <Box sx={{ width: "100%", paddingTop: "16px" }}>
+          {monsterRatingList.map((monstersWithRating) => {
+            return <Box>{monstersWithRating.name}</Box>;
+          })}
         </Box>
       </Box>
     </Grid>
