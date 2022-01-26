@@ -17,6 +17,7 @@ import useLoading from "../Hooks/useLoading";
 import { IMonster, IMonsterDetails, IMonsterList } from "../Context/Types";
 import monsterAPIs from "../API/monsterAPI";
 import { defaultMonsterDetails } from "../Context/DefaultTypes";
+import CharacterInput from "./CharacterInput";
 
 // import { signInWithEmailAndPassword } from "firebase/auth";
 // import { authenticate } from "API/firebase";
@@ -223,7 +224,7 @@ const MainPage: React.FC = () => {
             );
           })}
         </Box>
-        <Box>
+        {/* <Box>
           <TextField
             placeholder="how many players?"
             fullWidth
@@ -239,23 +240,9 @@ const MainPage: React.FC = () => {
               },
             }}
           />
-        </Box>
+        </Box> */}
         <Box>
-          <TextField
-            placeholder="PlayerName"
-            fullWidth
-            variant="outlined"
-            value={playerName}
-            disabled={loading !== null}
-            onChange={(
-              event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-            ) => onNameChange(event.target.value)}
-            InputProps={{
-              classes: {
-                root: classes.innerInput,
-              },
-            }}
-          />
+          <CharacterInput />
         </Box>
         <Box>{playerName}</Box>
       </Box>

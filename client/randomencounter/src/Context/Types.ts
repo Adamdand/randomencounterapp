@@ -320,3 +320,8 @@ export interface IMonsterDetails {
   legendary_actions?: IActions[];
   url: string;
 }
+
+export interface playerDetails {
+  firstName: string;
+  lastName: string;
+}
