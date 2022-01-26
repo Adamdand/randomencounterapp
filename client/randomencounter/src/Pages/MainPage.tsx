@@ -63,6 +63,8 @@ const MainPage: React.FC = () => {
   const [monsterDetails, setMonsterDetails] = useState<IMonsterDetails>(
     defaultMonsterDetails
   );
+  const [numberOfPlayers, setNumberOfPlayers] = useState<number>();
+  const [playerName, setPlayerName] = useState<string>("");
   //   const [selectedMonster, setSelectedMonster] = useState<IMonster>({
   //     index: "null",
   //     name: "null",
@@ -70,6 +72,15 @@ const MainPage: React.FC = () => {
   //   });
   // const { state } = useContext(IdContext);
   console.log("monsters on main page", monsterList);
+
+  const changeNumberOfPlayers = (playerNumber: string) => {
+    setNumberOfPlayers(Number(playerNumber));
+  };
+
+  const onNameChange = (name: string) => {
+    setPlayerName(name);
+  };
+
   let tempList: IMonster[];
   const getAllMonsters = async () => {
     try {
@@ -107,6 +118,13 @@ const MainPage: React.FC = () => {
     const tempSelectedMonster = event.target.value;
     console.log("set selected Monster", tempSelectedMonster);
     setSelectedMonster(event.target.value);
+    getMonsterDetails(tempSelectedMonster);
+  };
+
+  const selectMonsterFromCRList = (monsterName: string) => {
+    const tempSelectedMonster = monsterName;
+    console.log("set selected Monster", tempSelectedMonster);
+    // setSelectedMonster(event.target.value);
     getMonsterDetails(tempSelectedMonster);
   };
 
@@ -191,9 +209,55 @@ const MainPage: React.FC = () => {
         </Box>
         <Box sx={{ width: "100%", paddingTop: "16px" }}>
           {monsterRatingList.map((monstersWithRating) => {
-            return <Box>{monstersWithRating.name}</Box>;
+            return (
+              <Box
+                display="flex"
+                flexDirection="row"
+                justifyContent="space-evenly"
+                alignItems="center"
+                style={{ cursor: "pointer" }}
+                onClick={() => getMonsterDetails(monstersWithRating.index)}
+              >
+                <Box>{monstersWithRating.name}</Box>
+              </Box>
+            );
           })}
         </Box>
+        <Box>
+          <TextField
+            placeholder="how many players?"
+            fullWidth
+            variant="outlined"
+            value={numberOfPlayers}
+            disabled={loading !== null}
+            onChange={(
+              event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+            ) => changeNumberOfPlayers(event.target.value)}
+            InputProps={{
+              classes: {
+                root: classes.innerInput,
+              },
+            }}
+          />
+        </Box>
+        <Box>
+          <TextField
+            placeholder="PlayerName"
+            fullWidth
+            variant="outlined"
+            value={playerName}
+            disabled={loading !== null}
+            onChange={(
+              event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+            ) => onNameChange(event.target.value)}
+            InputProps={{
+              classes: {
+                root: classes.innerInput,
+              },
+            }}
+          />
+        </Box>
+        <Box>{playerName}</Box>
       </Box>
     </Grid>
   );

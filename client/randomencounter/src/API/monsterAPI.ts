@@ -39,15 +39,15 @@ const monsterAPI = {
       });
   },
 
-  getAllMonsters: async () => {
-    const data = await axios.get("http://localhost:8000/api/monsters");
-    console.log(data);
-  },
+  // getAllMonsters: async () => {
+  //   const data = await axios.get("http://localhost:8000/api/monsters");
+  //   console.log(data);
+  // },
 
-  getMonster: async () => {
-    const data = await axios.get("http://localhost:8000/api/monster");
-    console.log(data);
-  },
+  // getMonster: async () => {
+  //   const data = await axios.get("http://localhost:8000/api/monster");
+  //   console.log(data);
+  // },
 };
 
 export default monsterAPI;
