@@ -13,7 +13,6 @@ function CharacterInput() {
       characterLevel: null,
     },
   ]);
-  const [averageLevels, setAverageLevels] = useState<number>();
 
   // handle input change
   const handleInputChange = (
@@ -57,7 +56,13 @@ function CharacterInput() {
   };
 
   return (
-    <Box sx={{ paddingTop: "40px" }}>
+    <Box
+      sx={{
+        fisplay: "flex",
+        paddingTop: "40px",
+        width: "100%",
+      }}
+    >
       {inputList.map((x, i) => {
         return (
           <Box sx={{ display: "flex", flexDirection: "row", width: "800px" }}>

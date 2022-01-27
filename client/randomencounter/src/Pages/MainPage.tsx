@@ -18,6 +18,7 @@ import { IMonster, IMonsterDetails, IMonsterList } from "../Context/Types";
 import monsterAPIs from "../API/monsterAPI";
 import { defaultMonsterDetails } from "../Context/DefaultTypes";
 import CharacterInput from "./CharacterInput";
+import ButtonToggle from "./ButtonToggle";
 
 // import { signInWithEmailAndPassword } from "firebase/auth";
 // import { authenticate } from "API/firebase";
@@ -31,7 +32,9 @@ const monsterRatings = [
 
 const useStyle = makeStyles((theme) => ({
   root: {
+    display: "flex",
     flexDirection: "column",
+    alignItems: "center",
     spacing: "8px",
     flexBasis: "72%",
   },
@@ -153,16 +156,19 @@ const MainPage: React.FC = () => {
   };
 
   return (
-    <Grid container={true} item={true} className={classes.root}>
+    <Box className={classes.root} sx={{ width: "100%" }}>
       <Box
         sx={{
           display: "block",
           textAlign: "center",
           paddingTop: "40px",
           paddingLeft: "16px",
-          width: "200px",
+          width: "100%",
         }}
       >
+        <Box sx={{ paddingBottom: "40px" }}>
+          <ButtonToggle />
+        </Box>
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Monster</InputLabel>
           <Select
@@ -241,12 +247,12 @@ const MainPage: React.FC = () => {
             }}
           />
         </Box> */}
-        <Box>
+        <Box sx={{ justifyContent: "center" }}>
           <CharacterInput />
         </Box>
         <Box>{playerName}</Box>
       </Box>
-    </Grid>
+    </Box>
   );
 };
 
