@@ -15,7 +15,12 @@ import { makeStyles } from "@mui/styles";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import useLoading from "../Hooks/useLoading";
-import { IMonster, IMonsterDetails, IMonsterList } from "../Context/Types";
+import {
+  IMonster,
+  IMonsterDetails,
+  IMonsterList,
+  IRandomMonster,
+} from "../Context/Types";
 import monsterAPIs from "../API/monsterAPI";
 import { defaultMonsterDetails } from "../Context/DefaultTypes";
 import CharacterInput from "./CharacterInput";
@@ -72,6 +77,21 @@ const MainPage: React.FC = () => {
   const [numberOfPlayers, setNumberOfPlayers] = useState<number>();
   const [averagePlayerLevel, setAveragePlayerLevel] = useState<number>();
   const [playerName, setPlayerName] = useState<string>("");
+  const [randomMonsterTypeOne, setRandomMonsterTypeOne] =
+    useState<IRandomMonster>({
+      quantity: 0,
+      index: "null",
+      name: "null",
+      url: "null",
+    });
+  const [randomMonsterTypeTwo, setRandomMonsterTypeTwo] =
+    useState<IRandomMonster>({
+      quantity: 0,
+      index: "null",
+      name: "null",
+      url: "null",
+    });
+  const [twoTypeOfMonsters, settwoTypeOfMonsters] = useState<boolean>(false);
   //   const [selectedMonster, setSelectedMonster] = useState<IMonster>({
   //     index: "null",
   //     name: "null",
@@ -153,6 +173,49 @@ const MainPage: React.FC = () => {
     }
   };
 
+  // const getRandomMonsterTypeOne = (twoTypeOfMonsters: boolean) => {
+  //   let monsterIndex = Math.floor(Math.random() * monsterRatingList.length);
+  //   let rndInt: number;
+  //   if (twoTypeOfMonsters === true) {
+  //     rndInt = Math.floor(Math.random() * 3) + 1;
+  //   } else {
+  //     rndInt = Math.floor(Math.random() * 6) + 1;
+  //   }
+  //   let monsterObject = monsterRatingList[monsterIndex];
+
+  //   let newRandomMonster = {
+  //     ...monsterObject,
+  //     quantity: rndInt,
+  //   } as IRandomMonster;
+  //   setRandomMonsterTypeOne(newRandomMonster);
+  // };
+
+  // const getRandomMonsterTypeTwo = (twoTypeOfMonsters: boolean) => {
+  //   if (twoTypeOfMonsters === true && monsterRatingList.length > 1) {
+  //     let monsterIndex = Math.floor(Math.random() * monsterRatingList.length);
+  //     let rndInt = Math.floor(Math.random() * 3) + 1;
+  //     let monsterObject = monsterRatingList[monsterIndex];
+  //     let newRandomMonster = {
+  //       ...monsterObject,
+  //       quantity: rndInt,
+  //     } as IRandomMonster;
+  //     setRandomMonsterTypeTwo(newRandomMonster);
+  //   } else {
+  //     setRandomMonsterTypeTwo({
+  //       quantity: 0,
+  //       index: "null",
+  //       name: "null",
+  //       url: "null",
+  //     });
+  //   }
+  // };
+
+  // const findRandomEncounter = () => {
+  //   settwoTypeOfMonsters(Math.random() < 0.5);
+  //   getRandomMonsterTypeOne(twoTypeOfMonsters);
+  //   getRandomMonsterTypeTwo(twoTypeOfMonsters);
+  // };
+
   const getMonsterWithRatingBtn = async () => {
     if (averagePlayerLevel !== undefined) {
       let monstersWithCR: IMonster[];
@@ -166,6 +229,7 @@ const MainPage: React.FC = () => {
       }
       if (monstersWithCR.length > 0) {
         setMonsterRatingList(monstersWithCR);
+        // findRandomEncounter();
       }
     }
   };
@@ -185,21 +249,6 @@ const MainPage: React.FC = () => {
     newGameType: React.SetStateAction<string>
   ) => {
     setGameType(newGameType);
-  };
-
-  const getRandomMonsterTypeOne = (twoTypeOfMonsters: boolean) => {
-    let monterIndex = Math.floor(Math.random() * setMonsterRatingList.length);
-    if (twoTypeOfMonsters === true) {
-      let rndInt = Math.floor(Math.random() * 3) + 1;
-    } else {
-      let rndInt = Math.floor(Math.random() * 6) + 1;
-    }
-  };
-
-  const getRandomMonsterTypeTwo = (twoTypeOfMonsters: boolean) => {
-    if (twoTypeOfMonsters === true) {
-      let rndInt = Math.floor(Math.random() * 3) + 1;
-    }
   };
 
   return (
@@ -383,29 +432,30 @@ const MainPage: React.FC = () => {
             <Button onClick={getMonsterWithRatingBtn}>
               <Typography>Start Battle</Typography>
             </Button>
-            {monsterRatingList.length > 0 && (
-              <Box>
+            {/* {monsterRatingList.length > 0 &&
+              randomMonsterTypeOne !== undefined && (
                 <Box>
-                  <Typography
-                    display="flex"
-                    flexDirection="row"
-                    alignItems="center"
-                    style={{ cursor: "pointer" }}
-                  >
-                    you have encountered {Math.floor(Math.random() * 4) + 1}
-                    <Box sx={{ paddingLeft: "4px" }}>
-                      {monsterRatingList[0].name}
-                    </Box>
-                    {monsterRatingList.length > 1 && (
-                      <Typography>
-                        , and {Math.floor(Math.random() * 4) + 1}{" "}
-                        {monsterRatingList[1].name} .
-                      </Typography>
-                    )}
-                  </Typography>
+                  <Box>
+                    <Typography
+                      display="flex"
+                      flexDirection="row"
+                      alignItems="center"
+                      style={{ cursor: "pointer" }}
+                    >
+                      you have encountered {randomMonsterTypeOne.quantity}
+                      <Box sx={{ paddingLeft: "4px" }}>
+                        {randomMonsterTypeOne?.name}
+                      </Box>
+                      {twoTypeOfMonsters && randomMonsterTypeTwo !== undefined && (
+                        <Typography>
+                          , and {randomMonsterTypeTwo.quantity}{" "}
+                          {randomMonsterTypeTwo.name} .
+                        </Typography>
+                      )}
+                    </Typography>
+                  </Box>
                 </Box>
-              </Box>
-            )}
+              )} */}
           </Box>
         )}
 

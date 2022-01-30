@@ -325,3 +325,10 @@ export interface playerDetails {
   firstName: string;
   lastName: string;
 }
+
+export interface IRandomMonster {
+  quantity: number;
+  index: string;
+  name: string;
+  url: string;
+}
