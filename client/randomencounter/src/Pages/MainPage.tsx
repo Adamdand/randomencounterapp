@@ -9,6 +9,7 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
+  AppBar,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useEffect, useState } from "react";
@@ -56,6 +57,7 @@ const MainPage: React.FC = () => {
   const classes = useStyle();
   // const { searchemail } = useHomeInspection();
   const { showLoading, hideLoading, loading } = useLoading();
+  const [gameType, setGameType] = useState<string>("monster search");
   const [monsterList, setMonsterList] = useState<IMonster[]>([]);
   const [monsterRatingList, setMonsterRatingList] = useState<IMonster[]>([]);
   const [selectedCR, setSelectedCR] = useState<number>();
@@ -68,6 +70,7 @@ const MainPage: React.FC = () => {
     defaultMonsterDetails
   );
   const [numberOfPlayers, setNumberOfPlayers] = useState<number>();
+  const [averagePlayerLevel, setAveragePlayerLevel] = useState<number>();
   const [playerName, setPlayerName] = useState<string>("");
   //   const [selectedMonster, setSelectedMonster] = useState<IMonster>({
   //     index: "null",
@@ -79,6 +82,10 @@ const MainPage: React.FC = () => {
 
   const changeNumberOfPlayers = (playerNumber: string) => {
     setNumberOfPlayers(Number(playerNumber));
+  };
+
+  const changeAveragePlayerLevel = (playerLevel: string) => {
+    setAveragePlayerLevel(Number(playerLevel));
   };
 
   const onNameChange = (name: string) => {
@@ -123,6 +130,7 @@ const MainPage: React.FC = () => {
     console.log("set selected Monster", tempSelectedMonster);
     setSelectedMonster(event.target.value);
     getMonsterDetails(tempSelectedMonster);
+    setSelectedCR(undefined);
   };
 
   const selectMonsterFromCRList = (monsterName: string) => {
@@ -155,6 +163,15 @@ const MainPage: React.FC = () => {
     }
   };
 
+  const handleGameType = (
+    event: any,
+    newGameType: React.SetStateAction<string>
+  ) => {
+    setGameType(newGameType);
+  };
+
+  console.log(gameType);
+
   return (
     <Box className={classes.root} sx={{ width: "100%" }}>
       <Box
@@ -167,69 +184,123 @@ const MainPage: React.FC = () => {
         }}
       >
         <Box sx={{ paddingBottom: "40px" }}>
-          <ButtonToggle />
+          <ButtonToggle onClick={handleGameType} gameType={gameType} />
         </Box>
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Monster</InputLabel>
-          <Select
-            fullWidth={true}
-            labelId="monster"
-            id="monster"
-            value={selectedMonster}
-            onChange={handleMonsterChange}
-          >
-            {monsterList.map((monster) => (
-              <MenuItem value={monster.index}>
-                <Typography>{monster.name}</Typography>
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
-        <Box sx={{ width: "100%", paddingTop: "16px" }}>
-          <Typography>Name = {monsterDetails.name}</Typography>
-          <Typography>
-            Challenge Rating = {monsterDetails.challenge_rating}
-          </Typography>
-          <Typography>AC = {monsterDetails.armor_class}</Typography>
-          <Typography>HitPoints = {monsterDetails.hit_points}</Typography>
-        </Box>
-        <Box sx={{ paddingTop: "40px" }}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">
-              Monster Rating
-            </InputLabel>
-            <Select
-              fullWidth={true}
-              labelId="monster"
-              id="monster"
-              value={selectedCR}
-              onChange={handleRatingChange}
+        {gameType === "Monster Search" && (
+          <Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+              }}
             >
-              {monsterRatings.map((rating) => (
-                <MenuItem value={rating}>
-                  <Typography>{rating}</Typography>
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Box>
-        <Box sx={{ width: "100%", paddingTop: "16px" }}>
-          {monsterRatingList.map((monstersWithRating) => {
-            return (
-              <Box
-                display="flex"
-                flexDirection="row"
-                justifyContent="space-evenly"
-                alignItems="center"
-                style={{ cursor: "pointer" }}
-                onClick={() => getMonsterDetails(monstersWithRating.index)}
-              >
-                <Box>{monstersWithRating.name}</Box>
+              <Box>
+                <FormControl sx={{ width: "250px" }}>
+                  <InputLabel id="demo-simple-select-label">Monster</InputLabel>
+                  <Select
+                    fullWidth={true}
+                    labelId="monster"
+                    id="monster"
+                    value={selectedMonster}
+                    onChange={handleMonsterChange}
+                  >
+                    {monsterList.map((monster) => (
+                      <MenuItem value={monster.index}>
+                        <Typography>{monster.name}</Typography>
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
               </Box>
-            );
-          })}
-        </Box>
+              <Box>
+                <FormControl sx={{ width: "250px" }}>
+                  <InputLabel id="demo-simple-select-label">
+                    Monster Rating
+                  </InputLabel>
+                  <Select
+                    fullWidth={true}
+                    labelId="monster"
+                    id="monster"
+                    value={selectedCR}
+                    onChange={handleRatingChange}
+                  >
+                    {monsterRatings.map((rating) => (
+                      <MenuItem value={rating}>
+                        <Typography>{rating}</Typography>
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+
+                {selectedCR && (
+                  <Box sx={{ width: "100%", paddingTop: "16px" }}>
+                    <Typography
+                      sx={{ textDecoration: "underline", fontWeight: "bold" }}
+                    >
+                      Monster Options with CR {selectedCR}
+                    </Typography>
+
+                    {monsterRatingList.map((monstersWithRating) => {
+                      return (
+                        <Box>
+                          <Button
+                            onClick={() =>
+                              getMonsterDetails(monstersWithRating.index)
+                            }
+                          >
+                            <Typography
+                              display="flex"
+                              flexDirection="row"
+                              justifyContent="space-evenly"
+                              alignItems="center"
+                              style={{ cursor: "pointer" }}
+                            >
+                              <Box>{monstersWithRating.name}</Box>
+                            </Typography>
+                          </Button>
+                        </Box>
+                      );
+                    })}
+                  </Box>
+                )}
+              </Box>
+              <Box
+                sx={{
+                  position: "fixed",
+                  right: "0px",
+                  bottom: "50%",
+                  backgroundColor: "#E5BBBB",
+                  height: "250px",
+                  border: "1px solid red",
+                  borderRadius: "5px",
+                  overflow: "scroll",
+                }}
+              >
+                <Box
+                  sx={{
+                    width: "200px",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <Typography
+                    sx={{ textDecoration: "underline", fontWeight: "bold" }}
+                  >
+                    Stats
+                  </Typography>
+                  <Typography>Name = {monsterDetails.name}</Typography>
+                  <Typography>
+                    Challenge Rating = {monsterDetails.challenge_rating}
+                  </Typography>
+                  <Typography>AC = {monsterDetails.armor_class}</Typography>
+                  <Typography>
+                    HitPoints = {monsterDetails.hit_points}
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+          </Box>
+        )}
         {/* <Box>
           <TextField
             placeholder="how many players?"
@@ -247,9 +318,49 @@ const MainPage: React.FC = () => {
             }}
           />
         </Box> */}
-        <Box sx={{ justifyContent: "center" }}>
-          <CharacterInput />
-        </Box>
+        {gameType === "Quick Fight" && (
+          <Box sx={{ justifyContent: "center" }}>
+            <TextField
+              placeholder="how many players?"
+              fullWidth
+              variant="outlined"
+              value={numberOfPlayers}
+              disabled={loading !== null}
+              onChange={(
+                event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+              ) => changeNumberOfPlayers(event.target.value)}
+              InputProps={{
+                classes: {
+                  root: classes.innerInput,
+                },
+              }}
+            />
+            <TextField
+              placeholder="average player level"
+              fullWidth
+              variant="outlined"
+              value={averagePlayerLevel}
+              disabled={loading !== null}
+              onChange={(
+                event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+              ) => changeAveragePlayerLevel(event.target.value)}
+              InputProps={{
+                classes: {
+                  root: classes.innerInput,
+                },
+              }}
+            />
+            <Button>
+              <Typography>Start Battle</Typography>
+            </Button>
+          </Box>
+        )}
+
+        {gameType === "Detailed Fight" && (
+          <Box sx={{ justifyContent: "center" }}>
+            <CharacterInput />
+          </Box>
+        )}
         <Box>{playerName}</Box>
       </Box>
     </Box>

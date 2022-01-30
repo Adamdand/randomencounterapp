@@ -3,35 +3,34 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { Typography } from "@mui/material";
 
-export default function ToggleButtons() {
-  const [gameType, setGameType] = React.useState("monster search");
+interface IProps {
+  onClick: (event: any, newGameType: string) => void;
+  gameType: string;
+}
 
-  const handleAlignment = (
-    event: any,
-    newGameType: React.SetStateAction<string>
-  ) => {
-    setGameType(newGameType);
-  };
+const ButtonToggle = (props: IProps) => {
+  const { onClick, gameType } = props;
 
   return (
     <ToggleButtonGroup
       value={gameType}
       exclusive
-      onChange={handleAlignment}
+      onChange={onClick}
       aria-label="text alignment"
     >
-      <ToggleButton value="left" aria-label="monster search">
+      <ToggleButton value="Monster Search" aria-label="monster search">
         <Typography>Monster Search</Typography>
       </ToggleButton>
-      <ToggleButton value="center" aria-label="quick fight">
+      <ToggleButton value="Quick Fight" aria-label="quick fight">
         <Typography>Quick Fight</Typography>
       </ToggleButton>
-      <ToggleButton value="right" aria-label="detailed fight">
+      <ToggleButton value="Detailed Fight" aria-label="detailed fight">
         <Typography>Detailed Fight</Typography>
       </ToggleButton>
-      <ToggleButton value="justify" aria-label="extra" disabled>
+      <ToggleButton value="extra" aria-label="extra" disabled>
         <Typography>extra</Typography>
       </ToggleButton>
     </ToggleButtonGroup>
   );
-}
+};
+export default ButtonToggle;
