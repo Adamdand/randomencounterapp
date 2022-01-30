@@ -187,7 +187,20 @@ const MainPage: React.FC = () => {
     setGameType(newGameType);
   };
 
-  console.log(gameType);
+  const getRandomMonsterTypeOne = (twoTypeOfMonsters: boolean) => {
+    let monterIndex = Math.floor(Math.random() * setMonsterRatingList.length);
+    if (twoTypeOfMonsters === true) {
+      let rndInt = Math.floor(Math.random() * 3) + 1;
+    } else {
+      let rndInt = Math.floor(Math.random() * 6) + 1;
+    }
+  };
+
+  const getRandomMonsterTypeTwo = (twoTypeOfMonsters: boolean) => {
+    if (twoTypeOfMonsters === true) {
+      let rndInt = Math.floor(Math.random() * 3) + 1;
+    }
+  };
 
   return (
     <Box className={classes.root} sx={{ width: "100%" }}>
