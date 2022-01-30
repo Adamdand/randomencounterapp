@@ -153,6 +153,23 @@ const MainPage: React.FC = () => {
     }
   };
 
+  const getMonsterWithRatingBtn = async () => {
+    if (averagePlayerLevel !== undefined) {
+      let monstersWithCR: IMonster[];
+      monstersWithCR = [];
+      try {
+        monstersWithCR = await monsterAPIs.getMonstersWithRating(
+          averagePlayerLevel
+        );
+      } catch (error) {
+        console.log("error: ", error);
+      }
+      if (monstersWithCR.length > 0) {
+        setMonsterRatingList(monstersWithCR);
+      }
+    }
+  };
+
   const handleRatingChange = (event: any) => {
     const tempMonsterRating = event.target.value;
     setSelectedCR(tempMonsterRating);
@@ -350,9 +367,32 @@ const MainPage: React.FC = () => {
                 },
               }}
             />
-            <Button>
+            <Button onClick={getMonsterWithRatingBtn}>
               <Typography>Start Battle</Typography>
             </Button>
+            {monsterRatingList.length > 0 && (
+              <Box>
+                <Box>
+                  <Typography
+                    display="flex"
+                    flexDirection="row"
+                    alignItems="center"
+                    style={{ cursor: "pointer" }}
+                  >
+                    you have encountered {Math.floor(Math.random() * 4) + 1}
+                    <Box sx={{ paddingLeft: "4px" }}>
+                      {monsterRatingList[0].name}
+                    </Box>
+                    {monsterRatingList.length > 1 && (
+                      <Typography>
+                        , and {Math.floor(Math.random() * 4) + 1}{" "}
+                        {monsterRatingList[1].name} .
+                      </Typography>
+                    )}
+                  </Typography>
+                </Box>
+              </Box>
+            )}
           </Box>
         )}
 
