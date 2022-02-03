@@ -294,9 +294,9 @@ export interface IMonsterDetails {
   armor_class: number;
   hit_points: number;
   hit_dice: string;
-  speed?: {
-    walk?: string | null;
-    swim?: string | null;
+  speed: {
+    walk: string | null;
+    swim: string | null;
   };
   strength: number;
   dexterity: number;

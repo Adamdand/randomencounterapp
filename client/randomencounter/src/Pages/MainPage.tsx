@@ -77,6 +77,7 @@ const MainPage: React.FC = () => {
   const [numberOfPlayers, setNumberOfPlayers] = useState<number>();
   const [averagePlayerLevel, setAveragePlayerLevel] = useState<number>();
   const [playerName, setPlayerName] = useState<string>("");
+  const [randomActivityNumber, setRandomActivityNumber] = useState<number>(0);
   const [randomMonsterTypeOne, setRandomMonsterTypeOne] =
     useState<IRandomMonster>({
       quantity: 0,
@@ -111,6 +112,22 @@ const MainPage: React.FC = () => {
   const onNameChange = (name: string) => {
     setPlayerName(name);
   };
+
+  const monsterActivities = [
+    "playing chess",
+    "gossiping about Brenda",
+    "planning an attack",
+    "playing Dungeons and Dragons",
+    "roasting a pig",
+    "sleeping",
+    "cleaning their teeth after having just eaten",
+    "wondering around looking lost",
+  ];
+
+  const setNewMonsterActivity = () =>
+    setRandomActivityNumber(
+      Math.floor(Math.random() * monsterActivities.length - 1) + 1
+    );
 
   let tempList: IMonster[];
   const getAllMonsters = async () => {
@@ -220,17 +237,22 @@ const MainPage: React.FC = () => {
   };
 
   const getMonsterWithRatingBtn = async () => {
-    try {
-      const monstersWithCR = await monsterAPIs.getMonstersWithRating(5);
-      console.log("MONSTERS: TEST", monstersWithCR);
+    if (averagePlayerLevel !== undefined) {
+      try {
+        const monstersWithCR = await monsterAPIs.getMonstersWithRating(
+          averagePlayerLevel
+        );
+        console.log("MONSTERS: TEST", monstersWithCR);
 
-      setMonsterRatingList(monstersWithCR);
-      console.log("monsterRatingList: TEST", monsterRatingList);
-    } catch (error) {
-      console.log("error: ", error);
-    }
-    if (monsterRatingList.length > 0) {
-      findRandomEncounter();
+        setMonsterRatingList(monstersWithCR);
+        console.log("monsterRatingList: TEST", monsterRatingList);
+      } catch (error) {
+        console.log("error: ", error);
+      }
+      if (monsterRatingList.length > 0) {
+        findRandomEncounter();
+        setNewMonsterActivity();
+      }
     }
   };
 
@@ -375,6 +397,22 @@ const MainPage: React.FC = () => {
                   <Typography>
                     HitPoints = {monsterDetails.hit_points}
                   </Typography>
+                  <Typography>
+                    Alignment = {monsterDetails.alignment}
+                  </Typography>
+                  {/* <Typography>Speed = {monsterDetails.speed.walk}</Typography> */}
+                  <Typography>Size = {monsterDetails.size}</Typography>
+                  {/* <Typography>Actions = {monsterDetails.actions}</Typography> */}
+                  <Typography>
+                    Damage Resistances = {monsterDetails.damage_immunities}
+                  </Typography>
+                  <Typography>
+                    Damage Resistances = {monsterDetails.damage_resistances}
+                  </Typography>
+                  <Typography>
+                    Damage Vulnerabilities =
+                    {monsterDetails.damage_vulnerabilities}
+                  </Typography>
                 </Box>
               </Box>
             </Box>
@@ -443,20 +481,64 @@ const MainPage: React.FC = () => {
                       style={{ cursor: "pointer" }}
                     >
                       you have encountered {randomMonsterTypeOne.quantity}
-                      <Box sx={{ paddingLeft: "4px" }}>
-                        {randomMonsterTypeOne?.name}
+                      <Box>
+                        <Button
+                          onClick={() => {
+                            getMonsterDetails(randomMonsterTypeOne.index);
+                          }}
+                        >
+                          {randomMonsterTypeOne?.name}
+                        </Button>
                       </Box>
                       {twoTypeOfMonsters &&
                         randomMonsterTypeTwo.quantity !== 0 && (
                           <Typography>
-                            , and {randomMonsterTypeTwo.quantity}{" "}
-                            {randomMonsterTypeTwo.name} .
+                            and {randomMonsterTypeTwo.quantity}
+                            <Button
+                              onClick={() => {
+                                getMonsterDetails(randomMonsterTypeTwo.index);
+                              }}
+                            >
+                              {randomMonsterTypeTwo.name}
+                            </Button>
                           </Typography>
                         )}
+                      {monsterActivities[randomActivityNumber]}.
                     </Typography>
                   </Box>
                 </Box>
               )}
+            <Box
+              sx={{
+                position: "fixed",
+                right: "0px",
+                bottom: "50%",
+                backgroundColor: "#E5BBBB",
+                height: "250px",
+                border: "1px solid red",
+                borderRadius: "5px",
+                overflow: "scroll",
+              }}
+            >
+              <Box
+                sx={{
+                  width: "200px",
+                  paddingTop: "16px",
+                }}
+              >
+                <Typography
+                  sx={{ textDecoration: "underline", fontWeight: "bold" }}
+                >
+                  Stats
+                </Typography>
+                <Typography>Name = {monsterDetails.name}</Typography>
+                <Typography>
+                  Challenge Rating = {monsterDetails.challenge_rating}
+                </Typography>
+                <Typography>AC = {monsterDetails.armor_class}</Typography>
+                <Typography>HitPoints = {monsterDetails.hit_points}</Typography>
+              </Box>
+            </Box>
           </Box>
         )}
 
