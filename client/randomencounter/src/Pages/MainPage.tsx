@@ -173,64 +173,64 @@ const MainPage: React.FC = () => {
     }
   };
 
-  // const getRandomMonsterTypeOne = (twoTypeOfMonsters: boolean) => {
-  //   let monsterIndex = Math.floor(Math.random() * monsterRatingList.length);
-  //   let rndInt: number;
-  //   if (twoTypeOfMonsters === true) {
-  //     rndInt = Math.floor(Math.random() * 3) + 1;
-  //   } else {
-  //     rndInt = Math.floor(Math.random() * 6) + 1;
-  //   }
-  //   let monsterObject = monsterRatingList[monsterIndex];
+  const getRandomMonsterTypeOne = (twoMonsters: boolean) => {
+    console.log("FUNCTION MONSTERS WITH RATING LIST", monsterRatingList);
+    const monsterIndex = Math.floor(Math.random() * monsterRatingList.length);
+    let rndInt: number;
+    if (twoMonsters === true) {
+      rndInt = Math.floor(Math.random() * 3) + 1;
+    } else {
+      rndInt = Math.floor(Math.random() * 6) + 1;
+    }
+    const monsterObject = monsterRatingList[monsterIndex];
+    console.log("monsterObject", monsterObject);
 
-  //   let newRandomMonster = {
-  //     ...monsterObject,
-  //     quantity: rndInt,
-  //   } as IRandomMonster;
-  //   setRandomMonsterTypeOne(newRandomMonster);
-  // };
+    const newRandomMonster = {
+      ...monsterObject,
+      quantity: rndInt,
+    } as IRandomMonster;
+    setRandomMonsterTypeOne(newRandomMonster);
+  };
+  console.log("1 random monster: ", randomMonsterTypeOne);
 
-  // const getRandomMonsterTypeTwo = (twoTypeOfMonsters: boolean) => {
-  //   if (twoTypeOfMonsters === true && monsterRatingList.length > 1) {
-  //     let monsterIndex = Math.floor(Math.random() * monsterRatingList.length);
-  //     let rndInt = Math.floor(Math.random() * 3) + 1;
-  //     let monsterObject = monsterRatingList[monsterIndex];
-  //     let newRandomMonster = {
-  //       ...monsterObject,
-  //       quantity: rndInt,
-  //     } as IRandomMonster;
-  //     setRandomMonsterTypeTwo(newRandomMonster);
-  //   } else {
-  //     setRandomMonsterTypeTwo({
-  //       quantity: 0,
-  //       index: "null",
-  //       name: "null",
-  //       url: "null",
-  //     });
-  //   }
-  // };
+  const getRandomMonsterTypeTwo = (moreThanOneMonster: boolean) => {
+    if (moreThanOneMonster === true && monsterRatingList.length > 1) {
+      const monsterIndex = Math.floor(Math.random() * monsterRatingList.length);
+      const rndInt = Math.floor(Math.random() * 3) + 1;
+      const monsterObject = monsterRatingList[monsterIndex];
+      const newRandomMonster = {
+        ...monsterObject,
+        quantity: rndInt,
+      } as IRandomMonster;
+      setRandomMonsterTypeTwo(newRandomMonster);
+    } else {
+      setRandomMonsterTypeTwo({
+        quantity: 0,
+        index: "null",
+        name: "null",
+        url: "null",
+      });
+    }
+  };
 
-  // const findRandomEncounter = () => {
-  //   settwoTypeOfMonsters(Math.random() < 0.5);
-  //   getRandomMonsterTypeOne(twoTypeOfMonsters);
-  //   getRandomMonsterTypeTwo(twoTypeOfMonsters);
-  // };
+  const findRandomEncounter = () => {
+    settwoTypeOfMonsters(Math.random() < 0.5);
+    getRandomMonsterTypeOne(twoTypeOfMonsters);
+    getRandomMonsterTypeTwo(twoTypeOfMonsters);
+  };
 
   const getMonsterWithRatingBtn = async () => {
-    if (averagePlayerLevel !== undefined) {
-      let monstersWithCR: IMonster[];
-      monstersWithCR = [];
-      try {
-        monstersWithCR = await monsterAPIs.getMonstersWithRating(
-          averagePlayerLevel
-        );
-      } catch (error) {
-        console.log("error: ", error);
-      }
-      if (monstersWithCR.length > 0) {
-        setMonsterRatingList(monstersWithCR);
-        // findRandomEncounter();
-      }
+    try {
+      const monstersWithCR = await monsterAPIs.getMonstersWithRating(5);
+      console.log("MONSTERS: TEST", monstersWithCR);
+
+      setMonsterRatingList(monstersWithCR);
+      console.log("monsterRatingList: TEST", monsterRatingList);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+    if (monsterRatingList.length > 0) {
+      findRandomEncounter();
     }
   };
 
@@ -432,7 +432,7 @@ const MainPage: React.FC = () => {
             <Button onClick={getMonsterWithRatingBtn}>
               <Typography>Start Battle</Typography>
             </Button>
-            {/* {monsterRatingList.length > 0 &&
+            {monsterRatingList.length > 0 &&
               randomMonsterTypeOne !== undefined && (
                 <Box>
                   <Box>
@@ -446,16 +446,17 @@ const MainPage: React.FC = () => {
                       <Box sx={{ paddingLeft: "4px" }}>
                         {randomMonsterTypeOne?.name}
                       </Box>
-                      {twoTypeOfMonsters && randomMonsterTypeTwo !== undefined && (
-                        <Typography>
-                          , and {randomMonsterTypeTwo.quantity}{" "}
-                          {randomMonsterTypeTwo.name} .
-                        </Typography>
-                      )}
+                      {twoTypeOfMonsters &&
+                        randomMonsterTypeTwo.quantity !== 0 && (
+                          <Typography>
+                            , and {randomMonsterTypeTwo.quantity}{" "}
+                            {randomMonsterTypeTwo.name} .
+                          </Typography>
+                        )}
                     </Typography>
                   </Box>
                 </Box>
-              )} */}
+              )}
           </Box>
         )}
 
