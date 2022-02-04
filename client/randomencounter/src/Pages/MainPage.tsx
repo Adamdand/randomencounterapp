@@ -122,6 +122,12 @@ const MainPage: React.FC = () => {
     "sleeping",
     "cleaning their teeth after having just eaten",
     "wondering around looking lost",
+    "trying on tiny hats",
+    "clipping their toe nails",
+    "eating a child alive",
+    "mumbling to themself",
+    "doing just general nasty stuff",
+    "planning a birthday party for their grandmother",
   ];
 
   const setNewMonsterActivity = () =>
@@ -242,19 +248,18 @@ const MainPage: React.FC = () => {
         const monstersWithCR = await monsterAPIs.getMonstersWithRating(
           averagePlayerLevel
         );
-        console.log("MONSTERS: TEST", monstersWithCR);
-
         setMonsterRatingList(monstersWithCR);
-        console.log("monsterRatingList: TEST", monsterRatingList);
+        if (monsterRatingList.length > 0) {
+          findRandomEncounter();
+          setNewMonsterActivity();
+        }
       } catch (error) {
         console.log("error: ", error);
       }
-      if (monsterRatingList.length > 0) {
-        findRandomEncounter();
-        setNewMonsterActivity();
-      }
     }
   };
+
+  console.log("verage player level: ", averagePlayerLevel);
 
   const handleRatingChange = (event: any) => {
     const tempMonsterRating = event.target.value;
@@ -370,9 +375,9 @@ const MainPage: React.FC = () => {
                 sx={{
                   position: "fixed",
                   right: "0px",
-                  bottom: "50%",
+                  bottom: "25%",
                   backgroundColor: "#E5BBBB",
-                  height: "250px",
+                  height: "300px",
                   border: "1px solid red",
                   borderRadius: "5px",
                   overflow: "scroll",
@@ -380,7 +385,7 @@ const MainPage: React.FC = () => {
               >
                 <Box
                   sx={{
-                    width: "200px",
+                    width: "400px",
                     paddingTop: "16px",
                   }}
                 >
@@ -389,30 +394,48 @@ const MainPage: React.FC = () => {
                   >
                     Stats
                   </Typography>
-                  <Typography>Name = {monsterDetails.name}</Typography>
-                  <Typography>
-                    Challenge Rating = {monsterDetails.challenge_rating}
-                  </Typography>
-                  <Typography>AC = {monsterDetails.armor_class}</Typography>
-                  <Typography>
-                    HitPoints = {monsterDetails.hit_points}
-                  </Typography>
-                  <Typography>
-                    Alignment = {monsterDetails.alignment}
-                  </Typography>
-                  {/* <Typography>Speed = {monsterDetails.speed.walk}</Typography> */}
-                  <Typography>Size = {monsterDetails.size}</Typography>
-                  {/* <Typography>Actions = {monsterDetails.actions}</Typography> */}
-                  <Typography>
-                    Damage Resistances = {monsterDetails.damage_immunities}
-                  </Typography>
-                  <Typography>
-                    Damage Resistances = {monsterDetails.damage_resistances}
-                  </Typography>
-                  <Typography>
-                    Damage Vulnerabilities =
-                    {monsterDetails.damage_vulnerabilities}
-                  </Typography>
+                  <Box sx={{ textAlign: "left" }}>
+                    <Typography>Name = {monsterDetails.name}</Typography>
+                    <Typography>
+                      Challenge Rating = {monsterDetails.challenge_rating}
+                    </Typography>
+                    <Typography>AC = {monsterDetails.armor_class}</Typography>
+                    <Typography>
+                      HitPoints = {monsterDetails.hit_points}
+                    </Typography>
+                    <Typography>
+                      Alignment = {monsterDetails.alignment}
+                    </Typography>
+
+                    <Typography>
+                      Speed-walkwalk = {monsterDetails.speed.walk}
+                    </Typography>
+                    <Typography>
+                      Speed-swim= {monsterDetails.speed.swim}
+                    </Typography>
+
+                    <Typography>Size = {monsterDetails.size}</Typography>
+
+                    {monsterDetails.actions.map((action) => {
+                      return (
+                        <Box>
+                          <Typography>Action Name = {action.name}</Typography>
+                          <Typography>Action Desc = {action.desc}</Typography>
+                        </Box>
+                      );
+                    })}
+
+                    <Typography>
+                      Damage Resistances = {monsterDetails.damage_immunities}
+                    </Typography>
+                    <Typography>
+                      Damage Resistances = {monsterDetails.damage_resistances}
+                    </Typography>
+                    <Typography>
+                      Damage Vulnerabilities =
+                      {monsterDetails.damage_vulnerabilities}
+                    </Typography>
+                  </Box>
                 </Box>
               </Box>
             </Box>

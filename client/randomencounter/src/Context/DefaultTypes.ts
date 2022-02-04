@@ -18,4 +18,13 @@ export const defaultMonsterDetails = {
   url: "",
   wisdom: 0,
   challenge_rating: 0,
+  speed: { walk: "0ft", swim: "0ft" },
+  actions: [{ name: "", desc: "" }],
+  xp: 0,
+  special_abilities: [{ name: "", desc: "" }],
+  condition_immunities: [""],
+  damage_immunities: [""],
+  damage_resistances: [""],
+  damage_vulnerabilities: [""],
+  languages: [""],
 } as IMonsterDetails;

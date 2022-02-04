@@ -294,10 +294,7 @@ export interface IMonsterDetails {
   armor_class: number;
   hit_points: number;
   hit_dice: string;
-  speed: {
-    walk: string | null;
-    swim: string | null;
-  };
+  speed: ISpeed;
   strength: number;
   dexterity: number;
   constitution: number;
@@ -305,20 +302,26 @@ export interface IMonsterDetails {
   wisdom: number;
   charisma: number;
   proficiencies?: IProficiencies[];
-  damage_vulnerabilities?: string[];
-  damage_resistances?: string[];
-  damage_immunities?: string[];
-  condition_immunities?: string[];
+  damage_vulnerabilities: string[];
+  damage_resistances: string[];
+  damage_immunities: string[];
+  condition_immunities: string[];
   senses?: {
     darkvision?: string;
     passive_perception?: number;
   };
-  languages?: string;
-  challenge_rating?: number;
-  special_abilities?: IActions[];
-  actions?: IActions[];
+  languages?: string[];
+  challenge_rating: number;
+  special_abilities: IActions[];
+  actions: IActions[];
   legendary_actions?: IActions[];
   url: string;
+  xp: number;
+}
+
+export interface ISpeed {
+  walk: string;
+  swim?: string;
 }
 
 export interface playerDetails {
