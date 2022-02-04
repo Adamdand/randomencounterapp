@@ -10,6 +10,9 @@ import {
   FormControl,
   InputLabel,
   AppBar,
+  CardContent,
+  CardMedia,
+  Card,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useEffect, useState } from "react";
@@ -385,7 +388,7 @@ const MainPage: React.FC = () => {
               >
                 <Box
                   sx={{
-                    width: "400px",
+                    width: "600px",
                     paddingTop: "16px",
                   }}
                 >
@@ -396,6 +399,22 @@ const MainPage: React.FC = () => {
                   </Typography>
                   <Box sx={{ textAlign: "left" }}>
                     <Typography>Name = {monsterDetails.name}</Typography>
+                    <Card sx={{ margin: "32px" }}>
+                      <CardMedia
+                        component="img"
+                        height="max"
+                        image={`dndMonsterPics/${monsterDetails.index}.jpeg`}
+                        alt="monster image"
+                      />
+                      {/* <CardContent>
+                        <Typography gutterBottom variant="h5" component="div">
+                          monster picture
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          data
+                        </Typography>
+                      </CardContent> */}
+                    </Card>
                     <Typography>
                       Challenge Rating = {monsterDetails.challenge_rating}
                     </Typography>
