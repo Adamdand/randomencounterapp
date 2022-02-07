@@ -1,42 +1,22 @@
 import {
-  Grid,
   Typography,
   TextField,
   Button,
   CircularProgress,
   Box,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  AppBar,
-  CardContent,
-  CardMedia,
-  Card,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import useLoading from "../Hooks/useLoading";
-import {
-  IMonster,
-  IMonsterDetails,
-  IMonsterList,
-  IRandomMonster,
-} from "../Context/Types";
+import { IMonster, IMonsterDetails, IRandomMonster } from "../Context/Types";
 import monsterAPIs from "../API/monsterAPI";
 import { defaultMonsterDetails } from "../Context/DefaultTypes";
-import CharacterInput from "./CharacterInput";
-import ButtonToggle from "./ButtonToggle";
-import MonsterSearch from "./MonsterSearch";
-import QuickFight from "./QuickFight";
-import DetailedFight from "./DetailFight";
 
-// import { signInWithEmailAndPassword } from "firebase/auth";
-// import { authenticate } from "API/firebase";
-// import { IMonster, IMonsterDetails, IMonsterList } from "Context/Types";
-// import monsterAPIs from "../API/monsterAPI";
-// import SiteContent from "../SiteContent/SiteContent";
+interface IProps {
+  gameType: string;
+}
+
 const monsterRatings = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
   23, 24, 25, 26, 27, 28, 29, 30,
@@ -63,26 +43,20 @@ const useStyle = makeStyles((theme) => ({
   password: {},
 }));
 
-const MainPage: React.FC = () => {
+const QuickFight = (props: IProps) => {
+  const { gameType } = props;
   const history = useHistory();
   const classes = useStyle();
   // const { searchemail } = useHomeInspection();
   const { showLoading, hideLoading, loading } = useLoading();
-  const [gameType, setGameType] = useState<string>("monster search");
   const [monsterList, setMonsterList] = useState<IMonster[]>([]);
   const [monsterRatingList, setMonsterRatingList] = useState<IMonster[]>([]);
-  const [selectedCR, setSelectedCR] = useState<number>();
-  const [selectedMonster, setSelectedMonster] = useState<IMonster>({
-    index: "null",
-    name: "null",
-    url: "null",
-  });
+
   const [monsterDetails, setMonsterDetails] = useState<IMonsterDetails>(
     defaultMonsterDetails
   );
   const [numberOfPlayers, setNumberOfPlayers] = useState<number>();
   const [averagePlayerLevel, setAveragePlayerLevel] = useState<number>();
-  const [playerName, setPlayerName] = useState<string>("");
   const [randomActivityNumber, setRandomActivityNumber] = useState<number>(0);
   const [randomMonsterTypeOne, setRandomMonsterTypeOne] =
     useState<IRandomMonster>({
@@ -170,32 +144,11 @@ const MainPage: React.FC = () => {
     }
   };
 
-  const handleMonsterChange = (event: any) => {
-    const tempSelectedMonster = event.target.value;
-    console.log("set selected Monster", tempSelectedMonster);
-    setSelectedMonster(event.target.value);
-    getMonsterDetails(tempSelectedMonster);
-    setSelectedCR(undefined);
-  };
-
   const selectMonsterFromCRList = (monsterName: string) => {
     const tempSelectedMonster = monsterName;
     console.log("set selected Monster", tempSelectedMonster);
     // setSelectedMonster(event.target.value);
     getMonsterDetails(tempSelectedMonster);
-  };
-
-  const getMonsterWithRating = async (monsterRating: number) => {
-    let monstersWithCR: IMonster[];
-    monstersWithCR = [];
-    try {
-      monstersWithCR = await monsterAPIs.getMonstersWithRating(monsterRating);
-    } catch (error) {
-      console.log("error: ", error);
-    }
-    if (monstersWithCR.length > 0) {
-      setMonsterRatingList(monstersWithCR);
-    }
   };
 
   const getRandomMonsterTypeOne = (monsters: IMonster[]) => {
@@ -264,44 +217,97 @@ const MainPage: React.FC = () => {
 
   console.log("verage player level: ", averagePlayerLevel);
 
-  const handleRatingChange = (event: any) => {
-    const tempMonsterRating = event.target.value;
-    setSelectedCR(tempMonsterRating);
-    console.log("Monster Rating Selected", tempMonsterRating);
-    if (tempMonsterRating !== undefined) {
-      const monstersWithCR = getMonsterWithRating(tempMonsterRating);
-      console.log("monsterList with CR: ", monstersWithCR);
-    }
-  };
-
-  const handleGameType = (
-    event: any,
-    newGameType: React.SetStateAction<string>
-  ) => {
-    setGameType(newGameType);
-  };
-
   return (
-    <Box className={classes.root} sx={{ width: "100%" }}>
-      <Box
-        sx={{
-          display: "block",
-          textAlign: "center",
-          paddingTop: "40px",
-          paddingLeft: "16px",
-          width: "100%",
+    <Box sx={{ justifyContent: "center" }}>
+      <TextField
+        placeholder="how many players?"
+        fullWidth
+        variant="outlined"
+        value={numberOfPlayers}
+        disabled={loading !== null}
+        onChange={(
+          event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+        ) => changeNumberOfPlayers(event.target.value)}
+        InputProps={{
+          classes: {
+            root: classes.innerInput,
+          },
         }}
-      >
-        <Box sx={{ paddingBottom: "40px" }}>
-          <ButtonToggle onClick={handleGameType} gameType={gameType} />
+      />
+      <TextField
+        placeholder="average player level"
+        fullWidth
+        variant="outlined"
+        value={averagePlayerLevel}
+        disabled={loading !== null}
+        onChange={(
+          event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+        ) => changeAveragePlayerLevel(event.target.value)}
+        InputProps={{
+          classes: {
+            root: classes.innerInput,
+          },
+        }}
+      />
+      <Button onClick={getMonsterWithRatingBtn}>
+        <Typography>Start Battle</Typography>
+      </Button>
+      {monsterRatingList.length > 0 && randomMonsterTypeOne !== undefined && (
+        <Box>
+          <Box>
+            <Typography
+              display="flex"
+              flexDirection="row"
+              alignItems="center"
+              style={{ cursor: "pointer" }}
+            >
+              you have encountered {randomMonsterTypeOne.quantity}
+              <Box>
+                <Button
+                  onClick={() => {
+                    getMonsterDetails(randomMonsterTypeOne.index);
+                  }}
+                >
+                  {randomMonsterTypeOne?.name}
+                </Button>
+              </Box>
+              {twoTypeOfMonsters && randomMonsterTypeTwo.quantity !== 0 && (
+                <Typography>
+                  and {randomMonsterTypeTwo.quantity}
+                  <Button
+                    onClick={() => {
+                      getMonsterDetails(randomMonsterTypeTwo.index);
+                    }}
+                  >
+                    {randomMonsterTypeTwo.name}
+                  </Button>
+                </Typography>
+              )}
+              {monsterActivities[randomActivityNumber]}.
+            </Typography>
+          </Box>
         </Box>
-        {gameType === "Monster Search" && <MonsterSearch gameType={gameType} />}
-        {gameType === "Quick Fight" && <QuickFight gameType={gameType} />}
-
-        {gameType === "Detailed Fight" && <DetailedFight gameType={gameType} />}
+      )}
+      <Box>
+        <Box
+          sx={{
+            width: "200px",
+            paddingTop: "16px",
+          }}
+        >
+          <Typography sx={{ textDecoration: "underline", fontWeight: "bold" }}>
+            Stats
+          </Typography>
+          <Typography>Name = {monsterDetails.name}</Typography>
+          <Typography>
+            Challenge Rating = {monsterDetails.challenge_rating}
+          </Typography>
+          <Typography>AC = {monsterDetails.armor_class}</Typography>
+          <Typography>HitPoints = {monsterDetails.hit_points}</Typography>
+        </Box>
       </Box>
     </Box>
   );
 };
 
-export default MainPage;
+export default QuickFight;
