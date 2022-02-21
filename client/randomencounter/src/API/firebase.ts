@@ -1,12 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFunctions } from "firebase/functions";
-import {
-  ApplicationVerifier,
-  Auth,
-  ConfirmationResult,
-  getAuth,
-  signInAnonymously,
-} from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 // import firebase from '../node_modules/firebase/index/firebase';
 
@@ -27,8 +21,3 @@ export const dataBase = getDatabase();
 
 export const functions = getFunctions(app);
 // export const anonSignIn = async () => signInAnonymously(auth);
-export declare function signInWithPhoneNumber(
-  auth: Auth,
-  phoneNumber: string,
-  appVerifier: ApplicationVerifier
-): Promise<ConfirmationResult>;

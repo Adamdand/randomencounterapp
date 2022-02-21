@@ -1,18 +1,14 @@
 import { Box, Button, Input } from "@mui/material";
 import React, { useState } from "react";
-import { playerDetails } from "../Context/Types";
+import { IPlayer, playerDetails } from "../Context/Types";
 
-function CharacterInput() {
-  const [inputList, setInputList] = useState<any[]>([
-    {
-      index: 0,
-      characterName: "",
-      characterAC: null,
-      characterInitative: null,
-      characterHealth: null,
-      characterLevel: null,
-    },
-  ]);
+interface IProps {
+  inputList: any[];
+  setInputList: (newGameType: any[]) => void;
+}
+
+const CharacterInput = (props: IProps) => {
+  const { inputList, setInputList } = props;
 
   // handle input change
   const handleInputChange = (
@@ -70,7 +66,7 @@ function CharacterInput() {
               <Input
                 name="characterName"
                 placeholder="Enter Character Name"
-                value={x.firstName}
+                value={x.characterName}
                 onChange={(e) => handleInputChange(e, i)}
               />
             </Box>
@@ -80,7 +76,7 @@ function CharacterInput() {
                 className="ml10"
                 name="characterAC"
                 placeholder="Enter Armor Class"
-                value={x.lastName}
+                value={x.characterAC}
                 onChange={(e) => handleInputChange(e, i)}
               />
             </Box>
@@ -90,7 +86,7 @@ function CharacterInput() {
                 className="ml10"
                 name="characterInitative"
                 placeholder="Enter Initiative"
-                value={x.lastName}
+                value={x.characterInitative}
                 onChange={(e) => handleInputChange(e, i)}
               />
             </Box>
@@ -100,7 +96,7 @@ function CharacterInput() {
                 className="ml10"
                 name="characterHealth"
                 placeholder="Enter Health"
-                value={x.lastName}
+                value={x.characterHealth}
                 onChange={(e) => handleInputChange(e, i)}
               />
             </Box>
@@ -110,7 +106,7 @@ function CharacterInput() {
                 className="ml10"
                 name="characterLevel"
                 placeholder="Enter Level"
-                value={x.lastName}
+                value={x.characterLevel}
                 onChange={(e) => handleInputChange(e, i)}
               />
             </Box>
@@ -133,6 +129,6 @@ function CharacterInput() {
       </Box>
     </Box>
   );
-}
+};
 
 export default CharacterInput;

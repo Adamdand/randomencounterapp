@@ -335,3 +335,12 @@ export interface IRandomMonster {
   name: string;
   url: string;
 }
+
+export interface IPlayer {
+  index?: number | null;
+  characterName: string;
+  characterAC: number | null;
+  characterInitative: number;
+  characterHealth: number | null;
+  characterLevel: number | null;
+}
