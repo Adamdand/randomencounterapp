@@ -1,10 +1,12 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { CustomerDataContext } from "../Context/CustomerContext";
 import { IPlayer } from "../Context/Types";
-
-import CharacterInput from "./CharacterInput";
+import CharacterCard from "./CharacterCard";
+import { defaultUserData } from "../API/DummyData";
+import CreateNewPlayer from "./CreateNewPlayer";
 
 interface IProps {
   gameType: string;
@@ -33,6 +35,7 @@ const useStyle = makeStyles((theme) => ({
 
 const DetailedFight = (props: IProps) => {
   const { gameType } = props;
+  const userData = useContext(CustomerDataContext);
   const history = useHistory();
   const classes = useStyle();
   const [inputList, setInputList] = useState<any[]>([
@@ -40,12 +43,14 @@ const DetailedFight = (props: IProps) => {
       index: 0,
       characterName: "",
       characterAC: null,
-      characterInitative: null,
+      characterInitative: 0,
       characterHealth: null,
       characterLevel: null,
     },
   ]);
-
+  const [selectedPlayer, setSelectedPlayer] = useState<IPlayer>(
+    defaultUserData[0]
+  );
   const [playerName, setPlayerName] = useState<string>("");
 
   const onNameChange = (name: string) => {
@@ -78,42 +83,80 @@ const DetailedFight = (props: IProps) => {
       characterLevel: 3,
     },
   ]);
+  const [open, setOpen] = React.useState(false);
 
-  const arrayMove = (arr: IPlayer[], fromIndex: number, toIndex: number) => {
-    if (arr.length > 0) {
-      const element = arr[fromIndex];
-      arr.splice(fromIndex, 0);
-      arr.splice(toIndex, 3, element);
-    }
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const onClick = (setCharacter: IPlayer): void => {
+    const characterSelected = setCharacter;
+    setSelectedPlayer(selectedPlayer);
+  };
+
+  const createNewCharacterClick = async (): Promise<void> => {
+    history.push("/");
   };
 
   const orderListOnInitative = () => {
-    if (testList.length > 0) {
-      setTestList(
-        testList.sort((a, b) => b.characterInitative - a.characterInitative)
-      );
+    if (userData.length > 0) {
+      userData.sort((a, b) => b.characterInitative - a.characterInitative);
     }
-    console.log("testList", testList);
+    setTestList(inputList);
+    console.log("testList", inputList);
   };
 
   const turnOver = () => {
-    if (testList.length > 0) {
-      testList.push(testList.splice(0, 1)[0]);
+    if (userData.length > 0) {
+      userData.push(userData.splice(0, 1)[0]);
     }
-    console.log("testList", testList);
+    setTestList(inputList);
+    console.log("testList", inputList);
   };
 
   return (
     <Box className={classes.root} sx={{ width: "100%" }}>
-      <Box sx={{ justifyContent: "center" }}>
+      {/* <Box sx={{ justifyContent: "center" }}>
         <CharacterInput inputList={inputList} setInputList={setInputList} />
-      </Box>
+      </Box> */}
 
       <Box>{playerName}</Box>
+      <Box>Characters in Fight:</Box>
       <Box>
-        {testList.map((playerCharacter) => {
-          return <Box>{playerCharacter.characterName}</Box>;
-        })}
+        {userData.map((characters) => (
+          <Box sx={{ display: "flex" }}>
+            <CharacterCard
+              data={characters}
+              onClick={onClick}
+              isSelected={
+                characters.characterName === selectedPlayer?.characterName
+              }
+            />
+          </Box>
+        ))}
+      </Box>
+      <Box>
+        <Button onClick={handleClickOpen}>
+          <Typography
+            noWrap={true}
+            sx={{
+              fontFamily: "open sans",
+              fontStyle: "normal",
+              fontWeight: 400,
+              fontSize: "14px",
+              lineHeight: "16.41px",
+              color: "red",
+              textDecoration: "underline",
+            }}
+          >
+            New Player
+          </Typography>
+        </Button>
+        <CreateNewPlayer open={open} handleClose={handleClose} />
       </Box>
       <Box>
         <Button onClick={orderListOnInitative}>Start Fight</Button>

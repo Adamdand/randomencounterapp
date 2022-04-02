@@ -26,7 +26,6 @@ import {
 } from "../Context/Types";
 import monsterAPIs from "../API/monsterAPI";
 import { defaultMonsterDetails } from "../Context/DefaultTypes";
-import CharacterInput from "./CharacterInput";
 import ButtonToggle from "./ButtonToggle";
 import MonsterSearch from "./MonsterSearch";
 import QuickFight from "./QuickFight";
