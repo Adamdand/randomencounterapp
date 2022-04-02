@@ -87,13 +87,18 @@ const DetailedFight = (props: IProps) => {
     }
   };
 
-  const turnOver = () => {
+  const orderListOnInitative = () => {
     if (testList.length > 0) {
       setTestList(
-        testList.sort((a, b) =>
-          a.characterInitative > b.characterInitative ? 1 : -1
-        )
+        testList.sort((a, b) => b.characterInitative - a.characterInitative)
       );
+    }
+    console.log("testList", testList);
+  };
+
+  const turnOver = () => {
+    if (testList.length > 0) {
+      testList.push(testList.splice(0, 1)[0]);
     }
     console.log("testList", testList);
   };
@@ -106,9 +111,12 @@ const DetailedFight = (props: IProps) => {
 
       <Box>{playerName}</Box>
       <Box>
-        {testList.map((playerCharacter, i) => {
+        {testList.map((playerCharacter) => {
           return <Box>{playerCharacter.characterName}</Box>;
         })}
+      </Box>
+      <Box>
+        <Button onClick={orderListOnInitative}>Start Fight</Button>
       </Box>
       <Box>
         <Button onClick={turnOver}>Next Turn</Button>
