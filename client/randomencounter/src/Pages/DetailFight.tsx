@@ -225,7 +225,7 @@ const DetailedFight = (props: IProps) => {
           <CreateNewPlayer open={open} handleClose={handleClose} />
         </Box>
         <Box>
-          <Button onClick={orderListOnInitative}>Start Fight</Button>
+          <Button onClick={orderListOnInitative}>Order List</Button>
         </Box>
         <Box>
           <Button onClick={turnOver}>Next Turn</Button>

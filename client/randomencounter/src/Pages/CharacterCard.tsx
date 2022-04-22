@@ -44,6 +44,9 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
 
   const getHealthPercent = (): string => {
     if (data.characterHealth !== null && data.characterMaxHealth !== null) {
+      if ((data.characterHealth / data.characterMaxHealth) * 100 > 100) {
+        return "blue";
+      }
       if ((data.characterHealth / data.characterMaxHealth) * 100 > 50) {
         return "green";
       }
