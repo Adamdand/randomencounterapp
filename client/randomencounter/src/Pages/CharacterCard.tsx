@@ -103,9 +103,15 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
               {data.characterName}
             </Typography>
             <Typography>{data.characterAC}</Typography>
-            <Typography sx={{ color: getHealthPercent }}>
-              {data.characterHealth} / {data.characterMaxHealth}
-            </Typography>
+            <Box sx={{ display: "flex", flexDirection: "row" }}>
+              <Typography sx={{ color: getHealthPercent }}>
+                {data.characterHealth}
+              </Typography>
+              <Typography sx={{ paddingLeft: "4px" }}>
+                / {data.characterMaxHealth}
+              </Typography>
+            </Box>
+
             <Typography>{data.characterLevel}</Typography>
             <Typography>{data.characterInitative}</Typography>
           </Box>
