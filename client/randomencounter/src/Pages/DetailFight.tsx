@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -28,9 +28,11 @@ const useStyle = makeStyles((theme) => ({
     maxLength: 13,
     minLength: 13,
   },
-  emailAndPassword: {},
-  email: {},
-  password: {},
+  textField: {
+    marginLeft: "8px",
+    marginRight: "8px",
+    width: 200,
+  },
 }));
 
 const DetailedFight = (props: IProps) => {
@@ -82,6 +84,7 @@ const DetailedFight = (props: IProps) => {
     },
   ]);
   const [selectedPlayer, setSelectedPlayer] = useState<IPlayer>(testList[0]);
+  const [damageHealth, setDamageHealth] = useState<number>();
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -128,51 +131,131 @@ const DetailedFight = (props: IProps) => {
     console.log("testList", newList);
   };
 
+  const changeValue = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    if (event.target.value !== undefined) {
+      setDamageHealth(Number(event.target.value));
+    }
+  };
+
+  const damagePlayer = () => {
+    if (damageHealth !== undefined && damageHealth !== null) {
+      const newArr = testList.map((player) => {
+        if (
+          player.characterName === selectedPlayer.characterName &&
+          player.characterHealth !== null
+        ) {
+          return {
+            ...player,
+            characterHealth: player.characterHealth - damageHealth,
+          };
+        }
+
+        return player;
+      });
+      console.log(newArr);
+      setTestList(newArr);
+    }
+  };
+  const healPlayer = () => {
+    if (damageHealth !== undefined && damageHealth !== null) {
+      const newArr = testList.map((player) => {
+        if (
+          player.characterName === selectedPlayer.characterName &&
+          player.characterHealth !== null
+        ) {
+          return {
+            ...player,
+            characterHealth: player.characterHealth + damageHealth,
+          };
+        }
+
+        return player;
+      });
+      console.log(newArr);
+      setTestList(newArr);
+    }
+  };
+
   return (
-    <Box className={classes.root} sx={{ width: "100%" }}>
+    <Box
+      className={classes.root}
+      sx={{ display: "flex", flexDirection: "row" }}
+    >
       {/* <Box sx={{ justifyContent: "center" }}>
         <CharacterInput inputList={inputList} setInputList={setInputList} />
       </Box> */}
+      <Box sx={{ width: "50%" }}>
+        <Box>Characters in Fight:</Box>
 
-      <Box>Characters in Fight:</Box>
+        {testList.map((characters) => (
+          <Box sx={{ display: "flex" }}>
+            <CharacterCard
+              data={characters}
+              onClick={onClick}
+              isSelected={
+                characters.characterName === selectedPlayer?.characterName
+              }
+            />
+          </Box>
+        ))}
+        {/* <Box>{listCharacters()}</Box> */}
 
-      {testList.map((characters) => (
-        <Box sx={{ display: "flex" }}>
-          <CharacterCard
-            data={characters}
-            onClick={onClick}
-            isSelected={
-              characters.characterName === selectedPlayer?.characterName
-            }
+        <Box>
+          <Button onClick={handleClickOpen}>
+            <Typography
+              noWrap={true}
+              sx={{
+                fontFamily: "open sans",
+                fontStyle: "normal",
+                fontWeight: 400,
+                fontSize: "14px",
+                lineHeight: "16.41px",
+                color: "red",
+                textDecoration: "underline",
+              }}
+            >
+              New Player
+            </Typography>
+          </Button>
+          <CreateNewPlayer open={open} handleClose={handleClose} />
+        </Box>
+        <Box>
+          <Button onClick={orderListOnInitative}>Start Fight</Button>
+        </Box>
+        <Box>
+          <Button onClick={turnOver}>Next Turn</Button>
+        </Box>
+      </Box>
+      <Box sx={{ width: "50%" }}>
+        <Box>
+          {" "}
+          <TextField
+            id="standard-name"
+            label="value"
+            className={classes.textField}
+            value={damageHealth}
+            onChange={changeValue}
+            margin="normal"
           />
         </Box>
-      ))}
-      {/* <Box>{listCharacters()}</Box> */}
-
-      <Box>
-        <Button onClick={handleClickOpen}>
-          <Typography
-            noWrap={true}
-            sx={{
-              fontFamily: "open sans",
-              fontStyle: "normal",
-              fontWeight: 400,
-              fontSize: "14px",
-              lineHeight: "16.41px",
-              color: "red",
-              textDecoration: "underline",
+        <Box>
+          <Button
+            onClick={() => {
+              damagePlayer();
             }}
           >
-            New Player
-          </Typography>
-        </Button>
-        <CreateNewPlayer open={open} handleClose={handleClose} />
-      </Box>
-      <Box>
-        <Button onClick={orderListOnInitative}>Start Fight</Button>
-      </Box>
-      <Box>
-        <Button onClick={turnOver}>Next Turn</Button>
+            damage
+          </Button>
+          <Button
+            onClick={() => {
+              healPlayer();
+            }}
+          >
+            heal
+          </Button>
+        </Box>
       </Box>
     </Box>
   );
