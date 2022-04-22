@@ -48,9 +48,7 @@ const DetailedFight = (props: IProps) => {
       characterLevel: null,
     },
   ]);
-  const [selectedPlayer, setSelectedPlayer] = useState<IPlayer>(
-    defaultUserData[0]
-  );
+
   const [playerName, setPlayerName] = useState<string>("");
 
   const onNameChange = (name: string) => {
@@ -83,6 +81,7 @@ const DetailedFight = (props: IProps) => {
       characterLevel: 3,
     },
   ]);
+  const [selectedPlayer, setSelectedPlayer] = useState<IPlayer>(testList[0]);
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -93,9 +92,9 @@ const DetailedFight = (props: IProps) => {
     setOpen(false);
   };
 
-  const onClick = (setCharacter: IPlayer): void => {
-    const characterSelected = setCharacter;
-    setSelectedPlayer(selectedPlayer);
+  const onClick = (newSelectedPlayer: IPlayer): void => {
+    const characterSelected = newSelectedPlayer;
+    setSelectedPlayer(characterSelected);
   };
 
   const createNewCharacterClick = async (): Promise<void> => {
@@ -103,19 +102,30 @@ const DetailedFight = (props: IProps) => {
   };
 
   const orderListOnInitative = () => {
-    if (userData.length > 0) {
-      userData.sort((a, b) => b.characterInitative - a.characterInitative);
+    let newList = [] as IPlayer[];
+    if (testList.length > 0) {
+      newList = testList.slice().sort((a, b) => {
+        return (
+          parseFloat(b.characterInitative.toString()) -
+          parseFloat(a.characterInitative.toString())
+        );
+      });
     }
-    setTestList(inputList);
-    console.log("testList", inputList);
+    setTestList(newList);
+    console.log("testList", newList);
   };
 
   const turnOver = () => {
-    if (userData.length > 0) {
-      userData.push(userData.splice(0, 1)[0]);
+    const negativeLength = 0 - (testList.length - 1);
+    let newList = [] as IPlayer[];
+    if (testList.length > 0) {
+      const firstCharacter = testList[0];
+      newList = testList.slice(negativeLength);
+      newList.push(firstCharacter);
     }
-    setTestList(inputList);
-    console.log("testList", inputList);
+    setTestList(newList);
+    setSelectedPlayer(testList[1]);
+    console.log("testList", newList);
   };
 
   return (
@@ -124,21 +134,21 @@ const DetailedFight = (props: IProps) => {
         <CharacterInput inputList={inputList} setInputList={setInputList} />
       </Box> */}
 
-      <Box>{playerName}</Box>
       <Box>Characters in Fight:</Box>
-      <Box>
-        {userData.map((characters) => (
-          <Box sx={{ display: "flex" }}>
-            <CharacterCard
-              data={characters}
-              onClick={onClick}
-              isSelected={
-                characters.characterName === selectedPlayer?.characterName
-              }
-            />
-          </Box>
-        ))}
-      </Box>
+
+      {testList.map((characters) => (
+        <Box sx={{ display: "flex" }}>
+          <CharacterCard
+            data={characters}
+            onClick={onClick}
+            isSelected={
+              characters.characterName === selectedPlayer?.characterName
+            }
+          />
+        </Box>
+      ))}
+      {/* <Box>{listCharacters()}</Box> */}
+
       <Box>
         <Button onClick={handleClickOpen}>
           <Typography

@@ -38,14 +38,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const CharacterCard: React.FC<IProps> = (props: IProps) => {
-  const { onClick, data, isSelected } = props;
+  const { data, isSelected, onClick } = props;
   const classes = useStyles();
   const theme = useTheme();
-
-  const changeSelection = (info: IPlayer) => {
-    onClick(info);
-    console.log(info.characterName);
-  };
 
   return (
     <Box
@@ -63,7 +58,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
         justifyContent="space-between"
         alignItems="center"
         style={{ cursor: "pointer" }}
-        onClick={() => changeSelection(data)}
+        onClick={() => onClick(data)}
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <Box
