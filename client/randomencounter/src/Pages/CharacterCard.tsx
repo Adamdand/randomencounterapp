@@ -47,7 +47,11 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
       className={classes.root}
       style={{
         cursor: "pointer",
-        borderColor: isSelected ? theme.palette.primary.main : "",
+        borderColor: isSelected
+          ? theme.palette.primary.main
+          : data.characterHealth !== null && data.characterHealth <= 0
+          ? "red"
+          : "",
         backgroundColor: isSelected ? theme.palette.primaryHover : "",
         color: isSelected ? theme.palette.primary.main : "",
       }}
