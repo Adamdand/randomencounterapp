@@ -27,6 +27,7 @@ const CreateNewPlayer = (props: IProps): JSX.Element => {
     characterAC: null,
     characterInitative: 0,
     characterHealth: null,
+    characterMaxHealth: null,
     characterLevel: null,
   });
 
@@ -66,6 +67,7 @@ const CreateNewPlayer = (props: IProps): JSX.Element => {
     const characterObject = {
       ...newPlayer,
       characterHealth: health,
+      characterMaxHealth: health,
     } as IPlayer;
     setNewPlayer(characterObject);
   };

@@ -342,5 +342,6 @@ export interface IPlayer {
   characterAC: number | null;
   characterInitative: number;
   characterHealth: number | null;
+  characterMaxHealth: number | null;
   characterLevel: number | null;
 }

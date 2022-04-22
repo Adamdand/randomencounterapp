@@ -42,6 +42,21 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
   const classes = useStyles();
   const theme = useTheme();
 
+  const getHealthPercent = (): string => {
+    if (data.characterHealth !== null && data.characterMaxHealth !== null) {
+      if ((data.characterHealth / data.characterMaxHealth) * 100 > 50) {
+        return "green";
+      }
+      if ((data.characterHealth / data.characterMaxHealth) * 100 > 25) {
+        return "orange";
+      }
+      if ((data.characterHealth / data.characterMaxHealth) * 100 <= 25) {
+        return "red";
+      }
+    }
+    return "black";
+  };
+
   return (
     <Box
       className={classes.root}
@@ -81,7 +96,9 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
           >
             <Typography>{data.characterName}</Typography>
             <Typography>{data.characterAC}</Typography>
-            <Typography>{data.characterHealth}</Typography>
+            <Typography sx={{ color: getHealthPercent }}>
+              {data.characterHealth} / {data.characterMaxHealth}
+            </Typography>
             <Typography>{data.characterLevel}</Typography>
             <Typography>{data.characterInitative}</Typography>
           </Box>
