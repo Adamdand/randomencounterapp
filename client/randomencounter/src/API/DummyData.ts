@@ -7,7 +7,8 @@ export const defaultUserData = [
     characterName: "test1",
     characterAC: 2,
     characterInitative: 90,
-    characterHealth: 2,
+    characterHealth: 20,
+    characterMaxHealth: 100,
     characterLevel: 3,
   },
   {
@@ -15,7 +16,8 @@ export const defaultUserData = [
     characterName: "test2",
     characterAC: 2,
     characterInitative: 2,
-    characterHealth: 2,
+    characterHealth: 50,
+    characterMaxHealth: 100,
     characterLevel: 2,
   },
   {
@@ -23,7 +25,8 @@ export const defaultUserData = [
     characterName: "test3",
     characterAC: 3,
     characterInitative: 55,
-    characterHealth: 3,
+    characterHealth: 100,
+    characterMaxHealth: 100,
     characterLevel: 3,
   },
 ] as IPlayer[];
