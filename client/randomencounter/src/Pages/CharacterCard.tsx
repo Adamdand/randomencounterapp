@@ -94,7 +94,11 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
           <Box
             sx={{ width: "145px", wordWrap: "break-word", textAlign: "left" }}
           >
-            <Typography>{data.characterName}</Typography>
+            <Typography
+              sx={{ fontWeight: "bolder", textDecoration: "underline" }}
+            >
+              {data.characterName}
+            </Typography>
             <Typography>{data.characterAC}</Typography>
             <Typography sx={{ color: getHealthPercent }}>
               {data.characterHealth} / {data.characterMaxHealth}
