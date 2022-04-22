@@ -1,8 +1,17 @@
-import { Box, Theme, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardMedia,
+  Theme,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
 
 import React from "react";
 import { IPlayer } from "../Context/Types";
+import DeathSaves from "./DeathSaves";
 
 interface IProps {
   data: IPlayer;
@@ -35,6 +44,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   classIcon: {
     width: "50px",
   },
+  media: {
+    // this is the`className` passed to `CardMedia` later
+    height: 100, // as an example I am modifying width and height
+    width: "33%",
+  },
 }));
 
 const CharacterCard: React.FC<IProps> = (props: IProps) => {
@@ -42,7 +56,17 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
   const classes = useStyles();
   const theme = useTheme();
 
-  const getHealthPercent = (): string => {
+  const playerDead = (): boolean => {
+    if (data.characterHealth !== null && data.characterMaxHealth !== null) {
+      if ((data.characterHealth / data.characterMaxHealth) * 100 <= 0) {
+        return true;
+      }
+      return false;
+    }
+    return false;
+  };
+
+  const getHealthColours = (): string => {
     if (data.characterHealth !== null && data.characterMaxHealth !== null) {
       if ((data.characterHealth / data.characterMaxHealth) * 100 > 100) {
         return "blue";
@@ -104,7 +128,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
             </Typography>
             <Typography>{data.characterAC}</Typography>
             <Box sx={{ display: "flex", flexDirection: "row" }}>
-              <Typography sx={{ color: getHealthPercent }}>
+              <Typography sx={{ color: getHealthColours }}>
                 {data.characterHealth}
               </Typography>
               <Typography sx={{ paddingLeft: "4px" }}>
@@ -115,6 +139,40 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
             <Typography>{data.characterLevel}</Typography>
             <Typography>{data.characterInitative}</Typography>
           </Box>
+        </Box>
+        <Box sx={{ width: "200px" }}>
+          {playerDead() && <DeathSaves isDead={true} />}
+          {(getHealthColours() === "green" ||
+            getHealthColours() === "blue") && (
+            <Box sx={{ height: "50%", width: "50%" }}>
+              <CardMedia
+                component="img"
+                height="max"
+                image="smilePics/happy.png"
+                alt="monster image"
+              />
+            </Box>
+          )}
+          {getHealthColours() === "orange" && (
+            <Box sx={{ height: "50%", width: "50%" }}>
+              <CardMedia
+                component="img"
+                height="max"
+                image="smilePics/medium.png"
+                alt="monster image"
+              />
+            </Box>
+          )}
+          {getHealthColours() === "red" && playerDead() === false && (
+            <Box sx={{ height: "50%", width: "50%" }}>
+              <CardMedia
+                component="img"
+                height="max"
+                image="smilePics/sad.png"
+                alt="monster image"
+              />
+            </Box>
+          )}
         </Box>
       </Box>
     </Box>
