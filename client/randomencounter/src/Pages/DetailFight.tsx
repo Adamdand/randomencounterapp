@@ -411,7 +411,9 @@ const DetailedFight = (props: IProps) => {
       }}
     >
       <Box sx={{ width: "50%" }}>
-        <Box>Characters in Fight:</Box>
+        <Box>
+          <Typography variant="h2">Characters in Fight:</Typography>
+        </Box>
 
         {testList.map((characters) => (
           <Box sx={{ display: "flex" }}>
@@ -447,16 +449,25 @@ const DetailedFight = (props: IProps) => {
         </Box>
       </Box>
       <Box sx={{ display: "flex", flexDirection: "column", width: "50%" }}>
-        <Box>Actions:</Box>
+        <Box>
+          {" "}
+          <Typography variant="h2">Actions:</Typography>
+        </Box>
         <Box sx={{ border: "1px dashed grey" }}>
-          <Box>Set Up</Box>
+          <Box>
+            {" "}
+            <Typography variant="h3">Set Up</Typography>
+          </Box>
           <Button onClick={getMonsterWithRatingBtn}>Get Monsters</Button>
           <Box>
             <Button onClick={orderListOnInitative}>Order List</Button>
           </Box>
         </Box>
         <Box sx={{ border: "1px dashed grey" }}>
-          <Box>Actions</Box>
+          <Box>
+            {" "}
+            <Typography variant="h3">Actions</Typography>
+          </Box>
           <Box>
             {" "}
             <TextField
@@ -496,7 +507,10 @@ const DetailedFight = (props: IProps) => {
             alignItems: "center",
           }}
         >
-          <Box>Monster Info</Box>
+          <Box>
+            {" "}
+            <Typography variant="h3">Monster Info</Typography>
+          </Box>
 
           {monsterRatingList.length > 0 && randomMonsterTypeOne !== undefined && (
             <Box>

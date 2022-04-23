@@ -224,14 +224,21 @@ const BaseTheme = createTheme({
       fontFamily: "Fjalla One",
       fontWeight: 400,
       fontStyle: "normal",
-      fontSize: "32px",
+      fontSize: "40px",
       lineHeight: "40.22px",
     },
     h2: {
       fontFamily: "Fjalla One",
       fontWeight: 400,
       fontStyle: "normal",
-      fontSize: "20px",
+      fontSize: "32px",
+      lineHeight: "25.14px",
+    },
+    h3: {
+      fontFamily: "Fjalla One",
+      fontWeight: 400,
+      fontStyle: "normal",
+      fontSize: "24px",
       lineHeight: "25.14px",
     },
     bodyBold: {
