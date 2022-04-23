@@ -446,9 +446,6 @@ const DetailedFight = (props: IProps) => {
           <Box>
             <Button onClick={orderListOnInitative}>Order List</Button>
           </Box>
-          <Box>
-            <Button onClick={turnOver}>Next Turn</Button>
-          </Box>
         </Box>
         <Box sx={{ border: "1px dashed grey" }}>
           <Box>Actions</Box>
@@ -478,6 +475,8 @@ const DetailedFight = (props: IProps) => {
             >
               heal
             </Button>
+
+            <Button onClick={turnOver}>Next Turn</Button>
           </Box>
         </Box>
 
