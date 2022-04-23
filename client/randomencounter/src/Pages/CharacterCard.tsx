@@ -119,7 +119,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
         </Box>
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <Box
-            sx={{ width: "145px", wordWrap: "break-word", textAlign: "left" }}
+            sx={{ width: "200px", wordWrap: "break-word", textAlign: "left" }}
           >
             <Typography
               sx={{ fontWeight: "bolder", textDecoration: "underline" }}
@@ -140,11 +140,11 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
             <Typography>{data.characterInitative}</Typography>
           </Box>
         </Box>
-        <Box sx={{ width: "200px" }}>
+        <Box sx={{ width: "100px" }}>
           {playerDead() && <DeathSaves isDead={true} />}
           {(getHealthColours() === "green" ||
             getHealthColours() === "blue") && (
-            <Box sx={{ height: "50%", width: "50%" }}>
+            <Box sx={{ width: "100%" }}>
               <CardMedia
                 component="img"
                 height="max"
@@ -154,7 +154,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
             </Box>
           )}
           {getHealthColours() === "orange" && (
-            <Box sx={{ height: "50%", width: "50%" }}>
+            <Box sx={{ width: "100%" }}>
               <CardMedia
                 component="img"
                 height="max"
@@ -164,7 +164,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
             </Box>
           )}
           {getHealthColours() === "red" && playerDead() === false && (
-            <Box sx={{ height: "50%", width: "50%" }}>
+            <Box sx={{ width: "100%" }}>
               <CardMedia
                 component="img"
                 height="max"

@@ -100,6 +100,30 @@ const DetailedFight = (props: IProps) => {
   const [damageHealth, setDamageHealth] = useState<number>();
   const [open, setOpen] = React.useState(false);
 
+  const [monsterList, setMonsterList] = useState<IMonster[]>([]);
+  const [monsterRatingList, setMonsterRatingList] = useState<IMonster[]>([]);
+
+  const [monsterDetails, setMonsterDetails] = useState<IMonsterDetails>(
+    defaultMonsterDetails
+  );
+  const [averagePlayerLevel, setAveragePlayerLevel] = useState<number>(3);
+  const [randomActivityNumber, setRandomActivityNumber] = useState<number>(0);
+  const [randomMonsterTypeOne, setRandomMonsterTypeOne] =
+    useState<IRandomMonster>({
+      quantity: 0,
+      index: "null",
+      name: "null",
+      url: "null",
+    });
+  const [randomMonsterTypeTwo, setRandomMonsterTypeTwo] =
+    useState<IRandomMonster>({
+      quantity: 0,
+      index: "null",
+      name: "null",
+      url: "null",
+    });
+  const [twoTypeOfMonsters, settwoTypeOfMonsters] = useState<boolean>(false);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -191,40 +215,25 @@ const DetailedFight = (props: IProps) => {
     }
   };
 
-  const [monsterList, setMonsterList] = useState<IMonster[]>([]);
-  const [monsterRatingList, setMonsterRatingList] = useState<IMonster[]>([]);
+  const changeAveragePlayerLevel = (): void => {
+    let levelSum = 0;
+    let count = 0;
 
-  const [monsterDetails, setMonsterDetails] = useState<IMonsterDetails>(
-    defaultMonsterDetails
-  );
-  const [averagePlayerLevel, setAveragePlayerLevel] = useState<number>(3);
-  const [randomActivityNumber, setRandomActivityNumber] = useState<number>(0);
-  const [randomMonsterTypeOne, setRandomMonsterTypeOne] =
-    useState<IRandomMonster>({
-      quantity: 0,
-      index: "null",
-      name: "null",
-      url: "null",
+    testList.forEach((element) => {
+      if (element.characterLevel !== null && element.type === "human") {
+        levelSum += element.characterLevel;
+        count += 1;
+      }
     });
-  const [randomMonsterTypeTwo, setRandomMonsterTypeTwo] =
-    useState<IRandomMonster>({
-      quantity: 0,
-      index: "null",
-      name: "null",
-      url: "null",
-    });
-  const [twoTypeOfMonsters, settwoTypeOfMonsters] = useState<boolean>(false);
-  //   const [selectedMonster, setSelectedMonster] = useState<IMonster>({
-  //     index: "null",
-  //     name: "null",
-  //     url: "null",
-  //   });
-  // const { state } = useContext(IdContext);
-  console.log("monsters on main page", monsterList);
 
-  const changeAveragePlayerLevel = (playerLevel: string) => {
-    setAveragePlayerLevel(Number(playerLevel));
+    const averageLevel = Math.trunc(levelSum / count);
+    setAveragePlayerLevel(averageLevel);
   };
+
+  useEffect(() => {
+    changeAveragePlayerLevel();
+    console.log("lvl: ", averagePlayerLevel);
+  }, [testList]);
 
   const monsterActivities = [
     "playing chess",
@@ -351,6 +360,7 @@ const DetailedFight = (props: IProps) => {
             characterMaxHealth: tempMonsterDetails.hit_points,
             type: "npc",
           });
+          setRandomMonsterTypeTwo(newRandomMonster);
           monsterCount += 1;
         }
       } catch (error) {
@@ -418,20 +428,22 @@ const DetailedFight = (props: IProps) => {
                 textDecoration: "underline",
               }}
             >
-              New Player
+              Add Player
             </Typography>
           </Button>
           <CreateNewPlayer open={open} handleClose={handleClose} />
         </Box>
-        <Box>
-          <Button onClick={orderListOnInitative}>Order List</Button>
-        </Box>
-        <Box>
-          <Button onClick={turnOver}>Next Turn</Button>
-        </Box>
       </Box>
       <Box sx={{ display: "flex", flexDirection: "column", width: "50%" }}>
-        <Box>
+        <Box sx={{ border: "1px dashed grey" }}>
+          <Box>
+            <Button onClick={orderListOnInitative}>Order List</Button>
+          </Box>
+          <Box>
+            <Button onClick={turnOver}>Next Turn</Button>
+          </Box>
+        </Box>
+        <Box sx={{ border: "1px dashed grey" }}>
           <Box>
             {" "}
             <TextField
@@ -461,7 +473,14 @@ const DetailedFight = (props: IProps) => {
           </Box>
         </Box>
 
-        <Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            border: "1px dashed grey",
+            alignItems: "center",
+          }}
+        >
           <Button onClick={getMonsterWithRatingBtn}>
             <Typography>Get Monsters</Typography>
           </Button>
@@ -500,6 +519,26 @@ const DetailedFight = (props: IProps) => {
               </Box>
             </Box>
           )}
+          <Box>
+            <Box
+              sx={{
+                width: "200px",
+                paddingTop: "16px",
+              }}
+            >
+              <Typography
+                sx={{ textDecoration: "underline", fontWeight: "bold" }}
+              >
+                Stats
+              </Typography>
+              <Typography>Name = {monsterDetails.name}</Typography>
+              <Typography>
+                Challenge Rating = {monsterDetails.challenge_rating}
+              </Typography>
+              <Typography>AC = {monsterDetails.armor_class}</Typography>
+              <Typography>HitPoints = {monsterDetails.hit_points}</Typography>
+            </Box>
+          </Box>
         </Box>
       </Box>
     </Box>
