@@ -298,23 +298,26 @@ const DetailedFight = (props: IProps) => {
       quantity: rndInt,
     } as IRandomMonster;
     try {
-      const tempMonsterDetails = monsterAPIs.getSpecificMonsterAxios(
+      const tempMonsterDetails = await monsterAPIs.getSpecificMonsterAxios(
         newRandomMonster.index
       );
-
-      testList.push({
-        characterName: (await tempMonsterDetails).name,
-        characterAC: (await tempMonsterDetails).armor_class,
-        characterHealth: (await tempMonsterDetails).hit_points,
-        characterInitative: Math.ceil(
-          Math.round(((await tempMonsterDetails).dexterity - 10) / 2) +
-            (Math.random() * (20 - 1) + 1)
-        ),
-        characterLevel: (await tempMonsterDetails).challenge_rating,
-        characterMaxHealth: (await tempMonsterDetails).hit_points,
-        type: "npc",
-      });
-      setRandomMonsterTypeOne(newRandomMonster);
+      let monsterCount = 0;
+      while (monsterCount < rndInt) {
+        testList.push({
+          characterName: tempMonsterDetails.name,
+          characterAC: tempMonsterDetails.armor_class,
+          characterHealth: tempMonsterDetails.hit_points,
+          characterInitative: Math.ceil(
+            Math.round((tempMonsterDetails.dexterity - 10) / 2) +
+              (Math.random() * (20 - 1) + 1)
+          ),
+          characterLevel: tempMonsterDetails.challenge_rating,
+          characterMaxHealth: tempMonsterDetails.hit_points,
+          type: "npc",
+        });
+        setRandomMonsterTypeOne(newRandomMonster);
+        monsterCount += 1;
+      }
     } catch (error) {
       console.log(error);
     }
@@ -331,22 +334,25 @@ const DetailedFight = (props: IProps) => {
         quantity: rndInt,
       } as IRandomMonster;
       try {
-        const tempMonsterDetails = monsterAPIs.getSpecificMonsterAxios(
+        const tempMonsterDetails = await monsterAPIs.getSpecificMonsterAxios(
           newRandomMonster.index
         );
-
-        testList.push({
-          characterName: (await tempMonsterDetails).name,
-          characterAC: (await tempMonsterDetails).armor_class,
-          characterHealth: (await tempMonsterDetails).hit_points,
-          characterInitative: Math.ceil(
-            Math.round(((await tempMonsterDetails).dexterity - 10) / 2) +
-              (Math.random() * (20 - 1) + 1)
-          ),
-          characterLevel: (await tempMonsterDetails).challenge_rating,
-          characterMaxHealth: (await tempMonsterDetails).hit_points,
-          type: "npc",
-        });
+        let monsterCount = 0;
+        while (monsterCount < rndInt) {
+          testList.push({
+            characterName: tempMonsterDetails.name,
+            characterAC: tempMonsterDetails.armor_class,
+            characterHealth: tempMonsterDetails.hit_points,
+            characterInitative: Math.ceil(
+              Math.round((tempMonsterDetails.dexterity - 10) / 2) +
+                (Math.random() * (20 - 1) + 1)
+            ),
+            characterLevel: tempMonsterDetails.challenge_rating,
+            characterMaxHealth: tempMonsterDetails.hit_points,
+            type: "npc",
+          });
+          monsterCount += 1;
+        }
       } catch (error) {
         console.log(error);
       }
@@ -424,74 +430,78 @@ const DetailedFight = (props: IProps) => {
           <Button onClick={turnOver}>Next Turn</Button>
         </Box>
       </Box>
-      <Box sx={{ width: "50%" }}>
-        <Box>
-          {" "}
-          <TextField
-            id="standard-name"
-            label="value"
-            className={classes.textField}
-            value={damageHealth}
-            onChange={changeValue}
-            margin="normal"
-          />
-        </Box>
-        <Box>
-          <Button
-            onClick={() => {
-              damagePlayer();
-            }}
-          >
-            damage
-          </Button>
-          <Button
-            onClick={() => {
-              healPlayer();
-            }}
-          >
-            heal
-          </Button>
-        </Box>
-      </Box>
-      <Button onClick={getMonsterWithRatingBtn}>
-        <Typography>Get Monsters</Typography>
-      </Button>
-      {monsterRatingList.length > 0 && randomMonsterTypeOne !== undefined && (
+      <Box sx={{ display: "flex", flexDirection: "column", width: "50%" }}>
         <Box>
           <Box>
-            <Typography
-              display="flex"
-              flexDirection="row"
-              alignItems="center"
-              style={{ cursor: "pointer" }}
+            {" "}
+            <TextField
+              id="standard-name"
+              label="value"
+              className={classes.textField}
+              value={damageHealth}
+              onChange={changeValue}
+              margin="normal"
+            />
+          </Box>
+          <Box>
+            <Button
+              onClick={() => {
+                damagePlayer();
+              }}
             >
-              you have encountered {randomMonsterTypeOne.quantity}
-              <Box>
-                <Button
-                  onClick={() => {
-                    getMonsterDetails(randomMonsterTypeOne.index);
-                  }}
-                >
-                  {randomMonsterTypeOne?.name}
-                </Button>
-              </Box>
-              {twoTypeOfMonsters && randomMonsterTypeTwo.quantity !== 0 && (
-                <Typography>
-                  and {randomMonsterTypeTwo.quantity}
-                  <Button
-                    onClick={() => {
-                      getMonsterDetails(randomMonsterTypeTwo.index);
-                    }}
-                  >
-                    {randomMonsterTypeTwo.name}
-                  </Button>
-                </Typography>
-              )}
-              {monsterActivities[randomActivityNumber]}.
-            </Typography>
+              damage
+            </Button>
+            <Button
+              onClick={() => {
+                healPlayer();
+              }}
+            >
+              heal
+            </Button>
           </Box>
         </Box>
-      )}
+
+        <Box>
+          <Button onClick={getMonsterWithRatingBtn}>
+            <Typography>Get Monsters</Typography>
+          </Button>
+          {monsterRatingList.length > 0 && randomMonsterTypeOne !== undefined && (
+            <Box>
+              <Box>
+                <Typography
+                  flexDirection="row"
+                  alignItems="center"
+                  style={{ cursor: "pointer" }}
+                >
+                  you have encountered {randomMonsterTypeOne.quantity}
+                  <Box>
+                    <Button
+                      onClick={() => {
+                        getMonsterDetails(randomMonsterTypeOne.index);
+                      }}
+                    >
+                      {randomMonsterTypeOne?.name}
+                    </Button>
+                  </Box>
+                  {twoTypeOfMonsters && randomMonsterTypeTwo.quantity !== 0 && (
+                    <Typography>
+                      and {randomMonsterTypeTwo.quantity}
+                      <Button
+                        onClick={() => {
+                          getMonsterDetails(randomMonsterTypeTwo.index);
+                        }}
+                      >
+                        {randomMonsterTypeTwo.name}
+                      </Button>
+                    </Typography>
+                  )}
+                  {monsterActivities[randomActivityNumber]}.
+                </Typography>
+              </Box>
+            </Box>
+          )}
+        </Box>
+      </Box>
     </Box>
   );
 };
