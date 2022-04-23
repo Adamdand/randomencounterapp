@@ -108,7 +108,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <Box
-            sx={{ width: "145px", wordWrap: "break-word", textAlign: "left" }}
+            sx={{ width: "80px", wordWrap: "break-word", textAlign: "left" }}
           >
             <Typography>Name</Typography>
             <Typography>AC</Typography>
