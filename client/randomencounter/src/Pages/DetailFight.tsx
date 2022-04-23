@@ -66,6 +66,7 @@ const DetailedFight = (props: IProps) => {
       characterHealth: 20,
       characterMaxHealth: 100,
       characterLevel: 3,
+      type: "human",
     },
     {
       index: 1,
@@ -75,6 +76,7 @@ const DetailedFight = (props: IProps) => {
       characterHealth: 25,
       characterMaxHealth: 50,
       characterLevel: 2,
+      type: "human",
     },
     {
       index: 2,
@@ -84,6 +86,7 @@ const DetailedFight = (props: IProps) => {
       characterHealth: 100,
       characterMaxHealth: 100,
       characterLevel: 3,
+      type: "human",
     },
   ]);
   const [selectedPlayer, setSelectedPlayer] = useState<IPlayer>(testList[0]);

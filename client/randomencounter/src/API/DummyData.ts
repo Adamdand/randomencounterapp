@@ -10,6 +10,7 @@ export const defaultUserData = [
     characterHealth: 20,
     characterMaxHealth: 100,
     characterLevel: 3,
+    type: "human",
   },
   {
     index: 1,
@@ -19,6 +20,7 @@ export const defaultUserData = [
     characterHealth: 50,
     characterMaxHealth: 100,
     characterLevel: 2,
+    type: "human",
   },
   {
     index: 2,
@@ -28,5 +30,6 @@ export const defaultUserData = [
     characterHealth: 100,
     characterMaxHealth: 100,
     characterLevel: 3,
+    type: "human",
   },
 ] as IPlayer[];

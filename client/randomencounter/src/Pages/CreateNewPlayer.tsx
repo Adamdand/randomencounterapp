@@ -29,6 +29,7 @@ const CreateNewPlayer = (props: IProps): JSX.Element => {
     characterHealth: null,
     characterMaxHealth: null,
     characterLevel: null,
+    type: "human",
   });
 
   const addCharacterToList = (completedNewPlayer: IPlayer): void => {
@@ -39,6 +40,7 @@ const CreateNewPlayer = (props: IProps): JSX.Element => {
     const characterObject = {
       ...newPlayer,
       characterName: nameChoice,
+      type: "human",
     } as IPlayer;
     setNewPlayer(characterObject);
   };

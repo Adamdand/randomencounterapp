@@ -338,6 +338,7 @@ export interface IRandomMonster {
 
 export interface IPlayer {
   index?: number | null;
+  type: string;
   characterName: string;
   characterAC: number | null;
   characterInitative: number;
