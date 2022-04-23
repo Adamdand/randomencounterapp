@@ -200,7 +200,7 @@ const CreateNewPlayer = (props: IProps): JSX.Element => {
               handleClose();
             }}
           >
-            <Typography variant="h2"> Create </Typography>
+            Create
           </Button>
           <Button variant="contained" onClick={handleClose}>
             close

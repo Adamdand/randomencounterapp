@@ -18,6 +18,7 @@ import useLoading from "../Hooks/useLoading";
 import { IMonster, IMonsterDetails } from "../Context/Types";
 import monsterAPIs from "../API/monsterAPI";
 import { defaultMonsterDetails } from "../Context/DefaultTypes";
+import MonsterDetails from "./Common/MonsterDetails";
 
 interface IProps {
   gameType: string;
@@ -225,8 +226,14 @@ const MonsterSearch = (props: IProps) => {
         <Box>
           <Box
             sx={{
-              width: "600px",
+              width: "500px",
               paddingTop: "16px",
+              display: "flex",
+              flexDirection: "column",
+              alignContent: "center",
+              justifyConent: "center",
+              alignItems: "center",
+              backgroundColor: "white",
             }}
           >
             <Typography
@@ -234,57 +241,7 @@ const MonsterSearch = (props: IProps) => {
             >
               Stats
             </Typography>
-            <Box sx={{ textAlign: "left" }}>
-              <Typography>Name = {monsterDetails.name}</Typography>
-              <Card sx={{ margin: "32px" }}>
-                <CardMedia
-                  component="img"
-                  height="max"
-                  image={`dndMonsterPics/${monsterDetails.index}.jpeg`}
-                  alt="monster image"
-                />
-                {/* <CardContent>
-                          <Typography gutterBottom variant="h5" component="div">
-                            monster picture
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            data
-                          </Typography>
-                        </CardContent> */}
-              </Card>
-              <Typography>
-                Challenge Rating = {monsterDetails.challenge_rating}
-              </Typography>
-              <Typography>AC = {monsterDetails.armor_class}</Typography>
-              <Typography>HitPoints = {monsterDetails.hit_points}</Typography>
-              <Typography>Alignment = {monsterDetails.alignment}</Typography>
-
-              <Typography>
-                Speed-walkwalk = {monsterDetails.speed.walk}
-              </Typography>
-              <Typography>Speed-swim= {monsterDetails.speed.swim}</Typography>
-
-              <Typography>Size = {monsterDetails.size}</Typography>
-
-              {monsterDetails.actions.map((action) => {
-                return (
-                  <Box>
-                    <Typography>Action Name = {action.name}</Typography>
-                    <Typography>Action Desc = {action.desc}</Typography>
-                  </Box>
-                );
-              })}
-
-              <Typography>
-                Damage Resistances = {monsterDetails.damage_immunities}
-              </Typography>
-              <Typography>
-                Damage Resistances = {monsterDetails.damage_resistances}
-              </Typography>
-              <Typography>
-                Damage Vulnerabilities ={monsterDetails.damage_vulnerabilities}
-              </Typography>
-            </Box>
+            <MonsterDetails monsterData={monsterDetails} />
           </Box>
         </Box>
       </Box>

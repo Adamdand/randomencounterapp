@@ -144,7 +144,11 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
               <CardMedia
                 component="img"
                 height="max"
-                image="smilePics/happy.png"
+                image={
+                  data.type === "human"
+                    ? "smilePics/happy.png"
+                    : "smilePics/happyMonster.png"
+                }
                 alt="monster image"
               />
             </Box>
@@ -154,7 +158,11 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
               <CardMedia
                 component="img"
                 height="max"
-                image="smilePics/medium.png"
+                image={
+                  data.type === "human"
+                    ? "smilePics/medium.png"
+                    : "smilePics/mediumMonster.png"
+                }
                 alt="monster image"
               />
             </Box>
@@ -164,7 +172,11 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
               <CardMedia
                 component="img"
                 height="max"
-                image="smilePics/sad.png"
+                image={
+                  data.type === "human"
+                    ? "smilePics/sad.png"
+                    : "smilePics/sadMonster.png"
+                }
                 alt="monster image"
               />
             </Box>
