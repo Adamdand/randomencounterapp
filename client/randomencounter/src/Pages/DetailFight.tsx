@@ -396,7 +396,11 @@ const DetailedFight = (props: IProps) => {
   return (
     <Box
       className={classes.root}
-      sx={{ display: "flex", flexDirection: "row" }}
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "flex-start",
+      }}
     >
       <Box sx={{ width: "50%" }}>
         <Box>Characters in Fight:</Box>
@@ -435,7 +439,10 @@ const DetailedFight = (props: IProps) => {
         </Box>
       </Box>
       <Box sx={{ display: "flex", flexDirection: "column", width: "50%" }}>
+        <Box>Actions:</Box>
         <Box sx={{ border: "1px dashed grey" }}>
+          <Box>Set Up</Box>
+          <Button onClick={getMonsterWithRatingBtn}>Get Monsters</Button>
           <Box>
             <Button onClick={orderListOnInitative}>Order List</Button>
           </Box>
@@ -444,6 +451,7 @@ const DetailedFight = (props: IProps) => {
           </Box>
         </Box>
         <Box sx={{ border: "1px dashed grey" }}>
+          <Box>Actions</Box>
           <Box>
             {" "}
             <TextField
@@ -481,9 +489,8 @@ const DetailedFight = (props: IProps) => {
             alignItems: "center",
           }}
         >
-          <Button onClick={getMonsterWithRatingBtn}>
-            <Typography>Get Monsters</Typography>
-          </Button>
+          <Box>Monster Info</Box>
+
           {monsterRatingList.length > 0 && randomMonsterTypeOne !== undefined && (
             <Box>
               <Box>
@@ -493,15 +500,13 @@ const DetailedFight = (props: IProps) => {
                   style={{ cursor: "pointer" }}
                 >
                   you have encountered {randomMonsterTypeOne.quantity}
-                  <Box>
-                    <Button
-                      onClick={() => {
-                        getMonsterDetails(randomMonsterTypeOne.index);
-                      }}
-                    >
-                      {randomMonsterTypeOne?.name}
-                    </Button>
-                  </Box>
+                  <Button
+                    onClick={() => {
+                      getMonsterDetails(randomMonsterTypeOne.index);
+                    }}
+                  >
+                    {randomMonsterTypeOne?.name}
+                  </Button>
                   {twoTypeOfMonsters && randomMonsterTypeTwo.quantity !== 0 && (
                     <Typography>
                       and {randomMonsterTypeTwo.quantity}
