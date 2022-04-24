@@ -241,7 +241,12 @@ const MonsterSearch = (props: IProps) => {
             >
               Stats
             </Typography>
-            <MonsterDetails monsterData={monsterDetails} />
+            {monsterDetails.name !== "" && (
+              <MonsterDetails monsterData={monsterDetails} />
+            )}
+            {monsterDetails.name === "" && (
+              <Typography>No Monster Selected</Typography>
+            )}
           </Box>
         </Box>
       </Box>
