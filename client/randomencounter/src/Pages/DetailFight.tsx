@@ -382,9 +382,8 @@ const DetailedFight = (props: IProps) => {
 
   const findRandomEncounter = (monsters: IMonster[]) => {
     settwoTypeOfMonsters(Math.random() < 0.5);
-
-    getRandomMonsterTypeOne(monsters);
     getRandomMonsterTypeTwo(monsters);
+    getRandomMonsterTypeOne(monsters);
   };
 
   const getMonsterWithRatingBtn = async () => {
