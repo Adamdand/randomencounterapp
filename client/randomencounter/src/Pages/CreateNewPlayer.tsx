@@ -85,7 +85,7 @@ const CreateNewPlayer = (props: IProps): JSX.Element => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          <Typography>Add Another Player</Typography>
+          <Typography variant="h3">Add Another Player</Typography>
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">

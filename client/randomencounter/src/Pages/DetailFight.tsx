@@ -6,6 +6,9 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { makeStyles } from "@mui/styles";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -486,6 +489,7 @@ const DetailedFight = (props: IProps) => {
               }}
             >
               damage
+              <ArrowDownwardIcon />
             </Button>
             <Button
               onClick={() => {
@@ -493,9 +497,13 @@ const DetailedFight = (props: IProps) => {
               }}
             >
               heal
+              <ArrowUpwardIcon />
             </Button>
 
-            <Button onClick={turnOver}>Next Turn</Button>
+            <Button onClick={turnOver}>
+              Next Turn
+              <ArrowForwardIosIcon />
+            </Button>
           </Box>
         </Box>
 
