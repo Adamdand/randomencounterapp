@@ -137,7 +137,13 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
           </Box>
         </Box>
         <Box sx={{ width: "200px" }}>
-          {playerDead() && <DeathSaves isDead={true} />}
+          {playerDead() && (
+            <DeathSaves
+              isDead={true}
+              successSaves={data.successSaves}
+              failSaves={data.failSaves}
+            />
+          )}
           {(getHealthColours() === "green" ||
             getHealthColours() === "blue") && (
             <Box sx={{}}>

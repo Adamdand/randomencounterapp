@@ -85,6 +85,8 @@ const DetailedFight = (props: IProps) => {
       characterMaxHealth: 100,
       characterLevel: 3,
       type: "human",
+      successSaves: 0,
+      failSaves: 0,
     },
     {
       index: 1,
@@ -95,6 +97,8 @@ const DetailedFight = (props: IProps) => {
       characterMaxHealth: 50,
       characterLevel: 2,
       type: "human",
+      successSaves: 0,
+      failSaves: 0,
     },
     {
       index: 2,
@@ -105,6 +109,8 @@ const DetailedFight = (props: IProps) => {
       characterMaxHealth: 100,
       characterLevel: 3,
       type: "human",
+      successSaves: 0,
+      failSaves: 0,
     },
   ]);
   const [selectedPlayer, setSelectedPlayer] = useState<IPlayer>(testList[0]);
@@ -226,6 +232,51 @@ const DetailedFight = (props: IProps) => {
     }
   };
 
+  const failADeathSave = () => {
+    const newArr = testList.map((player) => {
+      if (
+        player.characterName === selectedPlayer.characterName &&
+        player.characterHealth !== null &&
+        player.characterHealth <= 0
+      ) {
+        return {
+          ...player,
+          failSaves: player.failSaves + 1,
+        };
+      }
+
+      return player;
+    });
+    console.log(newArr);
+    setTestList(newArr);
+  };
+
+  const succeedADeathSave = () => {
+    const newArr = testList.map((player) => {
+      if (
+        player.characterName === selectedPlayer.characterName &&
+        player.characterHealth !== null &&
+        player.characterHealth <= 0
+      ) {
+        if (player.successSaves === 2) {
+          return {
+            ...player,
+            successSaves: 0,
+            characterHealth: 1,
+          };
+        }
+        return {
+          ...player,
+          successSaves: player.successSaves + 1,
+        };
+      }
+
+      return player;
+    });
+    console.log(newArr);
+    setTestList(newArr);
+  };
+
   const changeAveragePlayerLevel = (): void => {
     let levelSum = 0;
     let count = 0;
@@ -334,6 +385,8 @@ const DetailedFight = (props: IProps) => {
           characterLevel: tempMonsterDetails.challenge_rating,
           characterMaxHealth: tempMonsterDetails.hit_points,
           type: "npc",
+          successSaves: 0,
+          failSaves: 0,
         });
         setRandomMonsterTypeOne(newRandomMonster);
         monsterCount += 1;
@@ -370,6 +423,8 @@ const DetailedFight = (props: IProps) => {
             characterLevel: tempMonsterDetails.challenge_rating,
             characterMaxHealth: tempMonsterDetails.hit_points,
             type: "npc",
+            successSaves: 0,
+            failSaves: 0,
           });
           setRandomMonsterTypeTwo(newRandomMonster);
           monsterCount += 1;

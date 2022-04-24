@@ -6,6 +6,8 @@ import { IPlayer } from "../Context/Types";
 
 interface IProps {
   isDead: boolean;
+  successSaves: number;
+  failSaves: number;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -13,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const DeathSaves: React.FC<IProps> = (props: IProps) => {
-  const { isDead } = props;
+  const { isDead, successSaves, failSaves } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [selectedValue, setSelectedValue] = React.useState("a");
@@ -52,21 +54,21 @@ const DeathSaves: React.FC<IProps> = (props: IProps) => {
           <Box>Success:</Box>
           <Box>
             <Radio
-              checked={successDeathSaves > 0}
+              checked={props.successSaves > 0}
               onChange={successSave}
               value={1}
               name="name3"
               inputProps={{ "aria-label": "1" }}
             />
             <Radio
-              checked={successDeathSaves > 1}
+              checked={props.successSaves > 1}
               onChange={successSave}
               value={2}
               name="name2"
               inputProps={{ "aria-label": "2" }}
             />
             <Radio
-              checked={successDeathSaves > 2}
+              checked={props.successSaves > 2}
               onChange={successSave}
               value={3}
               name="name1"
@@ -79,21 +81,21 @@ const DeathSaves: React.FC<IProps> = (props: IProps) => {
           <Box>Failed:</Box>
           <Box>
             <Radio
-              checked={failedDeathSaves > 0}
+              checked={props.failSaves > 0}
               onChange={failedSave}
               value={1}
               name="radio-buttons4"
               inputProps={{ "aria-label": "1" }}
             />
             <Radio
-              checked={failedDeathSaves > 1}
+              checked={props.failSaves > 1}
               onChange={failedSave}
               value={2}
               name="radio-buttons5"
               inputProps={{ "aria-label": "2" }}
             />
             <Radio
-              checked={failedDeathSaves > 2}
+              checked={props.failSaves > 2}
               onChange={failedSave}
               value={3}
               name="radio-buttons6"

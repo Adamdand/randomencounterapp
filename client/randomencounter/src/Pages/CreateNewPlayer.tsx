@@ -30,6 +30,8 @@ const CreateNewPlayer = (props: IProps): JSX.Element => {
     characterMaxHealth: null,
     characterLevel: null,
     type: "human",
+    successSaves: 0,
+    failSaves: 0,
   });
 
   const addCharacterToList = (completedNewPlayer: IPlayer): void => {
