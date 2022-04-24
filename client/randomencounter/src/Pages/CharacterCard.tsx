@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     marginRight: "8px",
     width: "100%",
-    height: "100%",
+    height: "190px",
     fontColor: theme.palette.primary.main,
     padding: theme.spacing(2),
     border: "1px solid #DDDDDD",
@@ -143,7 +143,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
             <Box sx={{}}>
               <CardMedia
                 component="img"
-                height="max"
+                height="100%"
                 image={
                   data.type === "human"
                     ? "smilePics/happy.png"
@@ -157,7 +157,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
             <Box sx={{}}>
               <CardMedia
                 component="img"
-                height="max"
+                height="100%"
                 image={
                   data.type === "human"
                     ? "smilePics/medium.png"
@@ -171,7 +171,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
             <Box sx={{}}>
               <CardMedia
                 component="img"
-                height="max"
+                height="100%"
                 image={
                   data.type === "human"
                     ? "smilePics/sad.png"
