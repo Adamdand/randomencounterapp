@@ -37,6 +37,9 @@ const useStyle = makeStyles((theme) => ({
     lineHeight: "21.79px",
     maxLength: 13,
     minLength: 13,
+    alignContent: "center",
+    justifyContent: "center",
+    alignItems: "center",
   },
   emailAndPassword: {},
   email: {},
@@ -218,21 +221,28 @@ const QuickFight = (props: IProps) => {
   console.log("verage player level: ", averagePlayerLevel);
 
   return (
-    <Box sx={{ justifyContent: "center" }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       <TextField
         placeholder="how many players?"
         fullWidth
         variant="outlined"
         value={numberOfPlayers}
         disabled={loading !== null}
+        inputProps={{ min: 0, style: { textAlign: "center" } }}
         onChange={(
           event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
         ) => changeNumberOfPlayers(event.target.value)}
-        InputProps={{
-          classes: {
-            root: classes.innerInput,
-          },
-        }}
+        // InputProps={{
+        //   classes: {
+        //     root: classes.innerInput,
+        //   },
+        // }}
       />
       <TextField
         placeholder="average player level"
@@ -240,14 +250,15 @@ const QuickFight = (props: IProps) => {
         variant="outlined"
         value={averagePlayerLevel}
         disabled={loading !== null}
+        inputProps={{ min: 0, style: { textAlign: "center" } }}
         onChange={(
           event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
         ) => changeAveragePlayerLevel(event.target.value)}
-        InputProps={{
-          classes: {
-            root: classes.innerInput,
-          },
-        }}
+        // InputProps={{
+        //   classes: {
+        //     root: classes.innerInput,
+        //   },
+        // }}
       />
       <Button onClick={getMonsterWithRatingBtn}>
         <Typography>Start Battle</Typography>
