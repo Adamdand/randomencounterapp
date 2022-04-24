@@ -404,6 +404,15 @@ const DetailedFight = (props: IProps) => {
     }
   };
 
+  const removeMonsters = () => {
+    let updatePlayerList = [] as IPlayer[];
+    if (testList.length > 0) {
+      updatePlayerList = testList.filter((player) => player.type === "human");
+    }
+
+    setTestList(updatePlayerList);
+  };
+
   return (
     <Box
       className={classes.root}
@@ -454,7 +463,7 @@ const DetailedFight = (props: IProps) => {
       <Box sx={{ display: "flex", flexDirection: "column", width: "50%" }}>
         <Box>
           {" "}
-          <Typography variant="h2">Actions:</Typography>
+          <Typography variant="h2">Controls</Typography>
         </Box>
         <Box sx={{ border: "1px dashed grey" }}>
           <Box>
@@ -462,6 +471,7 @@ const DetailedFight = (props: IProps) => {
             <Typography variant="h3">Set Up</Typography>
           </Box>
           <Button onClick={getMonsterWithRatingBtn}>Get Monsters</Button>
+          <Button onClick={removeMonsters}>Remove Monsters</Button>
           <Box>
             <Button onClick={orderListOnInitative}>Order List</Button>
           </Box>
@@ -474,12 +484,16 @@ const DetailedFight = (props: IProps) => {
           <Box>
             {" "}
             <TextField
-              id="standard-name"
+              id="damageOrHealValue"
               label="value"
+              type="tel"
               className={classes.textField}
               value={damageHealth}
               onChange={changeValue}
               margin="normal"
+              inputProps={{
+                pattern: "[0-9]*",
+              }}
             />
           </Box>
           <Box>
