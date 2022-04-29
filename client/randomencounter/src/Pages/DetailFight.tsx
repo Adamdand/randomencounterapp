@@ -116,6 +116,7 @@ const DetailedFight = (props: IProps) => {
   const [selectedPlayer, setSelectedPlayer] = useState<IPlayer>(testList[0]);
   const [damageHealth, setDamageHealth] = useState<number>();
   const [open, setOpen] = React.useState(false);
+  const [hoveredPlayer, setHoveredPlayer] = useState<IPlayer>();
 
   const [monsterList, setMonsterList] = useState<IMonster[]>([]);
   const [monsterRatingList, setMonsterRatingList] = useState<IMonster[]>([]);
@@ -233,9 +234,11 @@ const DetailedFight = (props: IProps) => {
   };
 
   const failADeathSave = (num: number) => {
+    const myPlayer =
+      hoveredPlayer !== undefined ? hoveredPlayer : selectedPlayer;
     const newArr = testList.map((player) => {
       if (
-        player.characterName === selectedPlayer.characterName &&
+        player.characterName === myPlayer.characterName &&
         player.characterHealth !== null &&
         player.characterHealth <= 0
       ) {
@@ -252,9 +255,11 @@ const DetailedFight = (props: IProps) => {
   };
 
   const succeedADeathSave = (num: number) => {
+    const myPlayer =
+      hoveredPlayer !== undefined ? hoveredPlayer : selectedPlayer;
     const newArr = testList.map((player) => {
       if (
-        player.characterName === selectedPlayer.characterName &&
+        player.characterName === myPlayer.characterName &&
         player.characterHealth !== null &&
         player.characterHealth <= 0
       ) {
@@ -483,7 +488,10 @@ const DetailedFight = (props: IProps) => {
         </Box>
 
         {testList.map((characters) => (
-          <Box sx={{ display: "flex" }}>
+          <Box
+            sx={{ display: "flex" }}
+            onMouseOver={() => setHoveredPlayer(characters)}
+          >
             <CharacterCard
               data={characters}
               onClick={onClick}
