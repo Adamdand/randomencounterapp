@@ -8,6 +8,8 @@ interface IProps {
   isDead: boolean;
   successSaves: number;
   failSaves: number;
+  succeedADeathSave: (num: number) => void;
+  failADeathSave: (num: number) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -15,19 +17,18 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const DeathSaves: React.FC<IProps> = (props: IProps) => {
-  const { isDead, successSaves, failSaves } = props;
+  const { isDead, successSaves, failSaves, succeedADeathSave, failADeathSave } =
+    props;
   const classes = useStyles();
   const theme = useTheme();
   const [selectedValue, setSelectedValue] = React.useState("a");
-  const [failedDeathSaves, setFailedDeathSaves] = useState<number>(0);
-  const [successDeathSaves, setSuccessDeathSaves] = useState<number>(0);
 
   const failedSave = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFailedDeathSaves(Number(event.target.value));
+    failADeathSave(Number(event.target.value));
   };
 
   const successSave = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSuccessDeathSaves(Number(event.target.value));
+    succeedADeathSave(Number(event.target.value));
   };
 
   return (

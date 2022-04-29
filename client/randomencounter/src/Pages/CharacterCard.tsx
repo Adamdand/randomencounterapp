@@ -16,6 +16,8 @@ import DeathSaves from "./DeathSaves";
 interface IProps {
   data: IPlayer;
   onClick: (myCharacter: IPlayer) => void;
+  succeedADeathSave: (num: number) => void;
+  failADeathSave: (num: number) => void;
   isSelected: boolean;
 }
 
@@ -52,7 +54,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const CharacterCard: React.FC<IProps> = (props: IProps) => {
-  const { data, isSelected, onClick } = props;
+  const { data, isSelected, onClick, succeedADeathSave, failADeathSave } =
+    props;
   const classes = useStyles();
   const theme = useTheme();
 
@@ -142,6 +145,8 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
               isDead={true}
               successSaves={data.successSaves}
               failSaves={data.failSaves}
+              succeedADeathSave={succeedADeathSave}
+              failADeathSave={failADeathSave}
             />
           )}
           {(getHealthColours() === "green" ||

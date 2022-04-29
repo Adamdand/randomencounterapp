@@ -232,7 +232,7 @@ const DetailedFight = (props: IProps) => {
     }
   };
 
-  const failADeathSave = () => {
+  const failADeathSave = (num: number) => {
     const newArr = testList.map((player) => {
       if (
         player.characterName === selectedPlayer.characterName &&
@@ -241,7 +241,7 @@ const DetailedFight = (props: IProps) => {
       ) {
         return {
           ...player,
-          failSaves: player.failSaves + 1,
+          failSaves: num,
         };
       }
 
@@ -251,7 +251,7 @@ const DetailedFight = (props: IProps) => {
     setTestList(newArr);
   };
 
-  const succeedADeathSave = () => {
+  const succeedADeathSave = (num: number) => {
     const newArr = testList.map((player) => {
       if (
         player.characterName === selectedPlayer.characterName &&
@@ -262,12 +262,13 @@ const DetailedFight = (props: IProps) => {
           return {
             ...player,
             successSaves: 0,
+            failSaves: 0,
             characterHealth: 1,
           };
         }
         return {
           ...player,
-          successSaves: player.successSaves + 1,
+          successSaves: num,
         };
       }
 
@@ -486,6 +487,8 @@ const DetailedFight = (props: IProps) => {
             <CharacterCard
               data={characters}
               onClick={onClick}
+              succeedADeathSave={succeedADeathSave}
+              failADeathSave={failADeathSave}
               isSelected={
                 characters.characterName === selectedPlayer?.characterName
               }
