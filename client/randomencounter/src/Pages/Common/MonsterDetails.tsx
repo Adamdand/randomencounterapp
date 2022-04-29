@@ -25,31 +25,33 @@ const MonsterDetails: React.FC<IProps> = (props: IProps) => {
         alignItems: "flex-start",
       }}
     >
-      <Box
-        sx={{
-          width: "100%",
-          paddingTop: "16px",
-        }}
-      >
-        <Typography>Name = {monsterData.name}</Typography>
+      {" "}
+      {monsterData.name !== "" && (
         <Box
           sx={{
-            width: "50%",
-            paddingLeft: "25%",
+            width: "100%",
+            paddingTop: "16px",
           }}
         >
-          <Card
+          <Typography>Name = {monsterData.name}</Typography>
+          <Box
             sx={{
-              margin: "32px",
+              width: "50%",
+              paddingLeft: "25%",
             }}
           >
-            <CardMedia
-              component="img"
-              height="max"
-              image={`dndMonsterPics/${monsterData.index}.jpeg`}
-              alt="monster image"
-            />
-            {/* <CardContent>
+            <Card
+              sx={{
+                margin: "32px",
+              }}
+            >
+              <CardMedia
+                component="img"
+                height="max"
+                image={`dndMonsterPics/${monsterData.index}.jpeg`}
+                alt="monster image"
+              />
+              {/* <CardContent>
                             <Typography gutterBottom variant="h5" component="div">
                               monster picture
                             </Typography>
@@ -57,56 +59,67 @@ const MonsterDetails: React.FC<IProps> = (props: IProps) => {
                               data
                             </Typography>
                           </CardContent> */}
-          </Card>
+            </Card>
+          </Box>
+          <Typography>
+            Challenge Rating = {monsterData.challenge_rating}
+          </Typography>
+          <Typography>AC = {monsterData.armor_class}</Typography>
+          <Typography>HitPoints = {monsterData.hit_points}</Typography>
+          <Typography>Alignment = {monsterData.alignment}</Typography>
+
+          <Typography>Speed-walkwalk = {monsterData.speed.walk}</Typography>
+          <Typography>Speed-swim= {monsterData.speed.swim}</Typography>
+
+          <Typography>Size = {monsterData.size}</Typography>
+
+          {monsterData.actions.map(
+            (action: {
+              name:
+                | boolean
+                | React.ReactChild
+                | React.ReactFragment
+                | React.ReactPortal
+                | null
+                | undefined;
+              desc:
+                | boolean
+                | React.ReactChild
+                | React.ReactFragment
+                | React.ReactPortal
+                | null
+                | undefined;
+            }) => {
+              return (
+                <Box>
+                  <Typography>Action Name = {action.name}</Typography>
+                  <Typography>Action Desc = {action.desc}</Typography>
+                </Box>
+              );
+            }
+          )}
+
+          <Typography>
+            Damage Resistances = {monsterData.damage_immunities}
+          </Typography>
+          <Typography>
+            Damage Resistances = {monsterData.damage_resistances}
+          </Typography>
+          <Typography>
+            Damage Vulnerabilities ={monsterData.damage_vulnerabilities}
+          </Typography>
         </Box>
-        <Typography>
-          Challenge Rating = {monsterData.challenge_rating}
-        </Typography>
-        <Typography>AC = {monsterData.armor_class}</Typography>
-        <Typography>HitPoints = {monsterData.hit_points}</Typography>
-        <Typography>Alignment = {monsterData.alignment}</Typography>
-
-        <Typography>Speed-walkwalk = {monsterData.speed.walk}</Typography>
-        <Typography>Speed-swim= {monsterData.speed.swim}</Typography>
-
-        <Typography>Size = {monsterData.size}</Typography>
-
-        {monsterData.actions.map(
-          (action: {
-            name:
-              | boolean
-              | React.ReactChild
-              | React.ReactFragment
-              | React.ReactPortal
-              | null
-              | undefined;
-            desc:
-              | boolean
-              | React.ReactChild
-              | React.ReactFragment
-              | React.ReactPortal
-              | null
-              | undefined;
-          }) => {
-            return (
-              <Box>
-                <Typography>Action Name = {action.name}</Typography>
-                <Typography>Action Desc = {action.desc}</Typography>
-              </Box>
-            );
-          }
-        )}
-
-        <Typography>
-          Damage Resistances = {monsterData.damage_immunities}
-        </Typography>
-        <Typography>
-          Damage Resistances = {monsterData.damage_resistances}
-        </Typography>
-        <Typography>
-          Damage Vulnerabilities ={monsterData.damage_vulnerabilities}
-        </Typography>
-      </Box>
+      )}
+      {monsterData.name === "" && (
+        <Box
+          sx={{
+            width: "100%",
+            paddingTop: "16px",
+          }}
+        >
+          <Typography>No Monster Selected</Typography>
+        </Box>
+      )}
     </Box>
   );
 };
