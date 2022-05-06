@@ -155,8 +155,8 @@ const DetailedFight = (props: IProps) => {
     setSelectedPlayer(characterSelected);
   };
 
-  const createNewCharacterClick = async (): Promise<void> => {
-    history.push("/");
+  const addPlayer = (newPlayerData: IPlayer) => {
+    testList.push(newPlayerData);
   };
 
   const orderListOnInitative = () => {
@@ -522,7 +522,11 @@ const DetailedFight = (props: IProps) => {
               Add Player
             </Typography>
           </Button>
-          <CreateNewPlayer open={open} handleClose={handleClose} />
+          <CreateNewPlayer
+            open={open}
+            handleClose={handleClose}
+            addPlayer={addPlayer}
+          />
         </Box>
       </Box>
       <Box sx={{ display: "flex", flexDirection: "column", width: "50%" }}>

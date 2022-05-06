@@ -16,10 +16,11 @@ import { IPlayer } from "../Context/Types";
 interface IProps {
   open: boolean;
   handleClose: () => void;
+  addPlayer: (newPlayerData: IPlayer) => void;
 }
 
 const CreateNewPlayer = (props: IProps): JSX.Element => {
-  const { open, handleClose } = props;
+  const { open, handleClose, addPlayer } = props;
   const userData = useContext(CustomerDataContext);
   const [newPlayer, setNewPlayer] = useState<IPlayer>({
     index: 0,
@@ -198,7 +199,8 @@ const CreateNewPlayer = (props: IProps): JSX.Element => {
           <Button
             variant="contained"
             onClick={() => {
-              addCharacterToList(newPlayer);
+              // addCharacterToList(newPlayer);
+              addPlayer(newPlayer);
               handleClose();
             }}
           >
