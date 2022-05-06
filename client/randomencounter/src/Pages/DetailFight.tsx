@@ -441,10 +441,10 @@ const DetailedFight = (props: IProps) => {
     }
   };
 
-  const findRandomEncounter = (monsters: IMonster[]) => {
-    settwoTypeOfMonsters(Math.random() < 0.5);
-    getRandomMonsterTypeTwo(monsters);
-    getRandomMonsterTypeOne(monsters);
+  const findRandomEncounter = async (monsters: IMonster[]) => {
+    await settwoTypeOfMonsters(Math.random() < 0.5);
+    await getRandomMonsterTypeTwo(monsters);
+    await getRandomMonsterTypeOne(monsters);
   };
 
   const getMonsterWithRatingBtn = async () => {
@@ -455,7 +455,7 @@ const DetailedFight = (props: IProps) => {
         );
         setMonsterRatingList(monstersWithCR);
         if (monstersWithCR.length > 0) {
-          findRandomEncounter(monstersWithCR);
+          await findRandomEncounter(monstersWithCR);
           setNewMonsterActivity();
         }
       } catch (error) {
