@@ -1,14 +1,14 @@
 import {
   Box,
+  Button,
   Card,
   CardMedia,
   Theme,
   Typography,
   useTheme,
 } from "@mui/material";
-import { green } from "@mui/material/colors";
 import { makeStyles } from "@mui/styles";
-
+import ClearIcon from "@mui/icons-material/Clear";
 import React from "react";
 import { IPlayer } from "../Context/Types";
 import DeathSaves from "./DeathSaves";
@@ -18,6 +18,7 @@ interface IProps {
   onClick: (myCharacter: IPlayer) => void;
   succeedADeathSave: (num: number) => void;
   failADeathSave: (num: number) => void;
+  removePlayer: (playerToDelete: string) => void;
   isSelected: boolean;
 }
 
@@ -54,8 +55,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const CharacterCard: React.FC<IProps> = (props: IProps) => {
-  const { data, isSelected, onClick, succeedADeathSave, failADeathSave } =
-    props;
+  const {
+    data,
+    isSelected,
+    onClick,
+    succeedADeathSave,
+    failADeathSave,
+    removePlayer,
+  } = props;
   const classes = useStyles();
   const theme = useTheme();
 
@@ -102,6 +109,21 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
       }}
     >
       <Box
+        sx={{ height: "10px" }}
+        onClick={() => removePlayer(data.characterName)}
+      >
+        <ClearIcon
+          sx={{
+            zIndex: 999,
+            position: "relative",
+            left: "50%",
+            bottom: "0%",
+            width: "20px",
+            height: "20px",
+          }}
+        />
+      </Box>
+      <Box
         display="flex"
         flexDirection="row"
         justifyContent="space-evenly"
@@ -109,7 +131,14 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
         style={{ cursor: "pointer" }}
         onClick={() => onClick(data)}
       >
-        <Box sx={{ display: "flex", alignItems: "center", width: "80px" }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            width: "80px",
+            zindex: 50,
+          }}
+        >
           <Box sx={{ wordWrap: "break-word", textAlign: "left" }}>
             <Typography>Name</Typography>
             <Typography>AC</Typography>

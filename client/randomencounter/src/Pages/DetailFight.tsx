@@ -158,6 +158,13 @@ const DetailedFight = (props: IProps) => {
   const addPlayer = (newPlayerData: IPlayer) => {
     testList.push(newPlayerData);
   };
+  const removePlayer = (playerToDelete: string) => {
+    const indexOfObject = testList.findIndex((player) => {
+      return player.characterName === playerToDelete;
+    });
+
+    testList.splice(indexOfObject, 1);
+  };
 
   const orderListOnInitative = () => {
     let newList = [] as IPlayer[];
@@ -497,6 +504,7 @@ const DetailedFight = (props: IProps) => {
               onClick={onClick}
               succeedADeathSave={succeedADeathSave}
               failADeathSave={failADeathSave}
+              removePlayer={removePlayer}
               isSelected={
                 characters.characterName === selectedPlayer?.characterName
               }
@@ -572,7 +580,7 @@ const DetailedFight = (props: IProps) => {
               }}
             >
               damage
-              <ArrowDownwardIcon />
+              <ArrowDownwardIcon sx={{ color: "red" }} />
             </Button>
             <Button
               onClick={() => {
@@ -580,12 +588,12 @@ const DetailedFight = (props: IProps) => {
               }}
             >
               heal
-              <ArrowUpwardIcon />
+              <ArrowUpwardIcon sx={{ color: "green" }} />
             </Button>
 
             <Button onClick={turnOver}>
               Next Turn
-              <ArrowForwardIosIcon />
+              <ArrowForwardIosIcon sx={{ color: "black" }} />
             </Button>
           </Box>
         </Box>
