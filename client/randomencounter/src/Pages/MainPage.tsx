@@ -30,6 +30,7 @@ import ButtonToggle from "./ButtonToggle";
 import MonsterSearch from "./MonsterSearch";
 import QuickFight from "./QuickFight";
 import DetailedFight from "./DetailFight";
+import Home from "./Home";
 
 // import { signInWithEmailAndPassword } from "firebase/auth";
 // import { authenticate } from "API/firebase";
@@ -67,7 +68,7 @@ const MainPage: React.FC = () => {
   const classes = useStyle();
   // const { searchemail } = useHomeInspection();
   const { showLoading, hideLoading, loading } = useLoading();
-  const [gameType, setGameType] = useState<string>("monster search");
+  const [gameType, setGameType] = useState<string>("Home");
   const [monsterList, setMonsterList] = useState<IMonster[]>([]);
   const [monsterRatingList, setMonsterRatingList] = useState<IMonster[]>([]);
   const [selectedCR, setSelectedCR] = useState<number>();
@@ -294,9 +295,9 @@ const MainPage: React.FC = () => {
         <Box sx={{ paddingBottom: "40px" }}>
           <ButtonToggle onClick={handleGameType} gameType={gameType} />
         </Box>
+        {gameType === "Home" && <Home gameType={gameType} />}
         {gameType === "Monster Search" && <MonsterSearch gameType={gameType} />}
         {gameType === "Quick Fight" && <QuickFight gameType={gameType} />}
-
         {gameType === "Detailed Fight" && <DetailedFight gameType={gameType} />}
       </Box>
     </Box>

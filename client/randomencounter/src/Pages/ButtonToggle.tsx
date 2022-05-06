@@ -18,6 +18,9 @@ const ButtonToggle = (props: IProps) => {
       onChange={onClick}
       aria-label="text alignment"
     >
+      <ToggleButton value="Home" aria-label="homr">
+        <Typography>Home</Typography>
+      </ToggleButton>
       <ToggleButton value="Monster Search" aria-label="monster search">
         <Typography>Monster Search</Typography>
       </ToggleButton>
