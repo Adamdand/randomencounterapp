@@ -64,13 +64,35 @@ const Home = (props: IProps) => {
             },
             {
               children: (
-                <Box>
-                  <Typography variant="h1" sx={{ color: "black" }}>
-                    My Headline
+                <Box sx={{ backgroundColor: "transparent" }}>
+                  <Typography
+                    sx={{ backgroundColor: "transparent", color: "white" }}
+                  >
+                    asdjkabsd asjkd gasid gaiud gadu aud aud yasodu asod asd
+                    asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
+                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
+                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
+                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
+                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
+                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
+                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
+                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
+                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
+                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
+                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
+                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
+                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
+                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
+                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
+                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
+                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
+                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
+                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
+                    aisdig d asd asp
                   </Typography>
                 </Box>
               ),
-              speed: -20,
+              speed: -10,
             },
           ]}
           style={{ aspectRatio: "2 / 1" }}
@@ -78,8 +100,8 @@ const Home = (props: IProps) => {
         <Typography variant="h1" sx={{ color: "white" }}>
           Random Encounter DnD App
         </Typography>
-        <Box sx={{ backgroundColor: "red" }}>
-          <Typography sx={{ color: "black" }}>
+        <Box sx={{ backgroundColor: "transparent" }}>
+          <Typography sx={{ backgroundColor: "transparent", color: "white" }}>
             asdjkabsd asjkd gasid gaiud gadu aud aud yasodu asod asd asioyd gaod
             i aiod aid ad ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu
             asod asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
