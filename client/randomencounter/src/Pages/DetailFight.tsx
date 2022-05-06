@@ -1,16 +1,10 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardMedia,
-  TextField,
-  Typography,
-} from "@mui/material";
+import React, { useContext, useEffect, useState } from "react";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { makeStyles } from "@mui/styles";
-import React, { useContext, useEffect, useState } from "react";
+
 import { useHistory } from "react-router-dom";
 import { CustomerDataContext } from "../Context/CustomerContext";
 import {

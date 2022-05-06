@@ -1,3 +1,4 @@
+import React from "react";
 import { Typography, Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { ParallaxBanner } from "react-scroll-parallax";
@@ -13,10 +14,10 @@ const useStyle = makeStyles((theme) => ({
     alignItems: "center",
     spacing: "8px",
     flexBasis: "88%",
-    paddingTop: "100px",
+    paddingTop: "24px",
     backgroundColor: "black",
     width: "100%",
-    height: "10000px",
+    height: "2000px",
   },
   innerInput: {
     fontFamily: "Open Sans",
@@ -34,37 +35,41 @@ const Home = (props: IProps) => {
 
   return (
     <Box className={classes.root} sx={{ display: "flex" }}>
-      {/* <Box>
-      <SpinningObj />
-    </Box> */}
+      <Box>
+        <Typography variant="h1" sx={{ color: "white" }}>
+          DnD Random Encounter App
+        </Typography>
+      </Box>
       <Box
         sx={{
           display: "flex",
+          paddingTop: "24px",
           flexDirection: "column",
-          top: "50%",
-          right: "50%",
           contentAlign: "center",
           alignText: "center",
           color: "white",
         }}
       >
+        {/* <Box sx={{ height: "100%" }}> */}
         <ParallaxBanner
           layers={[
             {
               image: "/photo/photo_1.jpg",
-              speed: -20,
+              speed: -30,
             },
             {
               children: (
-                <Typography variant="h1" sx={{ color: "white" }}>
-                  My Headline
-                </Typography>
+                <Box sx={{ backgroundColor: "transparent", paddingTop: "25%" }}>
+                  <Typography variant="h1" sx={{ color: "white" }}>
+                    Search For Monsters
+                  </Typography>
+                </Box>
               ),
               speed: -10,
             },
             {
               children: (
-                <Box sx={{ backgroundColor: "transparent" }}>
+                <Box sx={{ backgroundColor: "transparent", paddingTop: "40%" }}>
                   <Typography
                     sx={{ backgroundColor: "transparent", color: "white" }}
                   >
@@ -92,12 +97,13 @@ const Home = (props: IProps) => {
                   </Typography>
                 </Box>
               ),
-              speed: -10,
+              speed: -20,
             },
           ]}
-          style={{ aspectRatio: "2 / 1" }}
+          style={{ aspectRatio: "3 / 2" }}
         />
-        <Typography variant="h1" sx={{ color: "white" }}>
+        {/* </Box> */}
+        {/* <Typography variant="h1" sx={{ color: "white" }}>
           Random Encounter DnD App
         </Typography>
         <Box sx={{ backgroundColor: "transparent" }}>
@@ -121,46 +127,109 @@ const Home = (props: IProps) => {
             dad pasd piasd ipasigd aisdig d asd asp yasodu asod asd asioyd gaod
             i aiod aid ad ipad ai dad pasd piasd ipasigd aisdig d asd asp
           </Typography>
-        </Box>
+        </Box> */}
+
         <ParallaxBanner
           layers={[
             {
               image: "/photo/photo_2.jpg",
+              speed: -30,
+            },
+            {
+              children: (
+                <Box sx={{ backgroundColor: "transparent", paddingTop: "25%" }}>
+                  <Typography variant="h1" sx={{ color: "white" }}>
+                    Quick Fight
+                  </Typography>
+                </Box>
+              ),
+              speed: -10,
+            },
+            {
+              children: (
+                <Box sx={{ backgroundColor: "transparent", paddingTop: "40%" }}>
+                  <Typography
+                    sx={{ backgroundColor: "transparent", color: "white" }}
+                  >
+                    asdjkabsd asjkd gasid gaiud gadu aud aud yasodu asod asd
+                    asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
+                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
+                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
+                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
+                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
+                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
+                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
+                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
+                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
+                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
+                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
+                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
+                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
+                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
+                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
+                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
+                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
+                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
+                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
+                    aisdig d asd asp
+                  </Typography>
+                </Box>
+              ),
               speed: -20,
             },
           ]}
-          style={{ aspectRatio: "2 / 1" }}
+          style={{ aspectRatio: "3 / 2" }}
         />
-        <Box>
-          <Typography>
-            asdjkabsd asjkd gasid gaiud gadu aud aud yasodu asod asd asioyd gaod
-            i aiod aid ad ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu
-            asod asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-            aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad ipad ai
-            dad pasd piasd ipasigd aisdig d asd asp yasodu asod asd asioyd gaod
-            i aiod aid ad ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu
-            asod asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-            aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad ipad ai
-            dad pasd piasd ipasigd aisdig d asd asp yasodu asod asd asioyd gaod
-            i aiod aid ad ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu
-            asod asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-            aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad ipad ai
-            dad pasd piasd ipasigd aisdig d asd asp yasodu asod asd asioyd gaod
-            i aiod aid ad ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu
-            asod asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-            aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad ipad ai
-            dad pasd piasd ipasigd aisdig d asd asp yasodu asod asd asioyd gaod
-            i aiod aid ad ipad ai dad pasd piasd ipasigd aisdig d asd asp
-          </Typography>
-        </Box>
         <ParallaxBanner
           layers={[
             {
               image: "/photo/photo_3.jpg",
+              speed: -30,
+            },
+            {
+              children: (
+                <Box sx={{ backgroundColor: "transparent", paddingTop: "25%" }}>
+                  <Typography variant="h1" sx={{ color: "white" }}>
+                    Detailed Fight
+                  </Typography>
+                </Box>
+              ),
+              speed: -10,
+            },
+            {
+              children: (
+                <Box sx={{ backgroundColor: "transparent", paddingTop: "40%" }}>
+                  <Typography
+                    sx={{ backgroundColor: "transparent", color: "white" }}
+                  >
+                    asdjkabsd asjkd gasid gaiud gadu aud aud yasodu asod asd
+                    asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
+                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
+                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
+                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
+                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
+                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
+                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
+                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
+                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
+                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
+                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
+                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
+                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
+                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
+                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
+                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
+                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
+                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
+                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
+                    aisdig d asd asp
+                  </Typography>
+                </Box>
+              ),
               speed: -20,
             },
           ]}
-          style={{ aspectRatio: "2 / 1" }}
+          style={{ aspectRatio: "3 / 2" }}
         />
         <Box>
           <Typography>
