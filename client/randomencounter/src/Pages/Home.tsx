@@ -1,10 +1,11 @@
 import React from "react";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { ParallaxBanner } from "react-scroll-parallax";
 
 interface IProps {
   gameType: string;
+  setGameType: (gameType: string) => void;
 }
 
 const useStyle = makeStyles((theme) => ({
@@ -17,7 +18,7 @@ const useStyle = makeStyles((theme) => ({
     paddingTop: "24px",
     backgroundColor: "black",
     width: "100%",
-    height: "2000px",
+    height: "100%",
   },
   innerInput: {
     fontFamily: "Open Sans",
@@ -30,11 +31,21 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 const Home = (props: IProps) => {
-  const { gameType } = props;
+  const { gameType, setGameType } = props;
   const classes = useStyle();
 
+  const goToMonsterSearch = () => {
+    setGameType("Monster Search");
+  };
+  const goToQuickFight = () => {
+    setGameType("Quick Fight");
+  };
+  const goToDetailedFight = () => {
+    setGameType("Detailed Fight");
+  };
+
   return (
-    <Box className={classes.root} sx={{ display: "flex" }}>
+    <Box className={classes.root}>
       <Box>
         <Typography variant="h1" sx={{ color: "white" }}>
           DnD Random Encounter App
@@ -102,6 +113,13 @@ const Home = (props: IProps) => {
           ]}
           style={{ aspectRatio: "3 / 2" }}
         />
+        <Box>
+          <Button onClick={goToMonsterSearch}>
+            <Typography variant="h1" sx={{ color: "white" }}>
+              Search For Monsters
+            </Typography>
+          </Button>
+        </Box>
         {/* </Box> */}
         {/* <Typography variant="h1" sx={{ color: "white" }}>
           Random Encounter DnD App
@@ -180,6 +198,13 @@ const Home = (props: IProps) => {
           ]}
           style={{ aspectRatio: "3 / 2" }}
         />
+        <Box>
+          <Button onClick={goToQuickFight}>
+            <Typography variant="h1" sx={{ color: "white" }}>
+              Quick Fight
+            </Typography>
+          </Button>
+        </Box>
         <ParallaxBanner
           layers={[
             {
@@ -231,6 +256,13 @@ const Home = (props: IProps) => {
           ]}
           style={{ aspectRatio: "3 / 2" }}
         />
+        <Box>
+          <Button onClick={goToDetailedFight}>
+            <Typography variant="h1" sx={{ color: "white" }}>
+              Detailed Fight
+            </Typography>
+          </Button>
+        </Box>
         <Box>
           <Typography>
             asdjkabsd asjkd gasid gaiud gadu aud aud yasodu asod asd asioyd gaod

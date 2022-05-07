@@ -295,7 +295,9 @@ const MainPage: React.FC = () => {
         <Box sx={{ paddingBottom: "40px" }}>
           <ButtonToggle onClick={handleGameType} gameType={gameType} />
         </Box>
-        {gameType === "Home" && <Home gameType={gameType} />}
+        {gameType === "Home" && (
+          <Home gameType={gameType} setGameType={setGameType} />
+        )}
         {gameType === "Monster Search" && <MonsterSearch gameType={gameType} />}
         {gameType === "Quick Fight" && <QuickFight gameType={gameType} />}
         {gameType === "Detailed Fight" && <DetailedFight gameType={gameType} />}
