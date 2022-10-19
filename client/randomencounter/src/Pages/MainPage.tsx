@@ -288,7 +288,7 @@ const MainPage: React.FC = () => {
           display: "block",
           textAlign: "center",
           paddingTop: "40px",
-          paddingLeft: "16px",
+          paddingLeft: "0px",
           width: "100%",
         }}
       >

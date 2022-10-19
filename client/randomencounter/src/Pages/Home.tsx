@@ -10,7 +10,7 @@ interface IProps {
 
 const useStyle = makeStyles((theme) => ({
   root: {
-    display: "flex",
+    display: "block",
     flexDirection: "column",
     alignItems: "center",
     spacing: "8px",
@@ -18,7 +18,7 @@ const useStyle = makeStyles((theme) => ({
     paddingTop: "24px",
     backgroundColor: "black",
     width: "100%",
-    height: "100%",
+    height: window.screen.height,
   },
   innerInput: {
     fontFamily: "Open Sans",
@@ -53,7 +53,7 @@ const Home = (props: IProps) => {
       </Box>
       <Box
         sx={{
-          display: "flex",
+          display: "block",
           paddingTop: "24px",
           flexDirection: "column",
           contentAlign: "center",
@@ -61,16 +61,22 @@ const Home = (props: IProps) => {
           color: "white",
         }}
       >
-        {/* <Box sx={{ height: "100%" }}> */}
         <ParallaxBanner
           layers={[
             {
+              // TODO: import scroll snapping
               image: "/photo/photo_1.jpg",
               speed: -30,
             },
             {
               children: (
-                <Box sx={{ backgroundColor: "transparent", paddingTop: "25%" }}>
+                <Box
+                  sx={{
+                    backgroundColor: "transparent",
+                    paddingTop: "25%",
+                    scrollSnapType: "x mandatory",
+                  }}
+                >
                   <Typography variant="h1" sx={{ color: "white" }}>
                     Search For Monsters
                   </Typography>
@@ -80,7 +86,13 @@ const Home = (props: IProps) => {
             },
             {
               children: (
-                <Box sx={{ backgroundColor: "transparent", paddingTop: "40%" }}>
+                <Box
+                  sx={{
+                    backgroundColor: "transparent",
+                    paddingTop: "40%",
+                    scrollSnapAlign: "start",
+                  }}
+                >
                   <Typography
                     sx={{ backgroundColor: "transparent", color: "white" }}
                   >
@@ -106,6 +118,16 @@ const Home = (props: IProps) => {
                     asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
                     aisdig d asd asp
                   </Typography>
+                  <Button
+                    sx={{
+                      marginTop: "48px",
+                      backgroundColor: "white",
+                      color: "black",
+                    }}
+                    onClick={goToMonsterSearch}
+                  >
+                    Monster Search
+                  </Button>
                 </Box>
               ),
               speed: -20,
@@ -114,39 +136,12 @@ const Home = (props: IProps) => {
           style={{ aspectRatio: "3 / 2" }}
         />
         <Box>
-          <Button onClick={goToMonsterSearch}>
+          {/* <Button onClick={goToMonsterSearch}>
             <Typography variant="h1" sx={{ color: "white" }}>
               Search For Monsters
             </Typography>
-          </Button>
+          </Button> */}
         </Box>
-        {/* </Box> */}
-        {/* <Typography variant="h1" sx={{ color: "white" }}>
-          Random Encounter DnD App
-        </Typography>
-        <Box sx={{ backgroundColor: "transparent" }}>
-          <Typography sx={{ backgroundColor: "transparent", color: "white" }}>
-            asdjkabsd asjkd gasid gaiud gadu aud aud yasodu asod asd asioyd gaod
-            i aiod aid ad ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu
-            asod asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-            aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad ipad ai
-            dad pasd piasd ipasigd aisdig d asd asp yasodu asod asd asioyd gaod
-            i aiod aid ad ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu
-            asod asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-            aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad ipad ai
-            dad pasd piasd ipasigd aisdig d asd asp yasodu asod asd asioyd gaod
-            i aiod aid ad ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu
-            asod asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-            aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad ipad ai
-            dad pasd piasd ipasigd aisdig d asd asp yasodu asod asd asioyd gaod
-            i aiod aid ad ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu
-            asod asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-            aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad ipad ai
-            dad pasd piasd ipasigd aisdig d asd asp yasodu asod asd asioyd gaod
-            i aiod aid ad ipad ai dad pasd piasd ipasigd aisdig d asd asp
-          </Typography>
-        </Box> */}
-
         <ParallaxBanner
           layers={[
             {
@@ -191,6 +186,16 @@ const Home = (props: IProps) => {
                     asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
                     aisdig d asd asp
                   </Typography>
+                  <Button
+                    sx={{
+                      marginTop: "48px",
+                      backgroundColor: "white",
+                      color: "black",
+                    }}
+                    onClick={goToQuickFight}
+                  >
+                    Quick Fight
+                  </Button>
                 </Box>
               ),
               speed: -20,
@@ -199,11 +204,11 @@ const Home = (props: IProps) => {
           style={{ aspectRatio: "3 / 2" }}
         />
         <Box>
-          <Button onClick={goToQuickFight}>
+          {/* <Button onClick={goToQuickFight}>
             <Typography variant="h1" sx={{ color: "white" }}>
               Quick Fight
             </Typography>
-          </Button>
+          </Button> */}
         </Box>
         <ParallaxBanner
           layers={[
@@ -249,6 +254,16 @@ const Home = (props: IProps) => {
                     asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
                     aisdig d asd asp
                   </Typography>
+                  <Button
+                    sx={{
+                      marginTop: "48px",
+                      backgroundColor: "white",
+                      color: "black",
+                    }}
+                    onClick={goToQuickFight}
+                  >
+                    Detailed Fight
+                  </Button>
                 </Box>
               ),
               speed: -20,
@@ -257,34 +272,13 @@ const Home = (props: IProps) => {
           style={{ aspectRatio: "3 / 2" }}
         />
         <Box>
-          <Button onClick={goToDetailedFight}>
+          {/* <Button onClick={goToDetailedFight}>
             <Typography variant="h1" sx={{ color: "white" }}>
               Detailed Fight
             </Typography>
-          </Button>
+          </Button> */}
         </Box>
-        <Box>
-          <Typography>
-            asdjkabsd asjkd gasid gaiud gadu aud aud yasodu asod asd asioyd gaod
-            i aiod aid ad ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu
-            asod asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-            aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad ipad ai
-            dad pasd piasd ipasigd aisdig d asd asp yasodu asod asd asioyd gaod
-            i aiod aid ad ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu
-            asod asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-            aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad ipad ai
-            dad pasd piasd ipasigd aisdig d asd asp yasodu asod asd asioyd gaod
-            i aiod aid ad ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu
-            asod asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-            aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad ipad ai
-            dad pasd piasd ipasigd aisdig d asd asp yasodu asod asd asioyd gaod
-            i aiod aid ad ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu
-            asod asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-            aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad ipad ai
-            dad pasd piasd ipasigd aisdig d asd asp yasodu asod asd asioyd gaod
-            i aiod aid ad ipad ai dad pasd piasd ipasigd aisdig d asd asp
-          </Typography>
-        </Box>
+        <Box sx={{ color: "black", width: "100%", display: "flex" }} />
       </Box>
     </Box>
   );

@@ -544,7 +544,7 @@ const DetailedFight = (props: IProps) => {
           <Button onClick={getMonsterWithRatingBtn}>Get Monsters</Button>
           <Button onClick={removeMonsters}>Remove Monsters</Button>
           <Box>
-            <Button onClick={orderListOnInitative}>Order List</Button>
+            <Button onClick={orderListOnInitative}>Order List Base On Initiative</Button>
           </Box>
         </Box>
         <Box sx={{ border: "1px dashed grey" }}>
