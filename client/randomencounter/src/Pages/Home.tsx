@@ -2,6 +2,7 @@ import React from "react";
 import { Typography, Box, Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { ParallaxBanner } from "react-scroll-parallax";
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 interface IProps {
   gameType: string;
@@ -28,6 +29,16 @@ const useStyle = makeStyles((theme) => ({
     maxLength: 13,
     minLength: 13,
   },
+  container:{
+    scrollSnapType: "y mandatory"
+  },
+  childText:{
+    backgroundColor: "transparent",
+    paddingTop: "40%",
+    scrollSnapAlign: "start",
+    paddingLeft:'40px',
+    paddingRight:'40px',
+  }
 }));
 
 const Home = (props: IProps) => {
@@ -61,6 +72,7 @@ const Home = (props: IProps) => {
           color: "white",
         }}
       >
+        <Box className={classes.container}>
         <ParallaxBanner
           layers={[
             {
@@ -74,7 +86,7 @@ const Home = (props: IProps) => {
                   sx={{
                     backgroundColor: "transparent",
                     paddingTop: "25%",
-                    scrollSnapType: "x mandatory",
+                    scrollSnapAlign: "start"
                   }}
                 >
                   <Typography variant="h1" sx={{ color: "white" }}>
@@ -87,37 +99,18 @@ const Home = (props: IProps) => {
             {
               children: (
                 <Box
-                  sx={{
-                    backgroundColor: "transparent",
-                    paddingTop: "40%",
-                    scrollSnapAlign: "start",
-                  }}
+                className={classes.childText}
                 >
                   <Typography
                     sx={{ backgroundColor: "transparent", color: "white" }}
                   >
-                    asdjkabsd asjkd gasid gaiud gadu aud aud yasodu asod asd
-                    asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
-                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
-                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
-                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
-                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
-                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
-                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
-                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
-                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
-                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
-                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
-                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
-                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-                    aisdig d asd asp
-                  </Typography>
+                    <Box> Dont know which monster to use?
+                    </Box>
+                    <Box >
+                      New to Dnd, and dont know many monsters, their challenge rattings, their health and abilities?</Box>
+                      <Box sx={{paddingTop:'16px'}}>Search our databse of monsters to find a monster type that best suits your players skill level.
+
+                      </Box></Typography>
                   <Button
                     sx={{
                       marginTop: "48px",
@@ -126,7 +119,8 @@ const Home = (props: IProps) => {
                     }}
                     onClick={goToMonsterSearch}
                   >
-                    Monster Search
+                    Go To Monster Search
+                    <ArrowForwardIcon sx={{paddingLeft:'8px'}}/>
                   </Button>
                 </Box>
               ),
@@ -135,6 +129,7 @@ const Home = (props: IProps) => {
           ]}
           style={{ aspectRatio: "3 / 2" }}
         />
+         </Box>
         <Box>
           {/* <Button onClick={goToMonsterSearch}>
             <Typography variant="h1" sx={{ color: "white" }}>
@@ -142,6 +137,8 @@ const Home = (props: IProps) => {
             </Typography>
           </Button> */}
         </Box>
+        <Box className={classes.container}>
+        
         <ParallaxBanner
           layers={[
             {
@@ -160,32 +157,25 @@ const Home = (props: IProps) => {
             },
             {
               children: (
-                <Box sx={{ backgroundColor: "transparent", paddingTop: "40%" }}>
+                <Box className={classes.childText}>
                   <Typography
                     sx={{ backgroundColor: "transparent", color: "white" }}
                   >
-                    asdjkabsd asjkd gasid gaiud gadu aud aud yasodu asod asd
-                    asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
-                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
-                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
-                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
-                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
-                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
-                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
-                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
-                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
-                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
-                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
-                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
-                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-                    aisdig d asd asp
-                  </Typography>
+                    <Box>
+                    Not sure how strong of a monster or how many monsters your party should fight?
+                   
+                    </Box>
+                    <Box>
+                    Tired of your players complaining to you  about the difficulty of their battles?
+                    </Box>
+                    <Box>
+                    Blaim it on us!!!
+                    </Box>
+                    <Box sx={{paddingTop:'16px'}}>
+                    We will randomly select monsters with reasonable challenge rattings for your players to fight.
+                   </Box> <Box>
+                    If they all get destroyed, just throw your hands up and let them know it wasnt your fault, it was fait!
+                    </Box></Typography>
                   <Button
                     sx={{
                       marginTop: "48px",
@@ -194,7 +184,8 @@ const Home = (props: IProps) => {
                     }}
                     onClick={goToQuickFight}
                   >
-                    Quick Fight
+                    Go To Quick Fight
+                    <ArrowForwardIcon sx={{paddingLeft:'8px'}}/>
                   </Button>
                 </Box>
               ),
@@ -210,6 +201,8 @@ const Home = (props: IProps) => {
             </Typography>
           </Button> */}
         </Box>
+        </Box>
+        <Box className={classes.container}>
         <ParallaxBanner
           layers={[
             {
@@ -228,31 +221,30 @@ const Home = (props: IProps) => {
             },
             {
               children: (
-                <Box sx={{ backgroundColor: "transparent", paddingTop: "40%" }}>
+                <Box className={classes.childText}>
                   <Typography
                     sx={{ backgroundColor: "transparent", color: "white" }}
                   >
-                    asdjkabsd asjkd gasid gaiud gadu aud aud yasodu asod asd
-                    asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
-                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
-                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
-                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
-                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
-                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
-                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
-                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
-                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
-                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
-                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-                    aisdig d asd asp yasodu asod asd asioyd gaod i aiod aid ad
-                    ipad ai dad pasd piasd ipasigd aisdig d asd asp yasodu asod
-                    asd asioyd gaod i aiod aid ad ipad ai dad pasd piasd ipasigd
-                    aisdig d asd asp
+                    <Box>
+                    Having trouble keeping track of the initiative order?
+                    </Box><Box>
+                    Want to know which players are low on health, so your monsters know who is bleeding and appears to be a weakened target?
+                    </Box><Box sx={{paddingTop:'16px'}}>Use the Detailed Fight program to optionally keep track of:
+                    </Box> <Box>
+                    - Initiative
+                    </Box> <Box>
+                    - Health - optional.
+                    </Box> <Box>
+                    - AC - optional.
+                    </Box> <Box>
+                    - Death rolls.
+                    </Box> <Box>
+                    - Add a reasonable number of  monsters to the fight with an appropriate Challenge Ratting.
+                    </Box> <Box>
+                    - Automatically order the players and monsters based on their initiative.
+                    </Box> <Box>
+                    - Add and Remove players/monsters from the initiative order.
+                    </Box>
                   </Typography>
                   <Button
                     sx={{
@@ -262,7 +254,8 @@ const Home = (props: IProps) => {
                     }}
                     onClick={goToQuickFight}
                   >
-                    Detailed Fight
+                    Go To Detailed Fight
+                    <ArrowForwardIcon sx={{paddingLeft:'8px'}}/>
                   </Button>
                 </Box>
               ),
@@ -271,6 +264,7 @@ const Home = (props: IProps) => {
           ]}
           style={{ aspectRatio: "3 / 2" }}
         />
+        </Box>
         <Box>
           {/* <Button onClick={goToDetailedFight}>
             <Typography variant="h1" sx={{ color: "white" }}>
