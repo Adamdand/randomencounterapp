@@ -266,32 +266,23 @@ const QuickFight = (props: IProps) => {
         <Typography>Start Battle</Typography>
       </Button>
       {monsterRatingList.length > 0 && randomMonsterTypeOne !== undefined && (
-        <Box>
+        <Box sx={{flexDirection:'row',  textAlign: "left",  paddingLeft:'40px', paddingRight:'40px' }}>
           <Box>
             <Typography>
               you have encountered {randomMonsterTypeOne.quantity}
-              </Typography>
-              <Typography color='red' sx={{cursor:"pointer"}} onClick={() => {
-                    getMonsterDetails(randomMonsterTypeOne.index);
-                  }}>
-                  {randomMonsterTypeOne?.name}
-              </Typography>
-              
-              {twoTypeOfMonsters && randomMonsterTypeTwo.quantity !== 0 && (
+              <span style={{ color: 'red', fontWeight: '600', cursor: 'pointer' }} onClick={() =>  getMonsterDetails(randomMonsterTypeOne.index)}>
+              {' '}{randomMonsterTypeOne?.name} {' '}
+            </span>
+            {twoTypeOfMonsters && randomMonsterTypeTwo.quantity !== 0 && (
                 <>
-                <Typography>
                   and {randomMonsterTypeTwo.quantity}
-                  </Typography>
-                  <Typography  color='red' sx={{cursor:"pointer"}} onClick={() => {
-                    getMonsterDetails(randomMonsterTypeTwo.index);
-                  }}>
-                    {randomMonsterTypeTwo.name}
-                </Typography>
+                  <span style={{ color: 'red', fontWeight: '600', cursor: 'pointer' }} onClick={() =>  getMonsterDetails(randomMonsterTypeTwo.index)}>
+                  {' '}{randomMonsterTypeTwo.name} {' '}
+                    </span>
                 </>
               )}
-                <Typography>
               {monsterActivities[randomActivityNumber]}.
-            </Typography>
+              </Typography>
           </Box>
         </Box>
       )}
