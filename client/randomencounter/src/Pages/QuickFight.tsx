@@ -41,9 +41,11 @@ const useStyle = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
   },
-  emailAndPassword: {},
-  email: {},
-  password: {},
+//   encounterText:{
+//     [theme.breakpoints.down("desktop")]: {
+//       flexDirection: "row",
+// }
+//   }
 }));
 
 const QuickFight = (props: IProps) => {
@@ -266,34 +268,28 @@ const QuickFight = (props: IProps) => {
       {monsterRatingList.length > 0 && randomMonsterTypeOne !== undefined && (
         <Box>
           <Box>
-            <Typography
-              display="flex"
-              flexDirection="row"
-              alignItems="center"
-              style={{ cursor: "pointer" }}
-            >
+            <Typography>
               you have encountered {randomMonsterTypeOne.quantity}
-              <Box>
-                <Button
-                  onClick={() => {
+              </Typography>
+              <Typography color='red' sx={{cursor:"pointer"}} onClick={() => {
                     getMonsterDetails(randomMonsterTypeOne.index);
-                  }}
-                >
+                  }}>
                   {randomMonsterTypeOne?.name}
-                </Button>
-              </Box>
+              </Typography>
+              
               {twoTypeOfMonsters && randomMonsterTypeTwo.quantity !== 0 && (
+                <>
                 <Typography>
                   and {randomMonsterTypeTwo.quantity}
-                  <Button
-                    onClick={() => {
-                      getMonsterDetails(randomMonsterTypeTwo.index);
-                    }}
-                  >
+                  </Typography>
+                  <Typography  color='red' sx={{cursor:"pointer"}} onClick={() => {
+                    getMonsterDetails(randomMonsterTypeTwo.index);
+                  }}>
                     {randomMonsterTypeTwo.name}
-                  </Button>
                 </Typography>
+                </>
               )}
+                <Typography>
               {monsterActivities[randomActivityNumber]}.
             </Typography>
           </Box>
@@ -302,19 +298,23 @@ const QuickFight = (props: IProps) => {
       <Box>
         <Box
           sx={{
-            width: "200px",
+            width: "100%",
             paddingTop: "16px",
           }}
         >
           <Typography sx={{ textDecoration: "underline", fontWeight: "bold" }}>
             Stats
           </Typography>
+          {monsterDetails.name==="" &&(<Box>
+          <Typography>Click on monster name to get details</Typography></Box>)}
+
+          {monsterDetails.name!=="" &&(<Box>
           <Typography>Name = {monsterDetails.name}</Typography>
           <Typography>
             Challenge Rating = {monsterDetails.challenge_rating}
           </Typography>
           <Typography>AC = {monsterDetails.armor_class}</Typography>
-          <Typography>HitPoints = {monsterDetails.hit_points}</Typography>
+          <Typography>HitPoints = {monsterDetails.hit_points}</Typography></Box>)}
         </Box>
       </Box>
     </Box>

@@ -31,11 +31,15 @@ const monsterRatings = [
 
 const useStyle = makeStyles((theme) => ({
   root: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    spacing: "8px",
-    flexBasis: "72%",
+       display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          [theme.breakpoints.down("desktop")]: {
+            flexDirection: "column",
+            alignItems: "center",
+            spacing: "8px",
+            flexBasis: "72%",
+    }
   },
   innerInput: {
     fontFamily: "Open Sans",
@@ -45,9 +49,18 @@ const useStyle = makeStyles((theme) => ({
     maxLength: 13,
     minLength: 13,
   },
-  emailAndPassword: {},
-  email: {},
-  password: {},
+  scrollBar: {
+    '&::-webkit-scrollbar': {
+      width: '8px',
+    },
+    '&::-webkit-scrollbar-track': {
+      '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.00)'
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: 'rgba(0,0,0,.1)',
+      outline: '1px solid slategrey'
+    }
+  }
 }));
 
 const MonsterSearch = (props: IProps) => {
@@ -135,11 +148,12 @@ const MonsterSearch = (props: IProps) => {
   return (
     <Box>
       <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-        }}
+      className={classes.root}
+        // sx={{
+        //   display: "flex",
+        //   flexDirection: "row",
+        //   justifyContent: "center",
+        // }}
       >
         <Box>
           <FormControl sx={{ width: "250px" }}>
@@ -187,6 +201,7 @@ const MonsterSearch = (props: IProps) => {
                 Monster Options with CR {selectedCR}
               </Typography>
 
+<Box sx={{height: '160px', width:'100%', overflowY: "scroll", backgroundColor:'rgba(0,0,0,.05)'}} className={classes.scrollBar}>
               {monsterRatingList.map((monstersWithRating) => {
                 return (
                   <Box>
@@ -208,6 +223,7 @@ const MonsterSearch = (props: IProps) => {
                   </Box>
                 );
               })}
+              </Box>
             </Box>
           )}
         </Box>
