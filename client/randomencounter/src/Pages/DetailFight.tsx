@@ -153,11 +153,12 @@ const DetailedFight = (props: IProps) => {
     testList.push(newPlayerData);
   };
   const removePlayer = (playerToDelete: string) => {
-    const indexOfObject = testList.findIndex((player) => {
-      return player.characterName === playerToDelete;
-    });
 
-    testList.splice(indexOfObject, 1);
+    const newList = testList.filter((player)=> {
+      return player.characterName !== playerToDelete
+    })
+    setTestList(newList)
+
   };
 
   const orderListOnInitative = () => {
@@ -531,7 +532,7 @@ const DetailedFight = (props: IProps) => {
           />
         </Box>
       </Box>
-      <Box sx={{ display: "flex", flexDirection: "column", width: "50%" }}>
+      <Box sx={{ display: "flex", flexDirection: "column", width: "50%", marginLeft:'40px' }}>
         <Box>
           {" "}
           <Typography variant="h2">Controls</Typography>
@@ -544,7 +545,7 @@ const DetailedFight = (props: IProps) => {
           <Button onClick={getMonsterWithRatingBtn}>Get Monsters</Button>
           <Button onClick={removeMonsters}>Remove Monsters</Button>
           <Box>
-            <Button onClick={orderListOnInitative}>Order List Base On Initiative</Button>
+            <Button onClick={orderListOnInitative}>Order List Based On Initiative</Button>
           </Box>
         </Box>
         <Box sx={{ border: "1px dashed grey" }}>
