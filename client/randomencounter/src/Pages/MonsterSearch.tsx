@@ -31,16 +31,16 @@ const monsterRatings = [
 
 const useStyle = makeStyles((theme) => ({
   root: {
-       display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          paddingTop:'40px',
-          [theme.breakpoints.down("desktop")]: {
-            flexDirection: "column",
-            alignItems: "center",
-            spacing: "8px",
-            flexBasis: "72%",
-    }
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    paddingTop: "40px",
+    [theme.breakpoints.down("desktop")]: {
+      flexDirection: "column",
+      alignItems: "center",
+      spacing: "8px",
+      flexBasis: "72%",
+    },
   },
   innerInput: {
     fontFamily: "Open Sans",
@@ -51,17 +51,17 @@ const useStyle = makeStyles((theme) => ({
     minLength: 13,
   },
   scrollBar: {
-    '&::-webkit-scrollbar': {
-      width: '8px',
+    "&::-webkit-scrollbar": {
+      width: "8px",
     },
-    '&::-webkit-scrollbar-track': {
-      '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.00)'
+    "&::-webkit-scrollbar-track": {
+      "-webkit-box-shadow": "inset 0 0 6px rgba(0,0,0,0.00)",
     },
-    '&::-webkit-scrollbar-thumb': {
-      backgroundColor: 'rgba(0,0,0,.1)',
-      outline: '1px solid slategrey'
-    }
-  }
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: "rgba(0,0,0,.1)",
+      outline: "1px solid slategrey",
+    },
+  },
 }));
 
 const MonsterSearch = (props: IProps) => {
@@ -147,9 +147,29 @@ const MonsterSearch = (props: IProps) => {
   };
 
   return (
-    <Box>
+    <Box
+      sx={{
+        // backgroundColor: "#FFD8D0",
+        display: "flex",
+        height: "100%",
+        flexDirection: "column",
+      }}
+    >
+      <Box>
+        <Typography
+          variant="h1"
+          sx={{
+            color: "white",
+            backgroundColor: "black",
+            paddingBottom: "24px",
+            paddingTop: "24px",
+          }}
+        >
+          Monster Search
+        </Typography>
+      </Box>
       <Box
-      className={classes.root}
+        className={classes.root}
         // sx={{
         //   display: "flex",
         //   flexDirection: "row",
@@ -202,28 +222,36 @@ const MonsterSearch = (props: IProps) => {
                 Monster Options with CR {selectedCR}
               </Typography>
 
-<Box sx={{height: '160px', width:'100%', overflowY: "scroll", backgroundColor:'rgba(0,0,0,.05)'}} className={classes.scrollBar}>
-              {monsterRatingList.map((monstersWithRating) => {
-                return (
-                  <Box>
-                    <Button
-                      onClick={() =>
-                        getMonsterDetails(monstersWithRating.index)
-                      }
-                    >
-                      <Typography
-                        display="flex"
-                        flexDirection="row"
-                        justifyContent="space-evenly"
-                        alignItems="center"
-                        style={{ cursor: "pointer" }}
+              <Box
+                sx={{
+                  height: "160px",
+                  width: "100%",
+                  overflowY: "scroll",
+                  backgroundColor: "rgba(0,0,0,.05)",
+                }}
+                className={classes.scrollBar}
+              >
+                {monsterRatingList.map((monstersWithRating) => {
+                  return (
+                    <Box>
+                      <Button
+                        onClick={() =>
+                          getMonsterDetails(monstersWithRating.index)
+                        }
                       >
-                        <Box>{monstersWithRating.name}</Box>
-                      </Typography>
-                    </Button>
-                  </Box>
-                );
-              })}
+                        <Typography
+                          display="flex"
+                          flexDirection="row"
+                          justifyContent="space-evenly"
+                          alignItems="center"
+                          style={{ cursor: "pointer" }}
+                        >
+                          <Box>{monstersWithRating.name}</Box>
+                        </Typography>
+                      </Button>
+                    </Box>
+                  );
+                })}
               </Box>
             </Box>
           )}
@@ -250,7 +278,8 @@ const MonsterSearch = (props: IProps) => {
               alignContent: "center",
               justifyConent: "center",
               alignItems: "center",
-              backgroundColor: "white",
+              // backgroundColor: "#FFC8BD",
+              // height: `${monsterDetails.name !== "" ? "100%" : "74vh"}`,
             }}
           >
             <Typography

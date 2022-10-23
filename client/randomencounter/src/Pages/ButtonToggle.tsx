@@ -10,8 +10,7 @@ interface IProps {
 }
 
 const useStyles = makeStyles((theme) => ({
-  toggleButton: {
-  },
+  toggleButton: {},
 }));
 
 const ButtonToggle = (props: IProps) => {
@@ -19,29 +18,33 @@ const ButtonToggle = (props: IProps) => {
   const classes = useStyles();
 
   return (
-    <Box sx={{backgroundColor:"maroon"}}>
-    <ToggleButtonGroup
-      value={gameType}
-      exclusive
-      onChange={onClick}
-      aria-label="text alignment"
-    >
-      <ToggleButton value="Home" className={classes.toggleButton} aria-label="home">
-        <Typography color="white" >Home</Typography>
-      </ToggleButton>
-      <ToggleButton value="Monster Search" aria-label="monster search">
-        <Typography color="white" >Monster Search</Typography>
-      </ToggleButton>
-      <ToggleButton value="Quick Fight" aria-label="quick fight">
-        <Typography color="white" >Quick Fight</Typography>
-      </ToggleButton>
-      <ToggleButton value="Detailed Fight" aria-label="detailed fight">
-        <Typography color="white" >Detailed Fight</Typography>
-      </ToggleButton>
-      <ToggleButton value="extra" aria-label="extra" disabled>
-        <Typography color="white">extra</Typography>
-      </ToggleButton>
-    </ToggleButtonGroup>
+    <Box sx={{ backgroundColor: "maroon" }}>
+      <ToggleButtonGroup
+        value={gameType}
+        exclusive
+        onChange={onClick}
+        aria-label="text alignment"
+      >
+        <ToggleButton
+          value="Home"
+          className={classes.toggleButton}
+          aria-label="home"
+        >
+          <Typography color="white">Home</Typography>
+        </ToggleButton>
+        <ToggleButton value="Monster Search" aria-label="monster search">
+          <Typography color="white">Monster Search</Typography>
+        </ToggleButton>
+        <ToggleButton value="Quick Fight" aria-label="quick fight">
+          <Typography color="white">Quick Fight</Typography>
+        </ToggleButton>
+        <ToggleButton value="Detailed Fight" aria-label="detailed fight">
+          <Typography color="white">Detailed Fight</Typography>
+        </ToggleButton>
+        <ToggleButton value="extra" aria-label="extra" disabled>
+          <Typography color="white">extra</Typography>
+        </ToggleButton>
+      </ToggleButtonGroup>
     </Box>
   );
 };

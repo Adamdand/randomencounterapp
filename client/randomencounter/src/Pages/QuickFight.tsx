@@ -29,7 +29,7 @@ const useStyle = makeStyles((theme) => ({
     alignItems: "center",
     spacing: "8px",
     flexBasis: "72%",
-    paddingTop:'40px',
+    paddingTop: "40px",
   },
   innerInput: {
     fontFamily: "Open Sans",
@@ -42,11 +42,11 @@ const useStyle = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
   },
-//   encounterText:{
-//     [theme.breakpoints.down("desktop")]: {
-//       flexDirection: "row",
-// }
-//   }
+  //   encounterText:{
+  //     [theme.breakpoints.down("desktop")]: {
+  //       flexDirection: "row",
+  // }
+  //   }
 }));
 
 const QuickFight = (props: IProps) => {
@@ -225,84 +225,132 @@ const QuickFight = (props: IProps) => {
 
   return (
     <Box
-      className={classes.root}
+      sx={
+        {
+          // backgroundColor: "#FFD8D0", height: "100%"
+        }
+      }
     >
-      <TextField
-        placeholder="how many players?"
-        fullWidth
-        variant="outlined"
-        value={numberOfPlayers}
-        disabled={loading !== null}
-        inputProps={{ min: 0, style: { textAlign: "center" } }}
-        onChange={(
-          event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-        ) => changeNumberOfPlayers(event.target.value)}
-        // InputProps={{
-        //   classes: {
-        //     root: classes.innerInput,
-        //   },
-        // }}
-      />
-      <TextField
-        placeholder="average player level"
-        fullWidth
-        variant="outlined"
-        value={averagePlayerLevel}
-        disabled={loading !== null}
-        inputProps={{ min: 0, style: { textAlign: "center" } }}
-        onChange={(
-          event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-        ) => changeAveragePlayerLevel(event.target.value)}
-        // InputProps={{
-        //   classes: {
-        //     root: classes.innerInput,
-        //   },
-        // }}
-      />
-      <Button onClick={getMonsterWithRatingBtn}>
-        <Typography>Start Battle</Typography>
-      </Button>
-      {monsterRatingList.length > 0 && randomMonsterTypeOne !== undefined && (
-        <Box sx={{flexDirection:'row',  textAlign: "left",  paddingLeft:'40px', paddingRight:'40px' }}>
-          <Box>
-            <Typography>
-              you have encountered {randomMonsterTypeOne.quantity}
-              <span style={{ color: 'red', fontWeight: '600', cursor: 'pointer' }} onClick={() =>  getMonsterDetails(randomMonsterTypeOne.index)}>
-              {' '}{randomMonsterTypeOne?.name} {' '}
-            </span>
-            {twoTypeOfMonsters && randomMonsterTypeTwo.quantity !== 0 && (
-                <>
-                  and {randomMonsterTypeTwo.quantity}
-                  <span style={{ color: 'red', fontWeight: '600', cursor: 'pointer' }} onClick={() =>  getMonsterDetails(randomMonsterTypeTwo.index)}>
-                  {' '}{randomMonsterTypeTwo.name} {' '}
-                    </span>
-                </>
-              )}
-              {monsterActivities[randomActivityNumber]}.
-              </Typography>
-          </Box>
-        </Box>
-      )}
       <Box>
-        <Box
+        <Typography
+          variant="h1"
           sx={{
-            width: "100%",
-            paddingTop: "16px",
+            color: "white",
+            backgroundColor: "black",
+            paddingBottom: "24px",
+            paddingTop: "24px",
           }}
         >
-          <Typography sx={{ textDecoration: "underline", fontWeight: "bold" }}>
-            Stats
-          </Typography>
-          {monsterDetails.name==="" &&(<Box>
-          <Typography>Click on monster name to get details</Typography></Box>)}
+          Quick Fight
+        </Typography>
+      </Box>
+      <Box className={classes.root}>
+        <TextField
+          placeholder="how many players?"
+          fullWidth
+          variant="outlined"
+          value={numberOfPlayers}
+          disabled={loading !== null}
+          inputProps={{ min: 0, style: { textAlign: "center" } }}
+          onChange={(
+            event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+          ) => changeNumberOfPlayers(event.target.value)}
+          // InputProps={{
+          //   classes: {
+          //     root: classes.innerInput,
+          //   },
+          // }}
+        />
+        <TextField
+          placeholder="average player level"
+          fullWidth
+          variant="outlined"
+          value={averagePlayerLevel}
+          disabled={loading !== null}
+          inputProps={{ min: 0, style: { textAlign: "center" } }}
+          onChange={(
+            event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+          ) => changeAveragePlayerLevel(event.target.value)}
+          // InputProps={{
+          //   classes: {
+          //     root: classes.innerInput,
+          //   },
+          // }}
+        />
+        <Button onClick={getMonsterWithRatingBtn}>
+          <Typography>Start Battle</Typography>
+        </Button>
+        {monsterRatingList.length > 0 && randomMonsterTypeOne !== undefined && (
+          <Box
+            sx={{
+              flexDirection: "row",
+              textAlign: "left",
+              paddingLeft: "40px",
+              paddingRight: "40px",
+            }}
+          >
+            <Box>
+              <Typography>
+                you have encountered {randomMonsterTypeOne.quantity}
+                <span
+                  style={{ color: "red", fontWeight: "600", cursor: "pointer" }}
+                  onClick={() => getMonsterDetails(randomMonsterTypeOne.index)}
+                >
+                  {" "}
+                  {randomMonsterTypeOne?.name}{" "}
+                </span>
+                {twoTypeOfMonsters && randomMonsterTypeTwo.quantity !== 0 && (
+                  <>
+                    and {randomMonsterTypeTwo.quantity}
+                    <span
+                      style={{
+                        color: "red",
+                        fontWeight: "600",
+                        cursor: "pointer",
+                      }}
+                      onClick={() =>
+                        getMonsterDetails(randomMonsterTypeTwo.index)
+                      }
+                    >
+                      {" "}
+                      {randomMonsterTypeTwo.name}{" "}
+                    </span>
+                  </>
+                )}
+                {monsterActivities[randomActivityNumber]}.
+              </Typography>
+            </Box>
+          </Box>
+        )}
+        <Box>
+          <Box
+            sx={{
+              width: "100%",
+              paddingTop: "16px",
+            }}
+          >
+            <Typography
+              sx={{ textDecoration: "underline", fontWeight: "bold" }}
+            >
+              Stats
+            </Typography>
+            {monsterDetails.name === "" && (
+              <Box>
+                <Typography>Click on monster name to get details</Typography>
+              </Box>
+            )}
 
-          {monsterDetails.name!=="" &&(<Box>
-          <Typography>Name = {monsterDetails.name}</Typography>
-          <Typography>
-            Challenge Rating = {monsterDetails.challenge_rating}
-          </Typography>
-          <Typography>AC = {monsterDetails.armor_class}</Typography>
-          <Typography>HitPoints = {monsterDetails.hit_points}</Typography></Box>)}
+            {monsterDetails.name !== "" && (
+              <Box>
+                <Typography>Name = {monsterDetails.name}</Typography>
+                <Typography>
+                  Challenge Rating = {monsterDetails.challenge_rating}
+                </Typography>
+                <Typography>AC = {monsterDetails.armor_class}</Typography>
+                <Typography>HitPoints = {monsterDetails.hit_points}</Typography>
+              </Box>
+            )}
+          </Box>
         </Box>
       </Box>
     </Box>

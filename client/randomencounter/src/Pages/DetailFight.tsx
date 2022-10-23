@@ -4,7 +4,6 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { makeStyles } from "@mui/styles";
-
 import { useHistory } from "react-router-dom";
 import { CustomerDataContext } from "../Context/CustomerContext";
 import {
@@ -31,7 +30,7 @@ const useStyle = makeStyles((theme) => ({
     alignItems: "center",
     spacing: "8px",
     flexBasis: "72%",
-    paddingTop:'40px',
+    paddingTop: "40px",
   },
   innerInput: {
     fontFamily: "Open Sans",
@@ -154,12 +153,10 @@ const DetailedFight = (props: IProps) => {
     testList.push(newPlayerData);
   };
   const removePlayer = (playerToDelete: string) => {
-
-    const newList = testList.filter((player)=> {
-      return player.characterName !== playerToDelete
-    })
-    setTestList(newList)
-
+    const newList = testList.filter((player) => {
+      return player.characterName !== playerToDelete;
+    });
+    setTestList(newList);
   };
 
   const orderListOnInitative = () => {
@@ -477,175 +474,201 @@ const DetailedFight = (props: IProps) => {
   };
 
   return (
-    <Box
-      className={classes.root}
-      sx={{
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "flex-start",
-      }}
-    >
-      <Box sx={{ width: "50%" }}>
-        <Box>
-          <Typography variant="h2">Characters in Fight:</Typography>
-        </Box>
-
-        {testList.map((characters) => (
-          <Box
-            sx={{ display: "flex" }}
-            onMouseOver={() => setHoveredPlayer(characters)}
-          >
-            <CharacterCard
-              data={characters}
-              onClick={onClick}
-              succeedADeathSave={succeedADeathSave}
-              failADeathSave={failADeathSave}
-              removePlayer={removePlayer}
-              isSelected={
-                characters.characterName === selectedPlayer?.characterName
-              }
-            />
-          </Box>
-        ))}
-        {/* <Box>{listCharacters()}</Box> */}
-
-        <Box>
-          <Button onClick={handleClickOpen}>
-            <Typography
-              noWrap={true}
-              sx={{
-                fontFamily: "open sans",
-                fontStyle: "normal",
-                fontWeight: 400,
-                fontSize: "14px",
-                lineHeight: "16.41px",
-                color: "red",
-                textDecoration: "underline",
-              }}
-            >
-              Add Player
-            </Typography>
-          </Button>
-          <CreateNewPlayer
-            open={open}
-            handleClose={handleClose}
-            addPlayer={addPlayer}
-          />
-        </Box>
+    <>
+      <Box>
+        <Typography
+          variant="h1"
+          sx={{
+            color: "white",
+            backgroundColor: "black",
+            paddingBottom: "24px",
+            paddingTop: "24px",
+          }}
+        >
+          Monster Search
+        </Typography>
       </Box>
-      <Box sx={{ display: "flex", flexDirection: "column", width: "50%", marginLeft:'40px' }}>
-        <Box>
-          {" "}
-          <Typography variant="h2">Controls</Typography>
-        </Box>
-        <Box sx={{ border: "1px dashed grey" }}>
+      <Box
+        className={classes.root}
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "flex-start",
+        }}
+      >
+        <Box sx={{ width: "50%" }}>
           <Box>
-            {" "}
-            <Typography variant="h3">Set Up</Typography>
+            <Typography variant="h2">Characters in Fight:</Typography>
           </Box>
-          <Button onClick={getMonsterWithRatingBtn}>Get Monsters</Button>
-          <Button onClick={removeMonsters}>Remove Monsters</Button>
+
+          {testList.map((characters) => (
+            <Box
+              sx={{ display: "flex" }}
+              onMouseOver={() => setHoveredPlayer(characters)}
+            >
+              <CharacterCard
+                data={characters}
+                onClick={onClick}
+                succeedADeathSave={succeedADeathSave}
+                failADeathSave={failADeathSave}
+                removePlayer={removePlayer}
+                isSelected={
+                  characters.characterName === selectedPlayer?.characterName
+                }
+              />
+            </Box>
+          ))}
+          {/* <Box>{listCharacters()}</Box> */}
+
           <Box>
-            <Button onClick={orderListOnInitative}>Order List Based On Initiative</Button>
-          </Box>
-        </Box>
-        <Box sx={{ border: "1px dashed grey" }}>
-          <Box>
-            {" "}
-            <Typography variant="h3">Actions</Typography>
-          </Box>
-          <Box>
-            {" "}
-            <TextField
-              id="damageOrHealValue"
-              label="value"
-              type="tel"
-              className={classes.textField}
-              value={damageHealth}
-              onChange={changeValue}
-              margin="normal"
-              inputProps={{
-                pattern: "[0-9]*",
-              }}
+            <Button onClick={handleClickOpen}>
+              <Typography
+                noWrap={true}
+                sx={{
+                  fontFamily: "open sans",
+                  fontStyle: "normal",
+                  fontWeight: 400,
+                  fontSize: "14px",
+                  lineHeight: "16.41px",
+                  color: "red",
+                  textDecoration: "underline",
+                }}
+              >
+                Add Player
+              </Typography>
+            </Button>
+            <CreateNewPlayer
+              open={open}
+              handleClose={handleClose}
+              addPlayer={addPlayer}
             />
           </Box>
-          <Box>
-            <Button
-              onClick={() => {
-                damagePlayer();
-              }}
-            >
-              damage
-              <ArrowDownwardIcon sx={{ color: "red" }} />
-            </Button>
-            <Button
-              onClick={() => {
-                healPlayer();
-              }}
-            >
-              heal
-              <ArrowUpwardIcon sx={{ color: "green" }} />
-            </Button>
-
-            <Button onClick={turnOver}>
-              Next Turn
-              <ArrowForwardIosIcon sx={{ color: "black" }} />
-            </Button>
-          </Box>
         </Box>
-
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
-            border: "1px dashed grey",
-            alignItems: "center",
+            width: "50%",
+            marginLeft: "40px",
           }}
         >
           <Box>
             {" "}
-            <Typography variant="h3">Monster Info</Typography>
+            <Typography variant="h2">Controls</Typography>
+          </Box>
+          <Box sx={{ border: "1px dashed grey" }}>
+            <Box>
+              {" "}
+              <Typography variant="h3">Set Up</Typography>
+            </Box>
+            <Button onClick={getMonsterWithRatingBtn}>Get Monsters</Button>
+            <Button onClick={removeMonsters}>Remove Monsters</Button>
+            <Box>
+              <Button onClick={orderListOnInitative}>
+                Order List Based On Initiative
+              </Button>
+            </Box>
+          </Box>
+          <Box sx={{ border: "1px dashed grey" }}>
+            <Box>
+              {" "}
+              <Typography variant="h3">Actions</Typography>
+            </Box>
+            <Box>
+              {" "}
+              <TextField
+                id="damageOrHealValue"
+                label="value"
+                type="tel"
+                className={classes.textField}
+                value={damageHealth}
+                onChange={changeValue}
+                margin="normal"
+                inputProps={{
+                  pattern: "[0-9]*",
+                }}
+              />
+            </Box>
+            <Box>
+              <Button
+                onClick={() => {
+                  damagePlayer();
+                }}
+              >
+                damage
+                <ArrowDownwardIcon sx={{ color: "red" }} />
+              </Button>
+              <Button
+                onClick={() => {
+                  healPlayer();
+                }}
+              >
+                heal
+                <ArrowUpwardIcon sx={{ color: "green" }} />
+              </Button>
+
+              <Button onClick={turnOver}>
+                Next Turn
+                <ArrowForwardIosIcon sx={{ color: "black" }} />
+              </Button>
+            </Box>
           </Box>
 
-          {monsterRatingList.length > 0 && randomMonsterTypeOne !== undefined && (
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              border: "1px dashed grey",
+              alignItems: "center",
+            }}
+          >
             <Box>
-              <Box>
-                <Typography
-                  flexDirection="row"
-                  alignItems="center"
-                  style={{ cursor: "pointer" }}
-                >
-                  you have encountered {randomMonsterTypeOne.quantity}
-                  <Button
-                    onClick={() => {
-                      getMonsterDetails(randomMonsterTypeOne.index);
-                    }}
-                  >
-                    {randomMonsterTypeOne?.name}
-                  </Button>
-                  {twoTypeOfMonsters && randomMonsterTypeTwo.quantity !== 0 && (
-                    <Typography>
-                      and {randomMonsterTypeTwo.quantity}
+              {" "}
+              <Typography variant="h3">Monster Info</Typography>
+            </Box>
+
+            {monsterRatingList.length > 0 &&
+              randomMonsterTypeOne !== undefined && (
+                <Box>
+                  <Box>
+                    <Typography
+                      flexDirection="row"
+                      alignItems="center"
+                      style={{ cursor: "pointer" }}
+                    >
+                      you have encountered {randomMonsterTypeOne.quantity}
                       <Button
                         onClick={() => {
-                          getMonsterDetails(randomMonsterTypeTwo.index);
+                          getMonsterDetails(randomMonsterTypeOne.index);
                         }}
                       >
-                        {randomMonsterTypeTwo.name}
+                        {randomMonsterTypeOne?.name}
                       </Button>
+                      {twoTypeOfMonsters &&
+                        randomMonsterTypeTwo.quantity !== 0 && (
+                          <Typography>
+                            and {randomMonsterTypeTwo.quantity}
+                            <Button
+                              onClick={() => {
+                                getMonsterDetails(randomMonsterTypeTwo.index);
+                              }}
+                            >
+                              {randomMonsterTypeTwo.name}
+                            </Button>
+                          </Typography>
+                        )}
+                      {monsterActivities[randomActivityNumber]}.
                     </Typography>
-                  )}
-                  {monsterActivities[randomActivityNumber]}.
-                </Typography>
-              </Box>
+                  </Box>
+                </Box>
+              )}
+            <Box>
+              <MonsterDetails monsterData={monsterDetails} />
             </Box>
-          )}
-          <Box>
-            <MonsterDetails monsterData={monsterDetails} />
           </Box>
         </Box>
       </Box>
-    </Box>
+    </>
   );
 };
 
