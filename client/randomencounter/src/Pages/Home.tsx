@@ -112,6 +112,7 @@ const Home = (props: IProps) => {
 
                       </Box></Typography>
                   <Button
+                  variant="text"
                     sx={{
                       marginTop: "48px",
                       backgroundColor: "white",

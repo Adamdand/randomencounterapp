@@ -29,6 +29,7 @@ const useStyle = makeStyles((theme) => ({
     alignItems: "center",
     spacing: "8px",
     flexBasis: "72%",
+    paddingTop:'40px',
   },
   innerInput: {
     fontFamily: "Open Sans",
@@ -224,11 +225,7 @@ const QuickFight = (props: IProps) => {
 
   return (
     <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
+      className={classes.root}
     >
       <TextField
         placeholder="how many players?"

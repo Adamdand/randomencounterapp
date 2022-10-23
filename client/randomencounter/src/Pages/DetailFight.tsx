@@ -31,6 +31,7 @@ const useStyle = makeStyles((theme) => ({
     alignItems: "center",
     spacing: "8px",
     flexBasis: "72%",
+    paddingTop:'40px',
   },
   innerInput: {
     fontFamily: "Open Sans",

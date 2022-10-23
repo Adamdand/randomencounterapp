@@ -34,6 +34,7 @@ const useStyle = makeStyles((theme) => ({
        display: "flex",
           flexDirection: "row",
           justifyContent: "center",
+          paddingTop:'40px',
           [theme.breakpoints.down("desktop")]: {
             flexDirection: "column",
             alignItems: "center",

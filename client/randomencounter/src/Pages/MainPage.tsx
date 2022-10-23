@@ -278,7 +278,9 @@ const MainPage: React.FC = () => {
     event: any,
     newGameType: React.SetStateAction<string>
   ) => {
+    if(newGameType !== null){
     setGameType(newGameType);
+  }
   };
 
   return (
@@ -287,12 +289,11 @@ const MainPage: React.FC = () => {
         sx={{
           display: "block",
           textAlign: "center",
-          paddingTop: "40px",
           paddingLeft: "0px",
           width: "100%",
         }}
       >
-        <Box sx={{ paddingBottom: "40px" }}>
+        <Box sx={{ paddingBottom: "20px", paddingTop:'40px', backgroundColor:'black' }}>
           <ButtonToggle onClick={handleGameType} gameType={gameType} />
         </Box>
         {gameType === "Home" && (
