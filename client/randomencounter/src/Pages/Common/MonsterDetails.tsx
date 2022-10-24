@@ -25,7 +25,6 @@ const MonsterDetails: React.FC<IProps> = (props: IProps) => {
         alignItems: "flex-start",
       }}
     >
-      {" "}
       {monsterData.name !== "" && (
         <Box
           sx={{
@@ -66,12 +65,21 @@ const MonsterDetails: React.FC<IProps> = (props: IProps) => {
           </Typography>
           <Typography>AC = {monsterData.armor_class}</Typography>
           <Typography>HitPoints = {monsterData.hit_points}</Typography>
-          <Typography>Alignment = {monsterData.alignment}</Typography>
+          {monsterData.alignment !== "" && (
+            <Typography>Alignment = {monsterData.alignment}</Typography>
+          )}
 
-          <Typography>Speed-walkwalk = {monsterData.speed.walk}</Typography>
-          <Typography>Speed-swim= {monsterData.speed.swim}</Typography>
-
-          <Typography>Size = {monsterData.size}</Typography>
+          {monsterData.speed.walk !== "" &&
+            monsterData.speed.walk !== undefined && (
+              <Typography>Speed-walkwalk = {monsterData.speed.walk}</Typography>
+            )}
+          {monsterData.speed.swim !== "" &&
+            monsterData.speed.swim !== undefined && (
+              <Typography>Speed-swim= {monsterData.speed.swim}</Typography>
+            )}
+          {monsterData.size !== "" && (
+            <Typography>Size = {monsterData.size}</Typography>
+          )}
 
           {monsterData.actions.map(
             (action: {
@@ -92,22 +100,32 @@ const MonsterDetails: React.FC<IProps> = (props: IProps) => {
             }) => {
               return (
                 <Box>
-                  <Typography>Action Name = {action.name}</Typography>
-                  <Typography>Action Desc = {action.desc}</Typography>
+                  {action.name !== "" && (
+                    <Typography>Action Name = {action.name}</Typography>
+                  )}
+                  {action.desc !== "" && (
+                    <Typography>Action Desc = {action.desc}</Typography>
+                  )}
                 </Box>
               );
             }
           )}
 
-          <Typography>
-            Damage Resistances = {monsterData.damage_immunities}
-          </Typography>
-          <Typography>
-            Damage Resistances = {monsterData.damage_resistances}
-          </Typography>
-          <Typography>
-            Damage Vulnerabilities ={monsterData.damage_vulnerabilities}
-          </Typography>
+          {monsterData.damage_immunities.length > 0 && (
+            <Typography>
+              Damage Resistances = {monsterData.damage_immunities}
+            </Typography>
+          )}
+          {monsterData.damage_resistances.length > 0 && (
+            <Typography>
+              Damage Resistances = {monsterData.damage_resistances}
+            </Typography>
+          )}
+          {monsterData.damage_vulnerabilities.length > 0 && (
+            <Typography>
+              Damage Vulnerabilities ={monsterData.damage_vulnerabilities}
+            </Typography>
+          )}
         </Box>
       )}
       {monsterData.name === "" && (
