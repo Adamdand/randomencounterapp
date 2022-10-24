@@ -341,7 +341,7 @@ const QuickFight = (props: IProps) => {
             )}
 
             {monsterDetails.name !== "" && (
-              <Box>
+              <Box sx={{ textAlign: "left" }}>
                 <Typography>Name = {monsterDetails.name}</Typography>
                 <Typography>
                   Challenge Rating = {monsterDetails.challenge_rating}
