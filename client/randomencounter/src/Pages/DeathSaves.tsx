@@ -60,6 +60,12 @@ const DeathSaves: React.FC<IProps> = (props: IProps) => {
               value={1}
               name="name3"
               inputProps={{ "aria-label": "1" }}
+              sx={{
+                color: "white",
+                "&.Mui-checked": {
+                  color: "green",
+                },
+              }}
             />
             <Radio
               checked={props.successSaves > 1}
@@ -67,6 +73,12 @@ const DeathSaves: React.FC<IProps> = (props: IProps) => {
               value={2}
               name="name2"
               inputProps={{ "aria-label": "2" }}
+              sx={{
+                color: "white",
+                "&.Mui-checked": {
+                  color: "green",
+                },
+              }}
             />
             <Radio
               checked={props.successSaves > 2}
@@ -74,6 +86,12 @@ const DeathSaves: React.FC<IProps> = (props: IProps) => {
               value={3}
               name="name1"
               inputProps={{ "aria-label": "2" }}
+              sx={{
+                color: "white",
+                "&.Mui-checked": {
+                  color: "green",
+                },
+              }}
             />
           </Box>
         </Box>
@@ -87,6 +105,12 @@ const DeathSaves: React.FC<IProps> = (props: IProps) => {
               value={1}
               name="radio-buttons4"
               inputProps={{ "aria-label": "1" }}
+              sx={{
+                color: "white",
+                "&.Mui-checked": {
+                  color: "red",
+                },
+              }}
             />
             <Radio
               checked={props.failSaves > 1}
@@ -94,6 +118,12 @@ const DeathSaves: React.FC<IProps> = (props: IProps) => {
               value={2}
               name="radio-buttons5"
               inputProps={{ "aria-label": "2" }}
+              sx={{
+                color: "white",
+                "&.Mui-checked": {
+                  color: "red",
+                },
+              }}
             />
             <Radio
               checked={props.failSaves > 2}
@@ -101,6 +131,12 @@ const DeathSaves: React.FC<IProps> = (props: IProps) => {
               value={3}
               name="radio-buttons6"
               inputProps={{ "aria-label": "2" }}
+              sx={{
+                color: "white",
+                "&.Mui-checked": {
+                  color: "red",
+                },
+              }}
             />
           </Box>
         </Box>

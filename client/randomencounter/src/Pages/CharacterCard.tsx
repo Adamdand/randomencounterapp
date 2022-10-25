@@ -29,20 +29,20 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: "190px",
     fontColor: theme.palette.primary.main,
     padding: theme.spacing(2),
-    border: "1px solid #DDDDDD",
-    backgroundColor: "#FFFFFF",
+    border: "1px solid maroon",
+    backgroundColor: "wheat",
     borderRadius: "4px",
     [theme.breakpoints.only("mobile")]: { marginRight: "0px" },
     "&:hover": {
       borderColor: theme.palette.primary.main,
-      backgroundColor: theme.palette.primaryHover,
-      color: theme.palette.primary.main,
+      backgroundColor: "maroon",
+      color: "white",
     },
   },
   selected: {
     borderColor: theme.palette.primary.main,
-    backgroundColor: theme.palette.primaryHover,
-    color: theme.palette.primary.main,
+    backgroundColor: "maroon",
+    color: "white",
   },
   classIcon: {
     width: "50px",
@@ -104,8 +104,8 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
           : data.characterHealth !== null && data.characterHealth <= 0
           ? "red"
           : "",
-        backgroundColor: isSelected ? theme.palette.primaryHover : "",
-        color: isSelected ? theme.palette.primary.main : "",
+        backgroundColor: isSelected ? "maroon" : "",
+        color: isSelected ? "white" : "",
       }}
     >
       <Box
@@ -156,7 +156,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
             </Typography>
             <Typography>{data.characterAC}</Typography>
             <Box sx={{ display: "flex", flexDirection: "row" }}>
-              <Typography sx={{ color: getHealthColours }}>
+              <Typography sx={{ color: getHealthColours, fontWeight: "bold" }}>
                 {data.characterHealth}
               </Typography>
               <Typography sx={{ paddingLeft: "4px" }}>

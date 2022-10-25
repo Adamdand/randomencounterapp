@@ -117,6 +117,7 @@ const CreateNewPlayer = (props: IProps): JSX.Element => {
               <Box>AC</Box>
               <TextField
                 placeholder="Character Armor Class"
+                type="number"
                 variant="outlined"
                 name="AC"
                 value={newPlayer?.characterAC}
@@ -138,6 +139,7 @@ const CreateNewPlayer = (props: IProps): JSX.Element => {
               <Box>Health</Box>
               <TextField
                 placeholder="Character Health"
+                type="number"
                 variant="outlined"
                 name="Health"
                 value={newPlayer?.characterHealth}
@@ -158,6 +160,7 @@ const CreateNewPlayer = (props: IProps): JSX.Element => {
               <Box>Level</Box>
               <TextField
                 placeholder="Character Level"
+                type="number"
                 variant="outlined"
                 name="Level"
                 value={newPlayer?.characterLevel}
@@ -178,6 +181,7 @@ const CreateNewPlayer = (props: IProps): JSX.Element => {
               <Box>Initiative</Box>
               <TextField
                 placeholder="Character Initiative"
+                type="number"
                 variant="outlined"
                 name="Initiative"
                 value={newPlayer?.characterInitative}
