@@ -3,6 +3,7 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
 import { CustomerDataContext } from "../Context/CustomerContext";
@@ -553,13 +554,20 @@ const DetailedFight = (props: IProps) => {
           }}
         >
           <Box>
-            {" "}
             <Typography variant="h2">Controls</Typography>
           </Box>
           <Box sx={{ border: "1px dashed grey" }}>
-            <Box>
-              {" "}
-              <Typography variant="h3">Set Up</Typography>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+              }}
+            >
+              <Typography sx={{ marginLeft: "32px" }} variant="h3">
+                Set Up
+              </Typography>
+              <InfoOutlinedIcon sx={{ paddingLeft: "16px", color: "white " }} />
             </Box>
             <Button onClick={getMonsterWithRatingBtn}>Get Monsters</Button>
             <Button onClick={removeMonsters}>Remove Monsters</Button>
@@ -570,12 +578,20 @@ const DetailedFight = (props: IProps) => {
             </Box>
           </Box>
           <Box sx={{ border: "1px dashed grey" }}>
-            <Box>
-              {" "}
-              <Typography variant="h3">Actions</Typography>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+              }}
+            >
+              <Typography sx={{ marginLeft: "32px" }} variant="h3">
+                Actions
+              </Typography>
+              <InfoOutlinedIcon sx={{ paddingLeft: "16px", color: "white " }} />
             </Box>
+
             <Box>
-              {" "}
               <TextField
                 id="damageOrHealValue"
                 label="value"
