@@ -32,12 +32,27 @@ const useStyle = makeStyles((theme) => ({
   container: {
     scrollSnapType: "y mandatory",
   },
-  childText: {
+  childTitle:{
     backgroundColor: "transparent",
-    paddingTop: "40%",
+    paddingTop: "25%",
     scrollSnapAlign: "start",
+    [theme.breakpoints.down("desktop")]: {
+      paddingTop: "50%",
+    },
+    [theme.breakpoints.down("tablet")]: {
+      paddingTop: "70%",
+    },
+  },
+  childText: {
+    paddingTop: "40%",
     paddingLeft: "40px",
     paddingRight: "40px",
+    [theme.breakpoints.down("desktop")]: {
+      paddingTop: "80%",
+    },
+    [theme.breakpoints.down("tablet")]: {
+      paddingTop: "110%",
+    },
   },
 }));
 
@@ -83,11 +98,7 @@ const Home = (props: IProps) => {
               {
                 children: (
                   <Box
-                    sx={{
-                      backgroundColor: "transparent",
-                      paddingTop: "25%",
-                      scrollSnapAlign: "start",
-                    }}
+                   className={classes.childTitle}
                   >
                     <Typography variant="h1" sx={{ color: "white", 
                       textShadow: "1px 1px 2px black"
@@ -131,7 +142,8 @@ const Home = (props: IProps) => {
                 speed: -20,
               },
             ]}
-            style={{ aspectRatio: "3 / 2" }}
+            style={{ width: "100%", height: window.screen.height }}
+            
           />
         </Box>
         <Box>
@@ -151,7 +163,7 @@ const Home = (props: IProps) => {
               {
                 children: (
                   <Box
-                    sx={{ backgroundColor: "transparent", paddingTop: "25%" }}
+                  className={classes.childTitle}
                   >
                     <Typography variant="h1" sx={{ color: "white", textShadow: "1px 1px 2px black" }}>
                       Quick Fight
@@ -200,7 +212,7 @@ const Home = (props: IProps) => {
                 speed: -20,
               },
             ]}
-            style={{ aspectRatio: "3 / 2" }}
+            style={{ width: "100%", height: window.screen.height }}
           />
           <Box>
             {/* <Button onClick={goToQuickFight}>
@@ -220,7 +232,7 @@ const Home = (props: IProps) => {
               {
                 children: (
                   <Box
-                    sx={{ backgroundColor: "transparent", paddingTop: "25%" }}
+                  className={classes.childTitle}
                   >
                     <Typography variant="h1" sx={{ color: "white",  textShadow: "1px 1px 2px black" }}>
                       Detailed Fight
@@ -278,7 +290,7 @@ const Home = (props: IProps) => {
                 speed: -20,
               },
             ]}
-            style={{ aspectRatio: "3 / 2" }}
+            style={{ width: "100%", height: window.screen.height }}
           />
         </Box>
         <Box>
