@@ -89,7 +89,9 @@ const Home = (props: IProps) => {
                       scrollSnapAlign: "start",
                     }}
                   >
-                    <Typography variant="h1" sx={{ color: "white" }}>
+                    <Typography variant="h1" sx={{ color: "white", 
+                      textShadow: "1px 1px 2px black"
+                      }}>
                       Search For Monsters
                     </Typography>
                   </Box>
@@ -100,7 +102,7 @@ const Home = (props: IProps) => {
                 children: (
                   <Box className={classes.childText}>
                     <Typography
-                      sx={{ backgroundColor: "transparent", color: "white" }}
+                      sx={{ backgroundColor: "transparent", color: "white",   textShadow: "1px 1px 2px black" }}
                     >
                       <Box> Dont know which monster to use?</Box>
                       <Box>
@@ -151,7 +153,7 @@ const Home = (props: IProps) => {
                   <Box
                     sx={{ backgroundColor: "transparent", paddingTop: "25%" }}
                   >
-                    <Typography variant="h1" sx={{ color: "white" }}>
+                    <Typography variant="h1" sx={{ color: "white", textShadow: "1px 1px 2px black" }}>
                       Quick Fight
                     </Typography>
                   </Box>
@@ -162,7 +164,7 @@ const Home = (props: IProps) => {
                 children: (
                   <Box className={classes.childText}>
                     <Typography
-                      sx={{ backgroundColor: "transparent", color: "white" }}
+                      sx={{ backgroundColor: "transparent", color: "white",  textShadow: "1px 1px 2px black" }}
                     >
                       <Box>
                         Not sure how strong of a monster or how many monsters
@@ -220,7 +222,7 @@ const Home = (props: IProps) => {
                   <Box
                     sx={{ backgroundColor: "transparent", paddingTop: "25%" }}
                   >
-                    <Typography variant="h1" sx={{ color: "white" }}>
+                    <Typography variant="h1" sx={{ color: "white",  textShadow: "1px 1px 2px black" }}>
                       Detailed Fight
                     </Typography>
                   </Box>
@@ -231,7 +233,7 @@ const Home = (props: IProps) => {
                 children: (
                   <Box className={classes.childText}>
                     <Typography
-                      sx={{ backgroundColor: "transparent", color: "white" }}
+                      sx={{ backgroundColor: "transparent", color: "white",  textShadow: "1px 1px 2px black" }}
                     >
                       <Box>
                         Having trouble keeping track of the initiative order?
