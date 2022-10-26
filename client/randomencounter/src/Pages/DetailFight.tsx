@@ -48,6 +48,19 @@ const useStyle = makeStyles((theme) => ({
     marginRight: "8px",
     width: "50%",
   },
+  controls:{
+    display: "flex",
+    flexDirection: "column",
+    width: "50%",
+    paddingLeft:'0px',
+    [theme.breakpoints.down("desktop")]: {
+      paddingLeft:'40px',
+    },
+    [theme.breakpoints.down("tablet")]: {
+      width: "40%",
+      paddingLeft:'40px',
+    },
+  }
 }));
 
 const DetailedFight = (props: IProps) => {
@@ -563,12 +576,7 @@ const DetailedFight = (props: IProps) => {
           </Box>
         </Box>
         <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            width: "50%",
-            marginLeft: "40px",
-          }}
+          className={classes.controls}
         >
           <Box>
             <Typography variant="h2">Controls</Typography>
