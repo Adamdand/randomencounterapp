@@ -19,6 +19,8 @@ import CreateNewPlayer from "./CreateNewPlayer";
 import monsterAPIs from "../API/monsterAPI";
 import { defaultMonsterDetails } from "../Context/DefaultTypes";
 import MonsterDetails from "./Common/MonsterDetails";
+import ActionsInfo from "./InfoPages/ActionsInfo";
+import SetUpInfo from "./InfoPages/SetUpInfo";
 
 interface IProps {
   gameType: string;
@@ -111,6 +113,8 @@ const DetailedFight = (props: IProps) => {
   const [selectedPlayer, setSelectedPlayer] = useState<IPlayer>(testList[0]);
   const [damageHealth, setDamageHealth] = useState<number>();
   const [open, setOpen] = React.useState(false);
+  const [openSetUp, setUpOpen] = React.useState(false)
+  const [openActionsInfo, setActionsOpen] = React.useState(false)
   const [hoveredPlayer, setHoveredPlayer] = useState<IPlayer>();
 
   const [monsterList, setMonsterList] = useState<IMonster[]>([]);
@@ -140,9 +144,22 @@ const DetailedFight = (props: IProps) => {
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleClickOpenSetUpInfo = () => {
+    setUpOpen(true);
+  };
+  const handleCloseSetUpInfo = () => {
+    setUpOpen(false);
+  };
+
+  const handleClickOpenActionsInfo = () => {
+    setActionsOpen(true);
+  };
+  const handleCloseActionsInfo = () => {
+    setActionsOpen(false);
   };
 
   const onClick = (newSelectedPlayer: IPlayer): void => {
@@ -567,8 +584,10 @@ const DetailedFight = (props: IProps) => {
               <Typography sx={{ marginLeft: "32px" }} variant="h3">
                 Set Up
               </Typography>
-              <InfoOutlinedIcon sx={{ paddingLeft: "16px", color: "white " }} />
+              <InfoOutlinedIcon sx={{ paddingLeft: "16px", color: "white " }} onClick={handleClickOpenSetUpInfo}/>
+            
             </Box>
+            <SetUpInfo open={openSetUp} handleClose={handleCloseSetUpInfo} />
             <Button onClick={getMonsterWithRatingBtn}>Get Monsters</Button>
             <Button onClick={removeMonsters}>Remove Monsters</Button>
             <Box>
@@ -588,8 +607,9 @@ const DetailedFight = (props: IProps) => {
               <Typography sx={{ marginLeft: "32px" }} variant="h3">
                 Actions
               </Typography>
-              <InfoOutlinedIcon sx={{ paddingLeft: "16px", color: "white " }} />
+              <InfoOutlinedIcon sx={{ paddingLeft: "16px", color: "white " }} onClick={handleClickOpenActionsInfo} />
             </Box>
+            <ActionsInfo open={openActionsInfo} handleClose={handleCloseActionsInfo} />
 
             <Box>
               <TextField
