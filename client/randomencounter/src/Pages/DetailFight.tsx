@@ -46,7 +46,7 @@ const useStyle = makeStyles((theme) => ({
   textField: {
     marginLeft: "8px",
     marginRight: "8px",
-    width: "100%",
+    width: "50%",
   },
 }));
 
@@ -566,7 +566,7 @@ const DetailedFight = (props: IProps) => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            width: "40%",
+            width: "50%",
             marginLeft: "40px",
           }}
         >
