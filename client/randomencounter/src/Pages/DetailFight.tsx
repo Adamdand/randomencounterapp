@@ -486,7 +486,7 @@ const DetailedFight = (props: IProps) => {
             paddingTop: "24px",
           }}
         >
-          Monster Search
+          Detailed Fight
         </Typography>
       </Box>
       <Box
