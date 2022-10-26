@@ -12,6 +12,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import React from "react";
 import { IPlayer } from "../Context/Types";
 import DeathSaves from "./DeathSaves";
+import useResponsiveHelper from "../Hooks/useResponsiveHelper";
 
 interface IProps {
   data: IPlayer;
@@ -65,6 +66,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
   } = props;
   const classes = useStyles();
   const theme = useTheme();
+  const { isMobile} = useResponsiveHelper();
 
   const playerDead = (): boolean => {
     if (data.characterHealth !== null && data.characterMaxHealth !== null) {
@@ -144,7 +146,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
             <Typography>AC</Typography>
             <Typography>HP</Typography>
             <Typography>Lvl</Typography>
-            <Typography>Initiative</Typography>
+            <Typography>{`${isMobile? "Init": "Initiative"}`}</Typography>
           </Box>
         </Box>
         <Box sx={{ display: "flex", alignItems: "center", width: "150px" }}>
