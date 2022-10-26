@@ -10,6 +10,7 @@ import {
   InputLabel,
   CardMedia,
   Card,
+  collapseClasses,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useEffect, useState } from "react";
@@ -62,6 +63,18 @@ const useStyle = makeStyles((theme) => ({
       outline: "1px solid slategrey",
     },
   },
+  monsterInfo:{
+    width: "500px",
+    paddingTop: "16px",
+    display: "flex",
+    flexDirection: "column",
+    alignContent: "center",
+    justifyConent: "center",
+    alignItems: "center",
+    [theme.breakpoints.down("tablet")]: {
+      width: "100%",
+    },
+  }
 }));
 
 const MonsterSearch = (props: IProps) => {
@@ -149,7 +162,6 @@ const MonsterSearch = (props: IProps) => {
   return (
     <Box
       sx={{
-        // backgroundColor: "#FFD8D0",
         display: "flex",
         height: "100%",
         flexDirection: "column",
@@ -170,11 +182,6 @@ const MonsterSearch = (props: IProps) => {
       </Box>
       <Box
         className={classes.root}
-        // sx={{
-        //   display: "flex",
-        //   flexDirection: "row",
-        //   justifyContent: "center",
-        // }}
       >
         <Box>
           <FormControl sx={{ width: "250px" }}>
@@ -256,31 +263,9 @@ const MonsterSearch = (props: IProps) => {
             </Box>
           )}
         </Box>
-        {/* <Box
-                  sx={{
-                    position: "fixed",
-                    right: "0px",
-                    bottom: "25%",
-                    backgroundColor: "#E5BBBB",
-                    height: "300px",
-                    border: "1px solid red",
-                    borderRadius: "5px",
-                    overflow: "scroll",
-                  }}
-                > */}
         <Box>
           <Box
-            sx={{
-              width: "500px",
-              paddingTop: "16px",
-              display: "flex",
-              flexDirection: "column",
-              alignContent: "center",
-              justifyConent: "center",
-              alignItems: "center",
-              // backgroundColor: "#FFC8BD",
-              // height: `${monsterDetails.name !== "" ? "100%" : "74vh"}`,
-            }}
+            className={classes.monsterInfo}
           >
             <Typography
               sx={{ textDecoration: "underline", fontWeight: "bold" }}
