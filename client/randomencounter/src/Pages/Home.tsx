@@ -32,7 +32,7 @@ const useStyle = makeStyles((theme) => ({
   container: {
     scrollSnapType: "y mandatory",
   },
-  childTitle:{
+  childTitle: {
     backgroundColor: "transparent",
     paddingTop: "25%",
     scrollSnapAlign: "start",
@@ -97,12 +97,11 @@ const Home = (props: IProps) => {
               },
               {
                 children: (
-                  <Box
-                   className={classes.childTitle}
-                  >
-                    <Typography variant="h1" sx={{ color: "white", 
-                      textShadow: "1px 1px 2px black"
-                      }}>
+                  <Box className={classes.childTitle}>
+                    <Typography
+                      variant="h1"
+                      sx={{ color: "white", textShadow: "1px 1px 2px black" }}
+                    >
                       Search For Monsters
                     </Typography>
                   </Box>
@@ -113,7 +112,11 @@ const Home = (props: IProps) => {
                 children: (
                   <Box className={classes.childText}>
                     <Typography
-                      sx={{ backgroundColor: "transparent", color: "white",   textShadow: "1px 1px 2px black" }}
+                      sx={{
+                        backgroundColor: "transparent",
+                        color: "white",
+                        textShadow: "1px 1px 2px black",
+                      }}
                     >
                       <Box> Dont know which monster to use?</Box>
                       <Box>
@@ -129,13 +132,29 @@ const Home = (props: IProps) => {
                       variant="text"
                       sx={{
                         marginTop: "48px",
-                        backgroundColor: "white",
+                        backgroundColor: "black",
                         color: "black",
+                        "&:hover": {
+                          borderColor: "black",
+                          backgroundColor: "maroon",
+                          color: "white",
+                        },
                       }}
                       onClick={goToMonsterSearch}
                     >
-                      Go To Monster Search
-                      <ArrowForwardIcon sx={{ paddingLeft: "8px" }} />
+                      <Typography
+                        variant="body1"
+                        sx={{ color: "white", textShadow: "1px 1px 2px black" }}
+                      >
+                        Go To Monster Search
+                      </Typography>
+
+                      <ArrowForwardIcon
+                        sx={{
+                          paddingLeft: "8px",
+                          color: "white",
+                        }}
+                      />
                     </Button>
                   </Box>
                 ),
@@ -143,7 +162,6 @@ const Home = (props: IProps) => {
               },
             ]}
             style={{ width: "100%", height: window.screen.height }}
-            
           />
         </Box>
         <Box>
@@ -162,10 +180,11 @@ const Home = (props: IProps) => {
               },
               {
                 children: (
-                  <Box
-                  className={classes.childTitle}
-                  >
-                    <Typography variant="h1" sx={{ color: "white", textShadow: "1px 1px 2px black" }}>
+                  <Box className={classes.childTitle}>
+                    <Typography
+                      variant="h1"
+                      sx={{ color: "white", textShadow: "1px 1px 2px black" }}
+                    >
                       Quick Fight
                     </Typography>
                   </Box>
@@ -176,7 +195,11 @@ const Home = (props: IProps) => {
                 children: (
                   <Box className={classes.childText}>
                     <Typography
-                      sx={{ backgroundColor: "transparent", color: "white",  textShadow: "1px 1px 2px black" }}
+                      sx={{
+                        backgroundColor: "transparent",
+                        color: "white",
+                        textShadow: "1px 1px 2px black",
+                      }}
                     >
                       <Box>
                         Not sure how strong of a monster or how many monsters
@@ -197,15 +220,32 @@ const Home = (props: IProps) => {
                       </Box>
                     </Typography>
                     <Button
+                      variant="text"
                       sx={{
                         marginTop: "48px",
-                        backgroundColor: "white",
+                        backgroundColor: "black",
                         color: "black",
+                        "&:hover": {
+                          borderColor: "black",
+                          backgroundColor: "maroon",
+                          color: "white",
+                        },
                       }}
-                      onClick={goToQuickFight}
+                      onClick={goToMonsterSearch}
                     >
-                      Go To Quick Fight
-                      <ArrowForwardIcon sx={{ paddingLeft: "8px" }} />
+                      <Typography
+                        variant="body1"
+                        sx={{ color: "white", textShadow: "1px 1px 2px black" }}
+                      >
+                        Go To Quick Fight
+                      </Typography>
+
+                      <ArrowForwardIcon
+                        sx={{
+                          paddingLeft: "8px",
+                          color: "white",
+                        }}
+                      />
                     </Button>
                   </Box>
                 ),
@@ -231,10 +271,11 @@ const Home = (props: IProps) => {
               },
               {
                 children: (
-                  <Box
-                  className={classes.childTitle}
-                  >
-                    <Typography variant="h1" sx={{ color: "white",  textShadow: "1px 1px 2px black" }}>
+                  <Box className={classes.childTitle}>
+                    <Typography
+                      variant="h1"
+                      sx={{ color: "white", textShadow: "1px 1px 2px black" }}
+                    >
                       Detailed Fight
                     </Typography>
                   </Box>
@@ -245,7 +286,11 @@ const Home = (props: IProps) => {
                 children: (
                   <Box className={classes.childText}>
                     <Typography
-                      sx={{ backgroundColor: "transparent", color: "white",  textShadow: "1px 1px 2px black" }}
+                      sx={{
+                        backgroundColor: "transparent",
+                        color: "white",
+                        textShadow: "1px 1px 2px black",
+                      }}
                     >
                       <Box>
                         Having trouble keeping track of the initiative order?
@@ -275,15 +320,32 @@ const Home = (props: IProps) => {
                       </Box>
                     </Typography>
                     <Button
+                      variant="text"
                       sx={{
                         marginTop: "48px",
-                        backgroundColor: "white",
+                        backgroundColor: "black",
                         color: "black",
+                        "&:hover": {
+                          borderColor: "black",
+                          backgroundColor: "maroon",
+                          color: "white",
+                        },
                       }}
-                      onClick={goToQuickFight}
+                      onClick={goToMonsterSearch}
                     >
-                      Go To Detailed Fight
-                      <ArrowForwardIcon sx={{ paddingLeft: "8px" }} />
+                      <Typography
+                        variant="body1"
+                        sx={{ color: "white", textShadow: "1px 1px 2px black" }}
+                      >
+                        Go To Detailed Fight
+                      </Typography>
+
+                      <ArrowForwardIcon
+                        sx={{
+                          paddingLeft: "8px",
+                          color: "white",
+                        }}
+                      />
                     </Button>
                   </Box>
                 ),

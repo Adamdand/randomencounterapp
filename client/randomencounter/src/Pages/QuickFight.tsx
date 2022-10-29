@@ -277,8 +277,18 @@ const QuickFight = (props: IProps) => {
           //   },
           // }}
         />
-        <Button onClick={getMonsterWithRatingBtn}>
-          <Typography>Start Battle</Typography>
+        <Button
+          onClick={getMonsterWithRatingBtn}
+          sx={{
+            marginTop: "48px",
+            "&:hover": {
+              borderColor: "black",
+              backgroundColor: "maroon",
+              color: "white",
+            },
+          }}
+        >
+          <Typography sx={{}}>Start Battle</Typography>
         </Button>
         {monsterRatingList.length > 0 && randomMonsterTypeOne !== undefined && (
           <Box
@@ -292,21 +302,34 @@ const QuickFight = (props: IProps) => {
             <Box>
               <Typography>
                 you have encountered {randomMonsterTypeOne.quantity}
-                <span
-                  style={{ color: "red", fontWeight: "600", cursor: "pointer" }}
+                <Button
+                  sx={{
+                    color: "maroon",
+                    fontWeight: "600",
+                    cursor: "pointer",
+                    "&:hover": {
+                      borderColor: "black",
+                      backgroundColor: "maroon",
+                      color: "white",
+                    },
+                  }}
                   onClick={() => getMonsterDetails(randomMonsterTypeOne.index)}
                 >
-                  {" "}
                   {randomMonsterTypeOne?.name}{" "}
-                </span>
+                </Button>
                 {twoTypeOfMonsters && randomMonsterTypeTwo.quantity !== 0 && (
                   <>
                     and {randomMonsterTypeTwo.quantity}
-                    <span
-                      style={{
-                        color: "red",
+                    <Button
+                      sx={{
+                        color: "maroon",
                         fontWeight: "600",
                         cursor: "pointer",
+                        "&:hover": {
+                          borderColor: "black",
+                          backgroundColor: "maroon",
+                          color: "white",
+                        },
                       }}
                       onClick={() =>
                         getMonsterDetails(randomMonsterTypeTwo.index)
@@ -314,7 +337,7 @@ const QuickFight = (props: IProps) => {
                     >
                       {" "}
                       {randomMonsterTypeTwo.name}{" "}
-                    </span>
+                    </Button>
                   </>
                 )}
                 {monsterActivities[randomActivityNumber]}.

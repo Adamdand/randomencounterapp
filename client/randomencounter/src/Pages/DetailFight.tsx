@@ -48,19 +48,19 @@ const useStyle = makeStyles((theme) => ({
     marginRight: "8px",
     width: "50%",
   },
-  controls:{
+  controls: {
     display: "flex",
     flexDirection: "column",
     width: "50%",
-    paddingLeft:'0px',
+    paddingLeft: "0px",
     [theme.breakpoints.down("desktop")]: {
-      paddingLeft:'40px',
+      paddingLeft: "40px",
     },
     [theme.breakpoints.down("tablet")]: {
       width: "40%",
-      paddingLeft:'40px',
+      paddingLeft: "40px",
     },
-  }
+  },
 }));
 
 const DetailedFight = (props: IProps) => {
@@ -126,8 +126,8 @@ const DetailedFight = (props: IProps) => {
   const [selectedPlayer, setSelectedPlayer] = useState<IPlayer>(testList[0]);
   const [damageHealth, setDamageHealth] = useState<number>();
   const [open, setOpen] = React.useState(false);
-  const [openSetUp, setUpOpen] = React.useState(false)
-  const [openActionsInfo, setActionsOpen] = React.useState(false)
+  const [openSetUp, setUpOpen] = React.useState(false);
+  const [openActionsInfo, setActionsOpen] = React.useState(false);
   const [hoveredPlayer, setHoveredPlayer] = useState<IPlayer>();
 
   const [monsterList, setMonsterList] = useState<IMonster[]>([]);
@@ -575,9 +575,7 @@ const DetailedFight = (props: IProps) => {
             />
           </Box>
         </Box>
-        <Box
-          className={classes.controls}
-        >
+        <Box className={classes.controls}>
           <Box>
             <Typography variant="h2">Controls</Typography>
           </Box>
@@ -592,14 +590,47 @@ const DetailedFight = (props: IProps) => {
               <Typography sx={{ marginLeft: "32px" }} variant="h3">
                 Set Up
               </Typography>
-              <InfoOutlinedIcon sx={{ paddingLeft: "16px", color: "white " }} onClick={handleClickOpenSetUpInfo}/>
-            
+              <InfoOutlinedIcon
+                sx={{ paddingLeft: "16px", color: "white", cursor: "pointer" }}
+                onClick={handleClickOpenSetUpInfo}
+              />
             </Box>
             <SetUpInfo open={openSetUp} handleClose={handleCloseSetUpInfo} />
-            <Button onClick={getMonsterWithRatingBtn}>Get Monsters</Button>
-            <Button onClick={removeMonsters}>Remove Monsters</Button>
+            <Button
+              sx={{
+                "&:hover": {
+                  borderColor: "black",
+                  backgroundColor: "maroon",
+                  color: "white",
+                },
+              }}
+              onClick={getMonsterWithRatingBtn}
+            >
+              Get Monsters
+            </Button>
+            <Button
+              sx={{
+                "&:hover": {
+                  borderColor: "black",
+                  backgroundColor: "maroon",
+                  color: "white",
+                },
+              }}
+              onClick={removeMonsters}
+            >
+              Remove Monsters
+            </Button>
             <Box>
-              <Button onClick={orderListOnInitative}>
+              <Button
+                sx={{
+                  "&:hover": {
+                    borderColor: "black",
+                    backgroundColor: "maroon",
+                    color: "white",
+                  },
+                }}
+                onClick={orderListOnInitative}
+              >
                 Order List Based On Initiative
               </Button>
             </Box>
@@ -615,9 +646,15 @@ const DetailedFight = (props: IProps) => {
               <Typography sx={{ marginLeft: "32px" }} variant="h3">
                 Actions
               </Typography>
-              <InfoOutlinedIcon sx={{ paddingLeft: "16px", color: "white " }} onClick={handleClickOpenActionsInfo} />
+              <InfoOutlinedIcon
+                sx={{ paddingLeft: "16px", color: "white", cursor: "pointer" }}
+                onClick={handleClickOpenActionsInfo}
+              />
             </Box>
-            <ActionsInfo open={openActionsInfo} handleClose={handleCloseActionsInfo} />
+            <ActionsInfo
+              open={openActionsInfo}
+              handleClose={handleCloseActionsInfo}
+            />
 
             <Box>
               <TextField
@@ -635,6 +672,13 @@ const DetailedFight = (props: IProps) => {
             </Box>
             <Box>
               <Button
+                sx={{
+                  "&:hover": {
+                    borderColor: "black",
+                    backgroundColor: "maroon",
+                    color: "white",
+                  },
+                }}
                 onClick={() => {
                   damagePlayer();
                 }}
@@ -643,6 +687,13 @@ const DetailedFight = (props: IProps) => {
                 <ArrowDownwardIcon sx={{ color: "red" }} />
               </Button>
               <Button
+                sx={{
+                  "&:hover": {
+                    borderColor: "black",
+                    backgroundColor: "maroon",
+                    color: "white",
+                  },
+                }}
                 onClick={() => {
                   healPlayer();
                 }}
@@ -651,7 +702,16 @@ const DetailedFight = (props: IProps) => {
                 <ArrowUpwardIcon sx={{ color: "green" }} />
               </Button>
 
-              <Button onClick={turnOver}>
+              <Button
+                sx={{
+                  "&:hover": {
+                    borderColor: "black",
+                    backgroundColor: "maroon",
+                    color: "white",
+                  },
+                }}
+                onClick={turnOver}
+              >
                 Next Turn
                 <ArrowForwardIosIcon sx={{ color: "black" }} />
               </Button>
@@ -682,6 +742,14 @@ const DetailedFight = (props: IProps) => {
                     >
                       you have encountered {randomMonsterTypeOne.quantity}
                       <Button
+                        sx={{
+                          fontWeight: "600",
+                          "&:hover": {
+                            borderColor: "black",
+                            backgroundColor: "maroon",
+                            color: "white",
+                          },
+                        }}
                         onClick={() => {
                           getMonsterDetails(randomMonsterTypeOne.index);
                         }}
@@ -693,6 +761,14 @@ const DetailedFight = (props: IProps) => {
                           <Typography>
                             and {randomMonsterTypeTwo.quantity}
                             <Button
+                              sx={{
+                                fontWeight: "600",
+                                "&:hover": {
+                                  borderColor: "black",
+                                  backgroundColor: "maroon",
+                                  color: "white",
+                                },
+                              }}
                               onClick={() => {
                                 getMonsterDetails(randomMonsterTypeTwo.index);
                               }}
