@@ -735,15 +735,12 @@ const DetailedFight = (props: IProps) => {
               randomMonsterTypeOne !== undefined && (
                 <Box>
                   <Box>
-                    <Typography
-                      flexDirection="row"
-                      alignItems="center"
-                      style={{ cursor: "pointer" }}
-                    >
+                    <Typography flexDirection="row" alignItems="center">
                       you have encountered {randomMonsterTypeOne.quantity}
                       <Button
                         sx={{
                           fontWeight: "600",
+                          cursor: "pointer",
                           "&:hover": {
                             borderColor: "black",
                             backgroundColor: "maroon",
@@ -762,6 +759,7 @@ const DetailedFight = (props: IProps) => {
                             and {randomMonsterTypeTwo.quantity}
                             <Button
                               sx={{
+                                cursor: "pointer",
                                 fontWeight: "600",
                                 "&:hover": {
                                   borderColor: "black",
