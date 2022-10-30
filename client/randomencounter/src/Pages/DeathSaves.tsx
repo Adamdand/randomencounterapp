@@ -3,6 +3,7 @@ import { makeStyles } from "@mui/styles";
 
 import React, { useState } from "react";
 import { IPlayer } from "../Context/Types";
+import useResponsiveHelper from "../Hooks/useResponsiveHelper";
 
 interface IProps {
   isDead: boolean;
@@ -22,6 +23,7 @@ const DeathSaves: React.FC<IProps> = (props: IProps) => {
   const classes = useStyles();
   const theme = useTheme();
   const [selectedValue, setSelectedValue] = React.useState("a");
+  const { isMobile } = useResponsiveHelper();
 
   const failedSave = (event: React.ChangeEvent<HTMLInputElement>) => {
     failADeathSave(Number(event.target.value));
@@ -38,10 +40,9 @@ const DeathSaves: React.FC<IProps> = (props: IProps) => {
           display: "flex",
           flexDirection: "column",
           alignItems: "flex-end",
-          paddingRight: "10px",
         }}
       >
-        Saving Throws
+        Saving Throws:
       </Box>
       <Box
         sx={{
@@ -52,7 +53,7 @@ const DeathSaves: React.FC<IProps> = (props: IProps) => {
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>
           {" "}
-          <Box>Success:</Box>
+          <Box>Save:</Box>
           <Box>
             <Radio
               checked={props.successSaves > 0}
@@ -61,6 +62,7 @@ const DeathSaves: React.FC<IProps> = (props: IProps) => {
               name="name3"
               inputProps={{ "aria-label": "1" }}
               sx={{
+                padding: "0px",
                 color: "white",
                 "&.Mui-checked": {
                   color: "green",
@@ -75,6 +77,7 @@ const DeathSaves: React.FC<IProps> = (props: IProps) => {
               inputProps={{ "aria-label": "2" }}
               sx={{
                 color: "white",
+                padding: "0px",
                 "&.Mui-checked": {
                   color: "green",
                 },
@@ -88,6 +91,7 @@ const DeathSaves: React.FC<IProps> = (props: IProps) => {
               inputProps={{ "aria-label": "2" }}
               sx={{
                 color: "white",
+                padding: "0px",
                 "&.Mui-checked": {
                   color: "green",
                 },
@@ -97,7 +101,7 @@ const DeathSaves: React.FC<IProps> = (props: IProps) => {
         </Box>
         <Box sx={{ display: "flex", alignItems: "center" }}>
           {" "}
-          <Box>Failed:</Box>
+          <Box>Fail:</Box>
           <Box>
             <Radio
               checked={props.failSaves > 0}
@@ -107,6 +111,7 @@ const DeathSaves: React.FC<IProps> = (props: IProps) => {
               inputProps={{ "aria-label": "1" }}
               sx={{
                 color: "white",
+                padding: "0px",
                 "&.Mui-checked": {
                   color: "red",
                 },
@@ -120,6 +125,7 @@ const DeathSaves: React.FC<IProps> = (props: IProps) => {
               inputProps={{ "aria-label": "2" }}
               sx={{
                 color: "white",
+                padding: "0px",
                 "&.Mui-checked": {
                   color: "red",
                 },
@@ -133,6 +139,7 @@ const DeathSaves: React.FC<IProps> = (props: IProps) => {
               inputProps={{ "aria-label": "2" }}
               sx={{
                 color: "white",
+                padding: "0px",
                 "&.Mui-checked": {
                   color: "red",
                 },

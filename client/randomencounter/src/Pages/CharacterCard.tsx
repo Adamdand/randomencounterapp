@@ -33,7 +33,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: "1px solid maroon",
     backgroundColor: "wheat",
     borderRadius: "4px",
-    [theme.breakpoints.only("mobile")]: { marginRight: "0px" },
+    [theme.breakpoints.only("mobile")]: {
+      marginRight: "0px",
+      height: "140px",
+    },
     "&:hover": {
       borderColor: theme.palette.primary.main,
       backgroundColor: "maroon",
@@ -66,7 +69,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
   } = props;
   const classes = useStyles();
   const theme = useTheme();
-  const { isMobile} = useResponsiveHelper();
+  const { isMobile } = useResponsiveHelper();
 
   const playerDead = (): boolean => {
     if (data.characterHealth !== null && data.characterMaxHealth !== null) {
@@ -128,6 +131,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
       <Box
         display="flex"
         flexDirection="row"
+        paddingTop={playerDead() ? (isMobile ? "0px" : "38px") : "0px"}
         justifyContent="space-evenly"
         alignItems="center"
         style={{ cursor: "pointer" }}
@@ -146,7 +150,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
             <Typography>AC</Typography>
             <Typography>HP</Typography>
             <Typography>Lvl</Typography>
-            <Typography>{`${isMobile? "Init": "Initiative"}`}</Typography>
+            <Typography>{`${isMobile ? "Init" : "Initiative"}`}</Typography>
           </Box>
         </Box>
         <Box sx={{ display: "flex", alignItems: "center", width: "150px" }}>
