@@ -21,6 +21,7 @@ import { defaultMonsterDetails } from "../Context/DefaultTypes";
 import MonsterDetails from "./Common/MonsterDetails";
 import ActionsInfo from "./InfoPages/ActionsInfo";
 import SetUpInfo from "./InfoPages/SetUpInfo";
+import useResponsiveHelper from "../Hooks/useResponsiveHelper";
 
 interface IProps {
   gameType: string;
@@ -126,6 +127,7 @@ const DetailedFight = (props: IProps) => {
   const [selectedPlayer, setSelectedPlayer] = useState<IPlayer>(testList[0]);
   const [damageHealth, setDamageHealth] = useState<number>();
   const [open, setOpen] = React.useState(false);
+  const { isMobile } = useResponsiveHelper();
   const [openSetUp, setUpOpen] = React.useState(false);
   const [openActionsInfo, setActionsOpen] = React.useState(false);
   const [hoveredPlayer, setHoveredPlayer] = useState<IPlayer>();
@@ -528,8 +530,10 @@ const DetailedFight = (props: IProps) => {
         }}
       >
         <Box sx={{ width: "50%" }}>
-          <Box>
-            <Typography variant="h2">Characters in Fight:</Typography>
+          <Box sx={{ height: "32px" }}>
+            <Typography variant="h2">
+              {isMobile ? "Characters" : "Characters in Fight"}
+            </Typography>
           </Box>
 
           {testList.map((characters) => (
@@ -576,7 +580,7 @@ const DetailedFight = (props: IProps) => {
           </Box>
         </Box>
         <Box className={classes.controls}>
-          <Box>
+          <Box sx={{ height: "32px" }}>
             <Typography variant="h2">Controls</Typography>
           </Box>
           <Box sx={{ border: "1px dashed grey" }}>
