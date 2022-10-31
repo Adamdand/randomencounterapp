@@ -4,6 +4,7 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
 import { CustomerDataContext } from "../Context/CustomerContext";
@@ -63,6 +64,24 @@ const useStyle = makeStyles((theme) => ({
     },
   },
 }));
+
+const damageLines = [
+  "Ouch!",
+  "Stop that!",
+  "Hey!",
+  "Uuug!",
+  "Stop!",
+  "I'll get you for that!",
+  "I'll remember this!",
+];
+const healingLines = [
+  "Thank you!",
+  "Thanks friend",
+  "Apreciated!",
+  "I feel better now!",
+  "Right on!",
+  "Hell yah!",
+];
 
 const DetailedFight = (props: IProps) => {
   const { gameType } = props;
@@ -132,6 +151,9 @@ const DetailedFight = (props: IProps) => {
   const [openActionsInfo, setActionsOpen] = React.useState(false);
   const [hoveredPlayer, setHoveredPlayer] = useState<IPlayer>();
 
+  const [isDamageVisible, setDamageVisible] = React.useState(false);
+  const [isHealingVisible, setHealingVisible] = React.useState(false);
+
   const [monsterList, setMonsterList] = useState<IMonster[]>([]);
   const [monsterRatingList, setMonsterRatingList] = useState<IMonster[]>([]);
 
@@ -155,6 +177,23 @@ const DetailedFight = (props: IProps) => {
       url: "null",
     });
   const [twoTypeOfMonsters, settwoTypeOfMonsters] = useState<boolean>(false);
+
+  const showDamage = () => {
+    setDamageVisible(true);
+    setTimeout(() => {
+      setDamageVisible(false);
+    }, 500);
+  };
+  const getRandomText = (lineOptions: string[]): string => {
+    const numOptions = lineOptions.length - 1;
+    return lineOptions[Math.floor(Math.random() * (numOptions + 1))];
+  };
+  const showHealing = () => {
+    setHealingVisible(true);
+    setTimeout(() => {
+      setHealingVisible(false);
+    }, 500);
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -234,6 +273,7 @@ const DetailedFight = (props: IProps) => {
           player.characterName === selectedPlayer.characterName &&
           player.characterHealth !== null
         ) {
+          showDamage();
           return {
             ...player,
             characterHealth: player.characterHealth - damageHealth,
@@ -253,6 +293,7 @@ const DetailedFight = (props: IProps) => {
           player.characterName === selectedPlayer.characterName &&
           player.characterHealth !== null
         ) {
+          showHealing();
           return {
             ...player,
             characterHealth: player.characterHealth + damageHealth,
@@ -529,6 +570,44 @@ const DetailedFight = (props: IProps) => {
           alignItems: "flex-start",
         }}
       >
+        {isHealingVisible && (
+          <Box
+            sx={{
+              display: "flex",
+              position: "fixed",
+              top: "50%",
+              right: "50%",
+              justifyContent: "center",
+              zIndex: "9999",
+            }}
+          >
+            {/* <Box>
+            <FavoriteIcon fontSize="large" sx={{ color: "red" }} />
+          </Box> */}
+            <Box sx={{ color: "green", fontSize: "24px", fontWeight: "bold" }}>
+              {getRandomText(healingLines)}
+            </Box>
+          </Box>
+        )}
+        {isDamageVisible && (
+          <Box
+            sx={{
+              display: "flex",
+              position: "fixed",
+              top: "50%",
+              right: "50%",
+              justifyContent: "center",
+              zIndex: "9999",
+            }}
+          >
+            {/* <Box>
+            <FavoriteIcon fontSize="large" sx={{ color: "blue" }} />
+          </Box> */}
+            <Box sx={{ color: "red", fontSize: "24px", fontWeight: "bold" }}>
+              {getRandomText(damageLines)}
+            </Box>
+          </Box>
+        )}
         <Box sx={{ width: "50%" }}>
           <Box sx={{ height: "32px" }}>
             <Typography variant="h2">
