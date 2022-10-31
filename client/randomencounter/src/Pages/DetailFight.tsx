@@ -58,8 +58,8 @@ const useStyle = makeStyles((theme) => ({
       paddingLeft: "40px",
     },
     [theme.breakpoints.down("tablet")]: {
-      width: "40%",
-      paddingLeft: "40px",
+      width: "50%",
+      paddingLeft: "16px",
     },
   },
 }));
@@ -575,15 +575,21 @@ const DetailedFight = (props: IProps) => {
               display: "flex",
               position: "fixed",
               top: "50%",
-              right: "50%",
-              justifyContent: "center",
+              left: "45%",
+              justifyContent: "space-around",
               zIndex: "9999",
             }}
           >
             {/* <Box>
             <FavoriteIcon fontSize="large" sx={{ color: "red" }} />
           </Box> */}
-            <Box sx={{ color: "green", fontSize: "24px", fontWeight: "bold" }}>
+            <Box
+              sx={{
+                color: "green",
+                fontSize: isMobile ? "24px" : "50px",
+                fontWeight: "bold",
+              }}
+            >
               {getRandomText(healingLines)}
             </Box>
           </Box>
@@ -594,15 +600,21 @@ const DetailedFight = (props: IProps) => {
               display: "flex",
               position: "fixed",
               top: "50%",
-              right: "50%",
-              justifyContent: "center",
+              left: "45%",
+              justifyContent: "space-around",
               zIndex: "9999",
             }}
           >
             {/* <Box>
             <FavoriteIcon fontSize="large" sx={{ color: "blue" }} />
           </Box> */}
-            <Box sx={{ color: "red", fontSize: "24px", fontWeight: "bold" }}>
+            <Box
+              sx={{
+                color: "red",
+                fontSize: isMobile ? "24px" : "50px",
+                fontWeight: "bold",
+              }}
+            >
               {getRandomText(damageLines)}
             </Box>
           </Box>

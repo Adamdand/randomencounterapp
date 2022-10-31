@@ -26,8 +26,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: "wheat",
     borderRadius: "4px",
     [theme.breakpoints.only("mobile")]: {
-      marginRight: "0px",
       height: "140px",
+      padding: "4px",
     },
     "&:hover": {
       borderColor: theme.palette.primary.main,
@@ -117,6 +117,9 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
             bottom: "0%",
             width: "20px",
             height: "20px",
+            [theme.breakpoints.only("mobile")]: {
+              left: "45%",
+            },
           }}
         />
       </Box>
