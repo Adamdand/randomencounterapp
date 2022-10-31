@@ -1,8 +1,7 @@
 import { Box, Radio, Theme, Typography, useTheme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
-import React, { useState } from "react";
-import { IPlayer } from "../Context/Types";
+import React from "react";
 import useResponsiveHelper from "../Hooks/useResponsiveHelper";
 
 interface IProps {

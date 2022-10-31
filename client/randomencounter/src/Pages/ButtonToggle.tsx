@@ -18,7 +18,14 @@ const ButtonToggle = (props: IProps) => {
   const classes = useStyles();
 
   return (
-    <Box sx={{ diaplay:'flex', flexDirection:'row',width:'100%',backgroundColor: "maroon" }}>
+    <Box
+      sx={{
+        diaplay: "flex",
+        flexDirection: "row",
+        width: "100%",
+        backgroundColor: "maroon",
+      }}
+    >
       <ToggleButtonGroup
         value={gameType}
         exclusive
@@ -30,7 +37,6 @@ const ButtonToggle = (props: IProps) => {
           className={classes.toggleButton}
           aria-label="home"
         >
-         
           <Typography color="white">Home</Typography>
         </ToggleButton>
         <ToggleButton value="Monster Search" aria-label="monster search">

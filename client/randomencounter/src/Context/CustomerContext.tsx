@@ -1,6 +1,6 @@
-import React, { createContext, useState } from "react";
+import React, { createContext } from "react";
 import { defaultUserData } from "../API/DummyData";
-import { IPlayer, IUserData } from "./Types";
+import { IPlayer } from "./Types";
 
 interface IProps {
   children?: React.ReactNode;

@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardMedia,
-  Theme,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Box, CardMedia, Theme, Typography, useTheme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import ClearIcon from "@mui/icons-material/Clear";
 import React from "react";

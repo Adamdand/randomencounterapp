@@ -1,10 +1,4 @@
-import {
-  Typography,
-  TextField,
-  Button,
-  CircularProgress,
-  Box,
-} from "@mui/material";
+import { Typography, TextField, Button, Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";

@@ -1,16 +1,11 @@
 import {
   Typography,
-  TextField,
   Button,
-  CircularProgress,
   Box,
   Select,
   MenuItem,
   FormControl,
   InputLabel,
-  CardMedia,
-  Card,
-  collapseClasses,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useEffect, useState } from "react";
@@ -63,7 +58,7 @@ const useStyle = makeStyles((theme) => ({
       outline: "1px solid slategrey",
     },
   },
-  monsterInfo:{
+  monsterInfo: {
     width: "500px",
     paddingTop: "16px",
     display: "flex",
@@ -74,7 +69,7 @@ const useStyle = makeStyles((theme) => ({
     [theme.breakpoints.down("tablet")]: {
       width: "100%",
     },
-  }
+  },
 }));
 
 const MonsterSearch = (props: IProps) => {
@@ -180,9 +175,7 @@ const MonsterSearch = (props: IProps) => {
           Monster Search
         </Typography>
       </Box>
-      <Box
-        className={classes.root}
-      >
+      <Box className={classes.root}>
         <Box>
           <FormControl sx={{ width: "250px" }}>
             <InputLabel id="demo-simple-select-label">Monster</InputLabel>
@@ -264,9 +257,7 @@ const MonsterSearch = (props: IProps) => {
           )}
         </Box>
         <Box>
-          <Box
-            className={classes.monsterInfo}
-          >
+          <Box className={classes.monsterInfo}>
             <Typography
               sx={{ textDecoration: "underline", fontWeight: "bold" }}
             >

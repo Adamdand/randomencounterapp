@@ -1,6 +1,5 @@
-import { accordionSummaryClasses } from "@mui/material";
 import axios, { AxiosResponse } from "axios";
-import { IMonster, IMonsterDetails, IMonsterList } from "../Context/Types";
+import { IMonster, IMonsterDetails } from "../Context/Types";
 
 const monsterAPI = {
   getAllMonsterAxios: async (): Promise<IMonster[]> => {

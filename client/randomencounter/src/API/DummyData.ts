@@ -1,4 +1,3 @@
-import React, { createContext } from "react";
 import { IPlayer } from "../Context/Types";
 
 export const defaultUserData = [

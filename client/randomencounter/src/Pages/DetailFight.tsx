@@ -15,7 +15,6 @@ import {
   IRandomMonster,
 } from "../Context/Types";
 import CharacterCard from "./CharacterCard";
-import { defaultUserData } from "../API/DummyData";
 import CreateNewPlayer from "./CreateNewPlayer";
 import monsterAPIs from "../API/monsterAPI";
 import { defaultMonsterDetails } from "../Context/DefaultTypes";

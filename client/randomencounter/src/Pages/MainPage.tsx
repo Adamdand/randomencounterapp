@@ -1,29 +1,9 @@
-import {
-  Grid,
-  Typography,
-  TextField,
-  Button,
-  CircularProgress,
-  Box,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  AppBar,
-  CardContent,
-  CardMedia,
-  Card,
-} from "@mui/material";
+import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import useLoading from "../Hooks/useLoading";
-import {
-  IMonster,
-  IMonsterDetails,
-  IMonsterList,
-  IRandomMonster,
-} from "../Context/Types";
+import { IMonster, IMonsterDetails, IRandomMonster } from "../Context/Types";
 import monsterAPIs from "../API/monsterAPI";
 import { defaultMonsterDetails } from "../Context/DefaultTypes";
 import ButtonToggle from "./ButtonToggle";
