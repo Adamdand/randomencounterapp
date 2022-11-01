@@ -577,7 +577,7 @@ const DetailedFight = (props: IProps) => {
               top: "50%",
               left: "45%",
               justifyContent: "space-around",
-              zIndex: "9999",
+              zIndex: 90,
             }}
           >
             {/* <Box>
@@ -602,7 +602,7 @@ const DetailedFight = (props: IProps) => {
               top: "50%",
               left: "45%",
               justifyContent: "space-around",
-              zIndex: "9999",
+              zIndex: 90,
             }}
           >
             {/* <Box>
@@ -640,6 +640,8 @@ const DetailedFight = (props: IProps) => {
                 isSelected={
                   characters.characterName === selectedPlayer?.characterName
                 }
+                isHealed={isHealingVisible}
+                isDamaged={isDamageVisible}
               />
             </Box>
           ))}

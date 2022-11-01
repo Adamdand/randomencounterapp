@@ -13,6 +13,8 @@ interface IProps {
   failADeathSave: (num: number) => void;
   removePlayer: (playerToDelete: string) => void;
   isSelected: boolean;
+  isHealed: boolean;
+  isDamaged: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -58,6 +60,8 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
     succeedADeathSave,
     failADeathSave,
     removePlayer,
+    isHealed,
+    isDamaged,
   } = props;
   const classes = useStyles();
   const theme = useTheme();
@@ -105,123 +109,171 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
         color: isSelected ? "white" : "",
       }}
     >
-      <Box
-        sx={{ height: "10px" }}
-        onClick={() => removePlayer(data.characterName)}
-      >
-        <ClearIcon
-          sx={{
-            zIndex: 999,
-            position: "relative",
-            left: "50%",
-            bottom: "0%",
-            width: "20px",
-            height: "20px",
-            [theme.breakpoints.only("mobile")]: {
-              left: "45%",
-            },
-          }}
-        />
-      </Box>
-      <Box
-        display="flex"
-        flexDirection="row"
-        paddingTop={playerDead() ? (isMobile ? "0px" : "38px") : "0px"}
-        justifyContent="space-evenly"
-        alignItems="center"
-        style={{ cursor: "pointer" }}
-        onClick={() => onClick(data)}
-      >
+      {isHealed && isSelected && (
         <Box
           sx={{
-            display: "flex",
-            alignItems: "center",
-            width: "80px",
-            zindex: 50,
+            position: "relative",
+            zindex: 30,
+            height: "0px",
+            width: "100%",
           }}
         >
-          <Box sx={{ wordWrap: "break-word", textAlign: "left" }}>
-            <Typography>Name</Typography>
-            <Typography>AC</Typography>
-            <Typography>HP</Typography>
-            <Typography>Lvl</Typography>
-            <Typography>{`${isMobile ? "Init" : "Initiative"}`}</Typography>
-          </Box>
+          <CardMedia
+            sx={{
+              color: "white",
+              fontSize: "24px",
+              height: "190px",
+              backgroundColor: "green",
+              opacity: "0.5",
+            }}
+          >
+            {}
+          </CardMedia>
         </Box>
-        <Box sx={{ display: "flex", alignItems: "center", width: "150px" }}>
-          <Box sx={{ wordWrap: "break-word", textAlign: "left" }}>
-            <Typography
-              sx={{ fontWeight: "bolder", textDecoration: "underline" }}
-            >
-              {data.characterName}
-            </Typography>
-            <Typography>{data.characterAC}</Typography>
-            <Box sx={{ display: "flex", flexDirection: "row" }}>
-              <Typography sx={{ color: getHealthColours, fontWeight: "bold" }}>
-                {data.characterHealth}
-              </Typography>
-              <Typography sx={{ paddingLeft: "4px" }}>
-                / {data.characterMaxHealth}
-              </Typography>
+      )}
+      {isDamaged && isSelected && (
+        <Box
+          sx={{
+            position: "relative",
+            zindex: 30,
+            height: "0px",
+            width: "100%",
+          }}
+        >
+          <CardMedia
+            sx={{
+              color: "white",
+              fontSize: "24px",
+              height: "190px",
+              backgroundColor: "red",
+              opacity: "0.5",
+            }}
+          >
+            {}
+          </CardMedia>
+        </Box>
+      )}
+      <Box>
+        <Box
+          sx={{ height: "10px" }}
+          onClick={() => removePlayer(data.characterName)}
+        >
+          <ClearIcon
+            sx={{
+              zIndex: 20,
+              position: "relative",
+              left: "50%",
+              bottom: "0%",
+              width: "20px",
+              height: "20px",
+              [theme.breakpoints.only("mobile")]: {
+                left: "45%",
+              },
+            }}
+          />
+        </Box>
+        <Box
+          display="flex"
+          flexDirection="row"
+          paddingTop={playerDead() ? (isMobile ? "0px" : "38px") : "0px"}
+          justifyContent="space-evenly"
+          alignItems="center"
+          style={{ cursor: "pointer" }}
+          onClick={() => onClick(data)}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              width: "80px",
+              zindex: 10,
+            }}
+          >
+            <Box sx={{ wordWrap: "break-word", textAlign: "left" }}>
+              <Typography>Name</Typography>
+              <Typography>AC</Typography>
+              <Typography>HP</Typography>
+              <Typography>Lvl</Typography>
+              <Typography>{`${isMobile ? "Init" : "Initiative"}`}</Typography>
             </Box>
+          </Box>
+          <Box sx={{ display: "flex", alignItems: "center", width: "150px" }}>
+            <Box sx={{ wordWrap: "break-word", textAlign: "left" }}>
+              <Typography
+                sx={{ fontWeight: "bolder", textDecoration: "underline" }}
+              >
+                {data.characterName}
+              </Typography>
+              <Typography>{data.characterAC}</Typography>
+              <Box sx={{ display: "flex", flexDirection: "row" }}>
+                <Typography
+                  sx={{ color: getHealthColours, fontWeight: "bold" }}
+                >
+                  {data.characterHealth}
+                </Typography>
+                <Typography sx={{ paddingLeft: "4px" }}>
+                  / {data.characterMaxHealth}
+                </Typography>
+              </Box>
 
-            <Typography>{data.characterLevel}</Typography>
-            <Typography>{data.characterInitative}</Typography>
+              <Typography>{data.characterLevel}</Typography>
+              <Typography>{data.characterInitative}</Typography>
+            </Box>
           </Box>
-        </Box>
-        <Box sx={{ width: "200px" }}>
-          {playerDead() && (
-            <DeathSaves
-              isDead={true}
-              successSaves={data.successSaves}
-              failSaves={data.failSaves}
-              succeedADeathSave={succeedADeathSave}
-              failADeathSave={failADeathSave}
-            />
-          )}
-          {(getHealthColours() === "green" ||
-            getHealthColours() === "blue") && (
-            <Box sx={{}}>
-              <CardMedia
-                component="img"
-                height="100%"
-                image={
-                  data.type === "human"
-                    ? "smilePics/happy.png"
-                    : "smilePics/happyMonster.png"
-                }
-                alt="monster image"
+          <Box sx={{ width: "200px" }}>
+            {playerDead() && (
+              <DeathSaves
+                isDead={true}
+                successSaves={data.successSaves}
+                failSaves={data.failSaves}
+                succeedADeathSave={succeedADeathSave}
+                failADeathSave={failADeathSave}
               />
-            </Box>
-          )}
-          {getHealthColours() === "orange" && (
-            <Box sx={{}}>
-              <CardMedia
-                component="img"
-                height="100%"
-                image={
-                  data.type === "human"
-                    ? "smilePics/medium.png"
-                    : "smilePics/mediumMonster.png"
-                }
-                alt="monster image"
-              />
-            </Box>
-          )}
-          {getHealthColours() === "red" && playerDead() === false && (
-            <Box sx={{}}>
-              <CardMedia
-                component="img"
-                height="100%"
-                image={
-                  data.type === "human"
-                    ? "smilePics/sad.png"
-                    : "smilePics/sadMonster.png"
-                }
-                alt="monster image"
-              />
-            </Box>
-          )}
+            )}
+            {(getHealthColours() === "green" ||
+              getHealthColours() === "blue") && (
+              <Box sx={{}}>
+                <CardMedia
+                  component="img"
+                  height="100%"
+                  image={
+                    data.type === "human"
+                      ? "smilePics/happy.png"
+                      : "smilePics/happyMonster.png"
+                  }
+                  alt="monster image"
+                />
+              </Box>
+            )}
+            {getHealthColours() === "orange" && (
+              <Box sx={{}}>
+                <CardMedia
+                  component="img"
+                  height="100%"
+                  image={
+                    data.type === "human"
+                      ? "smilePics/medium.png"
+                      : "smilePics/mediumMonster.png"
+                  }
+                  alt="monster image"
+                />
+              </Box>
+            )}
+            {getHealthColours() === "red" && playerDead() === false && (
+              <Box sx={{}}>
+                <CardMedia
+                  component="img"
+                  height="100%"
+                  image={
+                    data.type === "human"
+                      ? "smilePics/sad.png"
+                      : "smilePics/sadMonster.png"
+                  }
+                  alt="monster image"
+                />
+              </Box>
+            )}
+          </Box>
         </Box>
       </Box>
     </Box>
