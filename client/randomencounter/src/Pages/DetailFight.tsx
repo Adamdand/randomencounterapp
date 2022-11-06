@@ -150,8 +150,10 @@ const DetailedFight = (props: IProps) => {
   const [openActionsInfo, setActionsOpen] = React.useState(false);
   const [hoveredPlayer, setHoveredPlayer] = useState<IPlayer>();
 
-  const [isDamageVisible, setDamageVisible] = React.useState(false);
-  const [isHealingVisible, setHealingVisible] = React.useState(false);
+  const [isDamageOneVisible, setDamageOneVisible] = React.useState(false);
+  const [isDamageTwoVisible, setDamageTwoVisible] = React.useState(false);
+  const [isHealingOneVisible, setHealingOneVisible] = React.useState(false);
+  const [isHealingTwoVisible, setHealingTwoVisible] = React.useState(false);
 
   const [monsterList, setMonsterList] = useState<IMonster[]>([]);
   const [monsterRatingList, setMonsterRatingList] = useState<IMonster[]>([]);
@@ -177,21 +179,33 @@ const DetailedFight = (props: IProps) => {
     });
   const [twoTypeOfMonsters, settwoTypeOfMonsters] = useState<boolean>(false);
 
-  const showDamage = () => {
-    setDamageVisible(true);
+  const showDamageOne = () => {
+    setDamageOneVisible(true);
     setTimeout(() => {
-      setDamageVisible(false);
-    }, 500);
+      setDamageOneVisible(false);
+    }, 250);
+  };
+  const showDamageTwo = () => {
+    setDamageTwoVisible(true);
+    setTimeout(() => {
+      setDamageTwoVisible(false);
+    }, 250);
   };
   const getRandomText = (lineOptions: string[]): string => {
     const numOptions = lineOptions.length - 1;
     return lineOptions[Math.floor(Math.random() * (numOptions + 1))];
   };
-  const showHealing = () => {
-    setHealingVisible(true);
+  const showHealingOne = () => {
+    setHealingOneVisible(true);
     setTimeout(() => {
-      setHealingVisible(false);
-    }, 500);
+      setHealingOneVisible(false);
+    }, 250);
+  };
+  const showHealingTwo = () => {
+    setHealingTwoVisible(true);
+    setTimeout(() => {
+      setHealingTwoVisible(false);
+    }, 250);
   };
 
   const handleClickOpen = () => {
@@ -272,7 +286,8 @@ const DetailedFight = (props: IProps) => {
           player.characterName === selectedPlayer.characterName &&
           player.characterHealth !== null
         ) {
-          showDamage();
+          showDamageOne();
+          setTimeout(showDamageTwo, 250);
           return {
             ...player,
             characterHealth: player.characterHealth - damageHealth,
@@ -292,7 +307,8 @@ const DetailedFight = (props: IProps) => {
           player.characterName === selectedPlayer.characterName &&
           player.characterHealth !== null
         ) {
-          showHealing();
+          showHealingOne();
+          setTimeout(showHealingTwo, 250);
           return {
             ...player,
             characterHealth: player.characterHealth + damageHealth,
@@ -569,7 +585,7 @@ const DetailedFight = (props: IProps) => {
           alignItems: "flex-start",
         }}
       >
-        {isHealingVisible && (
+        {isHealingTwoVisible && (
           <Box
             sx={{
               display: "flex",
@@ -590,11 +606,11 @@ const DetailedFight = (props: IProps) => {
                 fontWeight: "bold",
               }}
             >
-              {getRandomText(healingLines)}
+              {/* {getRandomText(healingLines)} */}
             </Box>
           </Box>
         )}
-        {isDamageVisible && (
+        {isDamageTwoVisible && (
           <Box
             sx={{
               display: "flex",
@@ -615,7 +631,7 @@ const DetailedFight = (props: IProps) => {
                 fontWeight: "bold",
               }}
             >
-              {getRandomText(damageLines)}
+              {/* {getRandomText(damageLines)} */}
             </Box>
           </Box>
         )}
@@ -640,8 +656,10 @@ const DetailedFight = (props: IProps) => {
                 isSelected={
                   characters.characterName === selectedPlayer?.characterName
                 }
-                isHealed={isHealingVisible}
-                isDamaged={isDamageVisible}
+                isHealedOne={isHealingOneVisible}
+                isHealedTwo={isHealingTwoVisible}
+                isDamagedOne={isDamageOneVisible}
+                isDamagedTwo={isDamageTwoVisible}
               />
             </Box>
           ))}

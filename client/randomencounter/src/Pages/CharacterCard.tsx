@@ -13,8 +13,10 @@ interface IProps {
   failADeathSave: (num: number) => void;
   removePlayer: (playerToDelete: string) => void;
   isSelected: boolean;
-  isHealed: boolean;
-  isDamaged: boolean;
+  isHealedOne: boolean;
+  isDamagedOne: boolean;
+  isHealedTwo: boolean;
+  isDamagedTwo: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -60,8 +62,10 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
     succeedADeathSave,
     failADeathSave,
     removePlayer,
-    isHealed,
-    isDamaged,
+    isHealedOne,
+    isDamagedOne,
+    isHealedTwo,
+    isDamagedTwo,
   } = props;
   const classes = useStyles();
   const theme = useTheme();
@@ -109,7 +113,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
         color: isSelected ? "white" : "",
       }}
     >
-      {isHealed && isSelected && (
+      {isHealedOne && isSelected && (
         <Box
           sx={{
             position: "relative",
@@ -119,19 +123,18 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
           }}
         >
           <CardMedia
+            image="damageAndHealingPics/heal1.png"
             sx={{
               color: "white",
               fontSize: "24px",
               height: "190px",
-              backgroundColor: "green",
-              opacity: "0.5",
             }}
           >
             {}
           </CardMedia>
         </Box>
       )}
-      {isDamaged && isSelected && (
+      {isHealedTwo && isSelected && (
         <Box
           sx={{
             position: "relative",
@@ -141,12 +144,53 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
           }}
         >
           <CardMedia
+            image="damageAndHealingPics/heal2.png"
             sx={{
               color: "white",
               fontSize: "24px",
               height: "190px",
-              backgroundColor: "red",
-              opacity: "0.5",
+            }}
+          >
+            {}
+          </CardMedia>
+        </Box>
+      )}
+      {isDamagedOne && isSelected && (
+        <Box
+          sx={{
+            position: "relative",
+            zindex: 30,
+            height: "0px",
+            width: "100%",
+          }}
+        >
+          <CardMedia
+            image="damageAndHealingPics/damage1.png"
+            sx={{
+              color: "white",
+              fontSize: "24px",
+              height: "190px",
+            }}
+          >
+            {}
+          </CardMedia>
+        </Box>
+      )}
+      {isDamagedTwo && isSelected && (
+        <Box
+          sx={{
+            position: "relative",
+            zindex: 30,
+            height: "0px",
+            width: "100%",
+          }}
+        >
+          <CardMedia
+            image="damageAndHealingPics/damage2.png"
+            sx={{
+              color: "white",
+              fontSize: "24px",
+              height: "190px",
             }}
           >
             {}
