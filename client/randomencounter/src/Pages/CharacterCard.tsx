@@ -127,7 +127,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
             sx={{
               color: "white",
               fontSize: "24px",
-              height: "190px",
+              height: isMobile ? "140px" : "190px",
             }}
           >
             {}
@@ -148,7 +148,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
             sx={{
               color: "white",
               fontSize: "24px",
-              height: "190px",
+              height: isMobile ? "140px" : "190px",
             }}
           >
             {}
@@ -169,7 +169,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
             sx={{
               color: "white",
               fontSize: "24px",
-              height: "190px",
+              height: isMobile ? "140px" : "190px",
             }}
           >
             {}
@@ -190,7 +190,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
             sx={{
               color: "white",
               fontSize: "24px",
-              height: "190px",
+              height: isMobile ? "140px" : "190px",
             }}
           >
             {}
