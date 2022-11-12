@@ -6,6 +6,7 @@ import useLoading from "../Hooks/useLoading";
 import { IMonster, IMonsterDetails, IRandomMonster } from "../Context/Types";
 import monsterAPIs from "../API/monsterAPI";
 import { defaultMonsterDetails } from "../Context/DefaultTypes";
+import MonsterDetails from "./Common/MonsterDetails";
 
 interface IProps {
   gameType: string;
@@ -351,22 +352,10 @@ const QuickFight = (props: IProps) => {
             >
               Stats
             </Typography>
-            {monsterDetails.name === "" && (
-              <Box>
-                <Typography>Click on monster name to get details</Typography>
-              </Box>
-            )}
 
-            {monsterDetails.name !== "" && (
-              <Box sx={{ textAlign: "left" }}>
-                <Typography>Name = {monsterDetails.name}</Typography>
-                <Typography>
-                  Challenge Rating = {monsterDetails.challenge_rating}
-                </Typography>
-                <Typography>AC = {monsterDetails.armor_class}</Typography>
-                <Typography>HitPoints = {monsterDetails.hit_points}</Typography>
-              </Box>
-            )}
+            <Box>
+              <MonsterDetails monsterData={monsterDetails} />
+            </Box>
           </Box>
         </Box>
       </Box>

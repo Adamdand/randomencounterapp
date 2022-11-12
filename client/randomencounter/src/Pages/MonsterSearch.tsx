@@ -15,6 +15,7 @@ import { IMonster, IMonsterDetails } from "../Context/Types";
 import monsterAPIs from "../API/monsterAPI";
 import { defaultMonsterDetails } from "../Context/DefaultTypes";
 import MonsterDetails from "./Common/MonsterDetails";
+import useResponsiveHelper from "../Hooks/useResponsiveHelper";
 
 interface IProps {
   gameType: string;
@@ -78,6 +79,7 @@ const MonsterSearch = (props: IProps) => {
   const classes = useStyle();
   // const { searchemail } = useHomeInspection();
   const { showLoading, hideLoading, loading } = useLoading();
+  const { isMobile } = useResponsiveHelper();
   const [monsterList, setMonsterList] = useState<IMonster[]>([]);
   const [monsterRatingList, setMonsterRatingList] = useState<IMonster[]>([]);
   const [selectedCR, setSelectedCR] = useState<number>();
@@ -194,7 +196,7 @@ const MonsterSearch = (props: IProps) => {
             </Select>
           </FormControl>
         </Box>
-        <Box>
+        <Box sx={{ paddingTop: isMobile ? "16px" : "0px" }}>
           <FormControl sx={{ width: "250px" }}>
             <InputLabel id="demo-simple-select-label">
               Monster Rating
