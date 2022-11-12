@@ -118,10 +118,10 @@ const Home = (props: IProps) => {
                         textShadow: "1px 1px 2px black",
                       }}
                     >
-                      <Box> Don't know which monster to use?</Box>
+                      <Box> Don&apos;t know which monster to use?</Box>
                       <Box>
-                        New to Dnd, and dont know many monsters, their challenge
-                        ratings, their health and abilities?
+                        New to Dnd, and don&apos;t know many monsters, their
+                        challenge ratings, their health and abilities?
                       </Box>
                       <Box sx={{ paddingTop: "16px" }}>
                         Search our databse of monsters to find a monster type
