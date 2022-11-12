@@ -69,7 +69,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
   } = props;
   const classes = useStyles();
   const theme = useTheme();
-  const { isMobile } = useResponsiveHelper();
+  const { isMobile, isTablet } = useResponsiveHelper();
 
   const playerDead = (): boolean => {
     if (data.characterHealth !== null && data.characterMaxHealth !== null) {
@@ -97,6 +97,15 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
       }
     }
     return "black";
+  };
+
+  const shortenName = (longName: string): string => {
+    const allowedLength = isMobile ? 8 : isTablet ? 11 : 17;
+    let shortenedName = longName;
+    if (longName.length > 10) {
+      shortenedName = `${longName.substring(0, allowedLength)}...`;
+    }
+    return shortenedName;
   };
 
   return (
@@ -246,7 +255,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
               <Typography
                 sx={{ fontWeight: "bolder", textDecoration: "underline" }}
               >
-                {data.characterName}
+                {shortenName(data.characterName)}
               </Typography>
               <Typography>{data.characterAC}</Typography>
               <Box sx={{ display: "flex", flexDirection: "row" }}>
