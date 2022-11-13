@@ -51,14 +51,16 @@ const useStyle = makeStyles((theme) => ({
   },
   controls: {
     display: "flex",
+    right: "0",
+    position: "fixed",
     flexDirection: "column",
     width: "50%",
     paddingLeft: "0px",
     [theme.breakpoints.down("desktop")]: {
       paddingLeft: "40px",
+      width: "50%",
     },
     [theme.breakpoints.down("tablet")]: {
-      width: "50%",
       paddingLeft: "16px",
     },
   },
@@ -701,7 +703,7 @@ const DetailedFight = (props: IProps) => {
                 justifyContent: "center",
               }}
             >
-              <Typography sx={{ marginLeft: "32px" }} variant="h3">
+              <Typography sx={{ paddingLeft: "32px" }} variant="h3">
                 Set Up
               </Typography>
               <InfoOutlinedIcon
@@ -757,7 +759,7 @@ const DetailedFight = (props: IProps) => {
                 justifyContent: "center",
               }}
             >
-              <Typography sx={{ marginLeft: "32px" }} variant="h3">
+              <Typography sx={{ paddingLeft: "32px" }} variant="h3">
                 Actions
               </Typography>
               <InfoOutlinedIcon
@@ -841,7 +843,6 @@ const DetailedFight = (props: IProps) => {
             }}
           >
             <Box>
-              {" "}
               <Typography variant="h3">Monster Info</Typography>
             </Box>
 

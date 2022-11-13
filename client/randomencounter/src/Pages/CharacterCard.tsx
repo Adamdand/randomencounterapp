@@ -100,9 +100,9 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
   };
 
   const shortenName = (longName: string): string => {
-    const allowedLength = isMobile ? 8 : isTablet ? 11 : 17;
+    const allowedLength = isMobile ? 8 : isTablet ? 11 : 15;
     let shortenedName = longName;
-    if (longName.length > 10) {
+    if (longName.length > 8) {
       shortenedName = `${longName.substring(0, allowedLength)}...`;
     }
     return shortenedName;

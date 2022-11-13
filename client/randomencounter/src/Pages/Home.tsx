@@ -231,7 +231,7 @@ const Home = (props: IProps) => {
                           color: "white",
                         },
                       }}
-                      onClick={goToMonsterSearch}
+                      onClick={goToQuickFight}
                     >
                       <Typography
                         variant="body1"
@@ -331,7 +331,7 @@ const Home = (props: IProps) => {
                           color: "white",
                         },
                       }}
-                      onClick={goToMonsterSearch}
+                      onClick={goToDetailedFight}
                     >
                       <Typography
                         variant="body1"

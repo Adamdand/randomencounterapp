@@ -3,6 +3,7 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { Box, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import useResponsiveHelper from "../Hooks/useResponsiveHelper";
 
 interface IProps {
   onClick: (event: any, newGameType: string) => void;
@@ -15,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ButtonToggle = (props: IProps) => {
   const { onClick, gameType } = props;
+  const { isMobile } = useResponsiveHelper();
   const classes = useStyles();
 
   return (
@@ -40,7 +42,10 @@ const ButtonToggle = (props: IProps) => {
           <Typography color="white">Home</Typography>
         </ToggleButton>
         <ToggleButton value="Monster Search" aria-label="monster search">
-          <Typography color="white">Monster Search</Typography>
+          <Typography color="white">
+            {" "}
+            {isMobile ? "Search" : "Monster Search"}
+          </Typography>
         </ToggleButton>
         <ToggleButton value="Quick Fight" aria-label="quick fight">
           <Typography color="white">Quick Fight</Typography>
