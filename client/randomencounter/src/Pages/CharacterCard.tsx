@@ -229,7 +229,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
         <Box
           display="flex"
           flexDirection="row"
-          paddingTop={playerDead() ? (isMobile ? "0px" : "38px") : "0px"}
+          paddingTop={playerDead() ? (isMobile ? "0px" : "12px") : "0px"}
           justifyContent="space-evenly"
           alignItems="center"
           style={{ cursor: "pointer" }}
