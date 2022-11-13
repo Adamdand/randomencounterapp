@@ -51,18 +51,23 @@ const useStyle = makeStyles((theme) => ({
   },
   controls: {
     display: "flex",
-    right: "0",
+    right: 0,
     position: "fixed",
     flexDirection: "column",
-    width: "50%",
+    width: "40%",
     paddingLeft: "0px",
     [theme.breakpoints.down("desktop")]: {
-      paddingLeft: "40px",
-      width: "50%",
+      width: "40%",
     },
+
     [theme.breakpoints.down("tablet")]: {
-      paddingLeft: "16px",
+      width: "40%",
     },
+  },
+  CharactersInFight: {
+    display: "flex",
+    flexDirection: "column",
+    width: "60%",
   },
 }));
 
@@ -637,7 +642,7 @@ const DetailedFight = (props: IProps) => {
             </Box>
           </Box>
         )}
-        <Box sx={{ width: "50%" }}>
+        <Box className={classes.CharactersInFight}>
           <Box sx={{ height: "32px" }}>
             <Typography variant="h2">
               {isMobile ? "Characters" : "Characters in Fight"}
@@ -645,10 +650,7 @@ const DetailedFight = (props: IProps) => {
           </Box>
 
           {testList.map((characters) => (
-            <Box
-              sx={{ display: "flex" }}
-              onMouseOver={() => setHoveredPlayer(characters)}
-            >
+            <Box sx={{}} onMouseOver={() => setHoveredPlayer(characters)}>
               <CharacterCard
                 data={characters}
                 onClick={onClick}

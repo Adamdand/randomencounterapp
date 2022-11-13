@@ -33,7 +33,7 @@ const DeathSaves: React.FC<IProps> = (props: IProps) => {
   };
 
   return (
-    <Box className={classes.root}>
+    <Box sx={{ paddingRight: isMobile ? "4px" : "16px" }}>
       <Box
         sx={{
           display: "flex",

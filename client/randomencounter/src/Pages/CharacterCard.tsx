@@ -25,17 +25,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: "100%",
     height: "190px",
     fontColor: theme.palette.primary.main,
-    padding: theme.spacing(2),
     border: "1px solid maroon",
     backgroundColor: "wheat",
-    borderRadius: "4px",
+    borderRadius: "8px",
     [theme.breakpoints.only("mobile")]: {
-      height: "140px",
-      padding: "4px",
+      height: "150px",
     },
     "&:hover": {
       borderColor: theme.palette.primary.main,
-      backgroundColor: "maroon",
+      backgroundColor: "#FFB8AA",
       color: "white",
     },
   },
@@ -51,6 +49,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     // this is the`className` passed to `CardMedia` later
     height: 100, // as an example I am modifying width and height
     width: "33%",
+  },
+  deleteIcon: {
+    color: "white",
+    "&:hover": {
+      color: "maroon",
+    },
   },
 }));
 
@@ -208,22 +212,19 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
       )}
       <Box>
         <Box
-          sx={{ height: "10px" }}
+          sx={{
+            height: "24px",
+            width: "24px",
+            borderRadius: "16px",
+            backgroundColor: "black",
+            position: "relative",
+            left: 0,
+            top: -4,
+            zIndex: 20,
+          }}
           onClick={() => removePlayer(data.characterName)}
         >
-          <ClearIcon
-            sx={{
-              zIndex: 20,
-              position: "relative",
-              left: "50%",
-              bottom: "0%",
-              width: "20px",
-              height: "20px",
-              [theme.breakpoints.only("mobile")]: {
-                left: "45%",
-              },
-            }}
-          />
+          <ClearIcon className={classes.deleteIcon} />
         </Box>
         <Box
           display="flex"
@@ -240,9 +241,15 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
               alignItems: "center",
               width: "80px",
               zindex: 10,
+              paddingLeft: "8px",
             }}
           >
-            <Box sx={{ wordWrap: "break-word", textAlign: "left" }}>
+            <Box
+              sx={{
+                wordWrap: "break-word",
+                textAlign: "left",
+              }}
+            >
               <Typography>Name</Typography>
               <Typography>AC</Typography>
               <Typography>HP</Typography>
@@ -250,7 +257,14 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
               <Typography>{`${isMobile ? "Init" : "Initiative"}`}</Typography>
             </Box>
           </Box>
-          <Box sx={{ display: "flex", alignItems: "center", width: "150px" }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              width: "150px",
+              paddingLeft: "4px",
+            }}
+          >
             <Box sx={{ wordWrap: "break-word", textAlign: "left" }}>
               <Typography
                 sx={{ fontWeight: "bolder", textDecoration: "underline" }}
@@ -268,12 +282,11 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
                   / {data.characterMaxHealth}
                 </Typography>
               </Box>
-
               <Typography>{data.characterLevel}</Typography>
               <Typography>{data.characterInitative}</Typography>
             </Box>
           </Box>
-          <Box sx={{ width: "200px" }}>
+          <Box sx={{ width: "180px" }}>
             {playerDead() && (
               <DeathSaves
                 isDead={true}
@@ -285,10 +298,9 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
             )}
             {(getHealthColours() === "green" ||
               getHealthColours() === "blue") && (
-              <Box sx={{}}>
+              <Box sx={{ width: isMobile ? "120px" : "180px" }}>
                 <CardMedia
                   component="img"
-                  height="100%"
                   image={
                     data.type === "human"
                       ? "smilePics/happy.png"
@@ -299,7 +311,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
               </Box>
             )}
             {getHealthColours() === "orange" && (
-              <Box sx={{}}>
+              <Box sx={{ width: isMobile ? "120px" : "180px" }}>
                 <CardMedia
                   component="img"
                   height="100%"
@@ -313,7 +325,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
               </Box>
             )}
             {getHealthColours() === "red" && playerDead() === false && (
-              <Box sx={{}}>
+              <Box sx={{ width: isMobile ? "120px" : "180px" }}>
                 <CardMedia
                   component="img"
                   height="100%"
