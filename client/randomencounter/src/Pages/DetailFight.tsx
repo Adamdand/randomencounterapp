@@ -52,7 +52,8 @@ const useStyle = makeStyles((theme) => ({
   controls: {
     display: "flex",
     right: 0,
-    position: "fixed",
+    top: 0,
+    position: "sticky",
     flexDirection: "column",
     width: "40%",
     paddingLeft: "0px",
