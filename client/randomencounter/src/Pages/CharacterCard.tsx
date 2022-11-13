@@ -298,7 +298,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
             )}
             {(getHealthColours() === "green" ||
               getHealthColours() === "blue") && (
-              <Box sx={{ width: isMobile ? "120px" : "180px" }}>
+              <Box sx={{ width: isMobile ? "120px" : "170px" }}>
                 <CardMedia
                   component="img"
                   image={
@@ -311,7 +311,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
               </Box>
             )}
             {getHealthColours() === "orange" && (
-              <Box sx={{ width: isMobile ? "120px" : "180px" }}>
+              <Box sx={{ width: isMobile ? "120px" : "170px" }}>
                 <CardMedia
                   component="img"
                   height="100%"
@@ -325,7 +325,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
               </Box>
             )}
             {getHealthColours() === "red" && playerDead() === false && (
-              <Box sx={{ width: isMobile ? "120px" : "180px" }}>
+              <Box sx={{ width: isMobile ? "120px" : "170px" }}>
                 <CardMedia
                   component="img"
                   height="100%"
