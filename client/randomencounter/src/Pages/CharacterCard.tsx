@@ -122,10 +122,56 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
           : data.characterHealth !== null && data.characterHealth <= 0
           ? "red"
           : "",
-        backgroundColor: isSelected ? "maroon" : "",
-        color: isSelected ? "white" : "",
+        // backgroundColor: isSelected ? "maroon" : "",
+        // color: isSelected ? "white" : "",
       }}
     >
+      {isSelected && (
+        <>
+          <Box
+            sx={{
+              position: "relative",
+              zindex: 60,
+              height: "0px",
+              width: "100%",
+            }}
+          >
+            <CardMedia
+              component="img"
+              image="borders/desktopBorder.png"
+              sx={{
+                objectFit: "fill",
+                color: "white",
+                fontSize: "24px",
+                height: isMobile ? "150px" : "190px",
+              }}
+            >
+              {}
+            </CardMedia>
+          </Box>
+          <Box
+            sx={{
+              position: "relative",
+              zindex: 60,
+              height: "0px",
+              width: "100%",
+            }}
+          >
+            <CardMedia
+              component="img"
+              image="borders/topRightBorder.png"
+              sx={{
+                objectFit: "fill",
+                color: "white",
+                fontSize: "24px",
+                height: isMobile ? "150px" : "190px",
+              }}
+            >
+              {}
+            </CardMedia>
+          </Box>
+        </>
+      )}
       {isHealedOne && isSelected && (
         <Box
           sx={{
@@ -220,7 +266,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
             position: "relative",
             left: 0,
             top: -4,
-            zIndex: 20,
+            zIndex: 70,
           }}
           onClick={() => removePlayer(data.characterName)}
         >
