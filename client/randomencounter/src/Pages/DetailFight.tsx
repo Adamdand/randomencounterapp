@@ -22,6 +22,7 @@ import MonsterDetails from "./Common/MonsterDetails";
 import ActionsInfo from "./InfoPages/ActionsInfo";
 import SetUpInfo from "./InfoPages/SetUpInfo";
 import useResponsiveHelper from "../Hooks/useResponsiveHelper";
+import Confirmation from "./Common/Confirmation";
 
 interface IProps {
   gameType: string;
