@@ -1,4 +1,11 @@
-import { Box, CardMedia, Theme, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  CardMedia,
+  Theme,
+  Tooltip,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import ClearIcon from "@mui/icons-material/Clear";
 import React from "react";
@@ -257,21 +264,23 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
         </Box>
       )}
       <Box>
-        <Box
-          sx={{
-            height: "24px",
-            width: "24px",
-            borderRadius: "16px",
-            backgroundColor: "black",
-            position: "relative",
-            left: 0,
-            top: -4,
-            zIndex: 70,
-          }}
-          onClick={() => removePlayer(data.characterName)}
-        >
-          <ClearIcon className={classes.deleteIcon} />
-        </Box>
+        <Tooltip title="delete" placement="top">
+          <Box
+            sx={{
+              height: "24px",
+              width: "24px",
+              borderRadius: "16px",
+              backgroundColor: "black",
+              position: "relative",
+              left: 0,
+              top: -4,
+              zIndex: 70,
+            }}
+            onClick={() => removePlayer(data.characterName)}
+          >
+            <ClearIcon className={classes.deleteIcon} />
+          </Box>
+        </Tooltip>
         <Box
           display="flex"
           flexDirection="row"
@@ -312,11 +321,13 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
             }}
           >
             <Box sx={{ wordWrap: "break-word", textAlign: "left" }}>
-              <Typography
-                sx={{ fontWeight: "bolder", textDecoration: "underline" }}
-              >
-                {shortenName(data.characterName)}
-              </Typography>
+              <Tooltip title={`${data.characterName}`} placement="top">
+                <Typography
+                  sx={{ fontWeight: "bolder", textDecoration: "underline" }}
+                >
+                  {shortenName(data.characterName)}
+                </Typography>
+              </Tooltip>
               <Typography>{data.characterAC}</Typography>
               <Box sx={{ display: "flex", flexDirection: "row" }}>
                 <Typography
