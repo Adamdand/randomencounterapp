@@ -105,6 +105,9 @@ const QuickFight = (props: IProps) => {
     "mumbling to themself",
     "doing just general nasty stuff",
     "planning a birthday party for their grandmother",
+    "chasing a lost little boy",
+    "mumbling as they walk mindlessly around",
+    "jumping unexpectantly out of a bush at you",
   ];
 
   const setNewMonsterActivity = () =>
