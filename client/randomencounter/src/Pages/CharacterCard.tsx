@@ -122,6 +122,7 @@ const CharacterCard: React.FC<IProps> = (props: IProps) => {
   return (
     <Box
       className={classes.root}
+      boxShadow={8}
       style={{
         cursor: "pointer",
         borderColor: isSelected

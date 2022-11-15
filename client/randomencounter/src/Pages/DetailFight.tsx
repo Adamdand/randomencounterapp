@@ -698,208 +698,218 @@ const DetailedFight = (props: IProps) => {
           <Box sx={{ height: "32px" }}>
             <Typography variant="h2">Controls</Typography>
           </Box>
-          <Box sx={{ border: "1px dashed grey" }}>
+          <Box sx={{ boxShadow: 8, backgroundColor: "#EBEBEB" }}>
+            <Box sx={{ border: "1px dashed grey" }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                }}
+              >
+                <Typography sx={{ paddingLeft: "32px" }} variant="h3">
+                  Set Up
+                </Typography>
+                <InfoOutlinedIcon
+                  sx={{
+                    paddingLeft: "16px",
+                    color: "#B3B3B3",
+                    cursor: "pointer",
+                  }}
+                  onClick={handleClickOpenSetUpInfo}
+                />
+              </Box>
+              <SetUpInfo open={openSetUp} handleClose={handleCloseSetUpInfo} />
+              <Button
+                sx={{
+                  "&:hover": {
+                    borderColor: "black",
+                    backgroundColor: "maroon",
+                    color: "white",
+                  },
+                }}
+                onClick={getMonsterWithRatingBtn}
+              >
+                Get Monsters
+              </Button>
+              <Button
+                sx={{
+                  "&:hover": {
+                    borderColor: "black",
+                    backgroundColor: "maroon",
+                    color: "white",
+                  },
+                }}
+                onClick={removeMonsters}
+              >
+                Remove Monsters
+              </Button>
+              <Box>
+                <Button
+                  sx={{
+                    "&:hover": {
+                      borderColor: "black",
+                      backgroundColor: "maroon",
+                      color: "white",
+                    },
+                  }}
+                  onClick={orderListOnInitative}
+                >
+                  Order List Based On Initiative
+                </Button>
+              </Box>
+            </Box>
+            <Box sx={{ border: "1px dashed grey" }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                }}
+              >
+                <Typography sx={{ paddingLeft: "32px" }} variant="h3">
+                  Actions
+                </Typography>
+                <InfoOutlinedIcon
+                  sx={{
+                    paddingLeft: "16px",
+                    color: "#B3B3B3",
+                    cursor: "pointer",
+                  }}
+                  onClick={handleClickOpenActionsInfo}
+                />
+              </Box>
+              <ActionsInfo
+                open={openActionsInfo}
+                handleClose={handleCloseActionsInfo}
+              />
+
+              <Box>
+                <TextField
+                  id="damageOrHealValue"
+                  label="value"
+                  type="tel"
+                  className={classes.textField}
+                  value={damageHealth}
+                  onChange={changeValue}
+                  margin="normal"
+                  inputProps={{
+                    pattern: "[0-9]*",
+                  }}
+                />
+              </Box>
+              <Box>
+                <Button
+                  sx={{
+                    "&:hover": {
+                      borderColor: "black",
+                      backgroundColor: "maroon",
+                      color: "white",
+                    },
+                  }}
+                  onClick={() => {
+                    damagePlayer();
+                  }}
+                >
+                  damage
+                  <ArrowDownwardIcon sx={{ color: "red" }} />
+                </Button>
+                <Button
+                  sx={{
+                    "&:hover": {
+                      borderColor: "black",
+                      backgroundColor: "maroon",
+                      color: "white",
+                    },
+                  }}
+                  onClick={() => {
+                    healPlayer();
+                  }}
+                >
+                  heal
+                  <ArrowUpwardIcon sx={{ color: "green" }} />
+                </Button>
+
+                <Button
+                  sx={{
+                    "&:hover": {
+                      borderColor: "black",
+                      backgroundColor: "maroon",
+                      color: "white",
+                    },
+                  }}
+                  onClick={turnOver}
+                >
+                  Next Turn
+                  <ArrowForwardIosIcon sx={{ color: "black" }} />
+                </Button>
+              </Box>
+            </Box>
+
             <Box
               sx={{
                 display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
+                flexDirection: "column",
+                border: "1px dashed grey",
+                alignItems: "center",
               }}
             >
-              <Typography sx={{ paddingLeft: "32px" }} variant="h3">
-                Set Up
-              </Typography>
-              <InfoOutlinedIcon
-                sx={{ paddingLeft: "16px", color: "white", cursor: "pointer" }}
-                onClick={handleClickOpenSetUpInfo}
-              />
-            </Box>
-            <SetUpInfo open={openSetUp} handleClose={handleCloseSetUpInfo} />
-            <Button
-              sx={{
-                "&:hover": {
-                  borderColor: "black",
-                  backgroundColor: "maroon",
-                  color: "white",
-                },
-              }}
-              onClick={getMonsterWithRatingBtn}
-            >
-              Get Monsters
-            </Button>
-            <Button
-              sx={{
-                "&:hover": {
-                  borderColor: "black",
-                  backgroundColor: "maroon",
-                  color: "white",
-                },
-              }}
-              onClick={removeMonsters}
-            >
-              Remove Monsters
-            </Button>
-            <Box>
-              <Button
-                sx={{
-                  "&:hover": {
-                    borderColor: "black",
-                    backgroundColor: "maroon",
-                    color: "white",
-                  },
-                }}
-                onClick={orderListOnInitative}
-              >
-                Order List Based On Initiative
-              </Button>
-            </Box>
-          </Box>
-          <Box sx={{ border: "1px dashed grey" }}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-              }}
-            >
-              <Typography sx={{ paddingLeft: "32px" }} variant="h3">
-                Actions
-              </Typography>
-              <InfoOutlinedIcon
-                sx={{ paddingLeft: "16px", color: "white", cursor: "pointer" }}
-                onClick={handleClickOpenActionsInfo}
-              />
-            </Box>
-            <ActionsInfo
-              open={openActionsInfo}
-              handleClose={handleCloseActionsInfo}
-            />
+              <Box>
+                <Typography variant="h3">Monster Info</Typography>
+              </Box>
 
-            <Box>
-              <TextField
-                id="damageOrHealValue"
-                label="value"
-                type="tel"
-                className={classes.textField}
-                value={damageHealth}
-                onChange={changeValue}
-                margin="normal"
-                inputProps={{
-                  pattern: "[0-9]*",
-                }}
-              />
-            </Box>
-            <Box>
-              <Button
-                sx={{
-                  "&:hover": {
-                    borderColor: "black",
-                    backgroundColor: "maroon",
-                    color: "white",
-                  },
-                }}
-                onClick={() => {
-                  damagePlayer();
-                }}
-              >
-                damage
-                <ArrowDownwardIcon sx={{ color: "red" }} />
-              </Button>
-              <Button
-                sx={{
-                  "&:hover": {
-                    borderColor: "black",
-                    backgroundColor: "maroon",
-                    color: "white",
-                  },
-                }}
-                onClick={() => {
-                  healPlayer();
-                }}
-              >
-                heal
-                <ArrowUpwardIcon sx={{ color: "green" }} />
-              </Button>
-
-              <Button
-                sx={{
-                  "&:hover": {
-                    borderColor: "black",
-                    backgroundColor: "maroon",
-                    color: "white",
-                  },
-                }}
-                onClick={turnOver}
-              >
-                Next Turn
-                <ArrowForwardIosIcon sx={{ color: "black" }} />
-              </Button>
-            </Box>
-          </Box>
-
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              border: "1px dashed grey",
-              alignItems: "center",
-            }}
-          >
-            <Box>
-              <Typography variant="h3">Monster Info</Typography>
-            </Box>
-
-            {monsterRatingList.length > 0 &&
-              randomMonsterTypeOne !== undefined && (
-                <Box>
+              {monsterRatingList.length > 0 &&
+                randomMonsterTypeOne !== undefined && (
                   <Box>
-                    <Typography flexDirection="row" alignItems="center">
-                      you have encountered {randomMonsterTypeOne.quantity}
-                      <Button
-                        sx={{
-                          fontWeight: "600",
-                          cursor: "pointer",
-                          "&:hover": {
-                            borderColor: "black",
-                            backgroundColor: "maroon",
-                            color: "white",
-                          },
-                        }}
-                        onClick={() => {
-                          getMonsterDetails(randomMonsterTypeOne.index);
-                        }}
-                      >
-                        {randomMonsterTypeOne?.name}
-                      </Button>
-                      {twoTypeOfMonsters &&
-                        randomMonsterTypeTwo.quantity !== 0 && (
-                          <Typography>
-                            and {randomMonsterTypeTwo.quantity}
-                            <Button
-                              sx={{
-                                cursor: "pointer",
-                                fontWeight: "600",
-                                "&:hover": {
-                                  borderColor: "black",
-                                  backgroundColor: "maroon",
-                                  color: "white",
-                                },
-                              }}
-                              onClick={() => {
-                                getMonsterDetails(randomMonsterTypeTwo.index);
-                              }}
-                            >
-                              {randomMonsterTypeTwo.name}
-                            </Button>
-                          </Typography>
-                        )}
-                      {monsterActivities[randomActivityNumber]}.
-                    </Typography>
+                    <Box>
+                      <Typography flexDirection="row" alignItems="center">
+                        you have encountered {randomMonsterTypeOne.quantity}
+                        <Button
+                          sx={{
+                            fontWeight: "600",
+                            cursor: "pointer",
+                            "&:hover": {
+                              borderColor: "black",
+                              backgroundColor: "maroon",
+                              color: "white",
+                            },
+                          }}
+                          onClick={() => {
+                            getMonsterDetails(randomMonsterTypeOne.index);
+                          }}
+                        >
+                          {randomMonsterTypeOne?.name}
+                        </Button>
+                        {twoTypeOfMonsters &&
+                          randomMonsterTypeTwo.quantity !== 0 && (
+                            <Typography>
+                              and {randomMonsterTypeTwo.quantity}
+                              <Button
+                                sx={{
+                                  cursor: "pointer",
+                                  fontWeight: "600",
+                                  "&:hover": {
+                                    borderColor: "black",
+                                    backgroundColor: "maroon",
+                                    color: "white",
+                                  },
+                                }}
+                                onClick={() => {
+                                  getMonsterDetails(randomMonsterTypeTwo.index);
+                                }}
+                              >
+                                {randomMonsterTypeTwo.name}
+                              </Button>
+                            </Typography>
+                          )}
+                        {monsterActivities[randomActivityNumber]}.
+                      </Typography>
+                    </Box>
                   </Box>
-                </Box>
-              )}
-            <Box>
-              <MonsterDetails monsterData={monsterDetails} />
+                )}
+              <Box>
+                <MonsterDetails monsterData={monsterDetails} />
+              </Box>
             </Box>
           </Box>
         </Box>
