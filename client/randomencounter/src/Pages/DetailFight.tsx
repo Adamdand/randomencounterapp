@@ -4,6 +4,7 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router-dom";
@@ -671,21 +672,22 @@ const DetailedFight = (props: IProps) => {
           {/* <Box>{listCharacters()}</Box> */}
 
           <Box>
-            <Button onClick={handleClickOpen}>
-              <Typography
-                noWrap={true}
-                sx={{
-                  fontFamily: "open sans",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  fontSize: "14px",
-                  lineHeight: "16.41px",
-                  color: "red",
-                  textDecoration: "underline",
-                }}
-              >
-                Add Player
-              </Typography>
+            <Button
+              sx={{
+                "&:hover": {
+                  borderColor: "black",
+                  backgroundColor: "maroon",
+                  color: "white",
+                },
+              }}
+              onClick={handleClickOpen}
+            >
+              <Box sx={{ flexDirection: "column" }}>
+                <Box sx={{ height: "20px" }}>
+                  <KeyboardDoubleArrowDownIcon width="200px" />
+                </Box>
+                <Box sx={{}}>Add Player</Box>
+              </Box>
             </Button>
             <CreateNewPlayer
               open={open}
