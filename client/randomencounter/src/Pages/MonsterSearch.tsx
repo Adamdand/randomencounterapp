@@ -180,7 +180,7 @@ const MonsterSearch = (props: IProps) => {
       <Box className={classes.root}>
         <Box>
           <FormControl sx={{ width: "250px" }}>
-            <InputLabel id="demo-simple-select-label">Monster</InputLabel>
+            <InputLabel id="demo-simple-select-label">Monster Name</InputLabel>
             <Select
               fullWidth={true}
               labelId="monster"
@@ -234,25 +234,33 @@ const MonsterSearch = (props: IProps) => {
                 className={classes.scrollBar}
               >
                 {monsterRatingList.map((monstersWithRating) => {
-                  return (
-                    <Box>
-                      <Button
-                        onClick={() =>
-                          getMonsterDetails(monstersWithRating.index)
-                        }
-                      >
-                        <Typography
-                          display="flex"
-                          flexDirection="row"
-                          justifyContent="space-evenly"
-                          alignItems="center"
-                          style={{ cursor: "pointer" }}
+                  const forestMonsters = [
+                    "Animated Armor",
+                    "Brown Bear",
+                    "Bugbear",
+                  ] as string[];
+                  if (forestMonsters.includes(monstersWithRating.name)) {
+                    return (
+                      <Box>
+                        <Button
+                          onClick={() =>
+                            getMonsterDetails(monstersWithRating.index)
+                          }
                         >
-                          <Box>{monstersWithRating.name}</Box>
-                        </Typography>
-                      </Button>
-                    </Box>
-                  );
+                          <Typography
+                            display="flex"
+                            flexDirection="row"
+                            justifyContent="space-evenly"
+                            alignItems="center"
+                            style={{ cursor: "pointer" }}
+                          >
+                            <Box>{monstersWithRating.name}</Box>
+                          </Typography>
+                        </Button>
+                      </Box>
+                    );
+                  }
+                  return <></>;
                 })}
               </Box>
             </Box>
