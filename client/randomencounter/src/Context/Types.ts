@@ -348,3 +348,8 @@ export interface IPlayer {
   successSaves: number;
   failSaves: number;
 }
+
+export interface IMonsterEnvironments {
+  name: string;
+  environments: string[];
+}

@@ -16,28 +16,56 @@ import monsterAPIs from "../API/monsterAPI";
 import { defaultMonsterDetails } from "../Context/DefaultTypes";
 import MonsterDetails from "./Common/MonsterDetails";
 import useResponsiveHelper from "../Hooks/useResponsiveHelper";
+import { allMonstersEnv, monsterRegions } from "../API/monsterSort";
 
 interface IProps {
   gameType: string;
 }
 
 const monsterRatings = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-  23, 24, 25, 26, 27, 28, 29, 30,
+  "All",
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30,
 ];
 
 const useStyle = makeStyles((theme) => ({
   root: {
     display: "flex",
-    flexDirection: "row",
     justifyContent: "center",
     paddingTop: "40px",
-    [theme.breakpoints.down("desktop")]: {
-      flexDirection: "column",
-      alignItems: "center",
-      spacing: "8px",
-      flexBasis: "72%",
-    },
+
+    flexDirection: "column",
+    alignItems: "center",
+    spacing: "8px",
+    flexBasis: "72%",
   },
   innerInput: {
     fontFamily: "Open Sans",
@@ -60,16 +88,12 @@ const useStyle = makeStyles((theme) => ({
     },
   },
   monsterInfo: {
-    width: "500px",
     paddingTop: "16px",
     display: "flex",
     flexDirection: "column",
     alignContent: "center",
     justifyConent: "center",
-    alignItems: "center",
-    [theme.breakpoints.down("tablet")]: {
-      width: "100%",
-    },
+    width: "100%",
   },
 }));
 
@@ -82,7 +106,8 @@ const MonsterSearch = (props: IProps) => {
   const { isMobile, isDesktop } = useResponsiveHelper();
   const [monsterList, setMonsterList] = useState<IMonster[]>([]);
   const [monsterRatingList, setMonsterRatingList] = useState<IMonster[]>([]);
-  const [selectedCR, setSelectedCR] = useState<number>();
+  const [selectedCR, setSelectedCR] = useState<number | string>("All");
+  const [selectedRegion, setSelectedRegion] = useState<string>("All");
   const [selectedMonster, setSelectedMonster] = useState<IMonster>({
     index: "null",
     name: "null",
@@ -104,6 +129,9 @@ const MonsterSearch = (props: IProps) => {
     } else {
       setMonsterList([]);
     }
+    monsterList.map((monster) => {
+      return console.log("NAAAAME: ", monster.name);
+    });
   };
 
   useEffect(() => {
@@ -130,10 +158,11 @@ const MonsterSearch = (props: IProps) => {
     console.log("set selected Monster", tempSelectedMonster);
     setSelectedMonster(event.target.value);
     getMonsterDetails(tempSelectedMonster);
-    setSelectedCR(undefined);
+    setSelectedCR("All");
+    setSelectedRegion("All");
   };
 
-  const getMonsterWithRating = async (monsterRating: number) => {
+  const getMonsterWithRating = async (monsterRating: number | string) => {
     let monstersWithCR: IMonster[];
     monstersWithCR = [];
     try {
@@ -149,11 +178,15 @@ const MonsterSearch = (props: IProps) => {
   const handleRatingChange = (event: any) => {
     const tempMonsterRating = event.target.value;
     setSelectedCR(tempMonsterRating);
-    console.log("Monster Rating Selected", tempMonsterRating);
     if (tempMonsterRating !== undefined) {
       const monstersWithCR = getMonsterWithRating(tempMonsterRating);
       console.log("monsterList with CR: ", monstersWithCR);
     }
+  };
+
+  const handleRegionChange = (event: any) => {
+    const tempRegion = event.target.value;
+    setSelectedRegion(tempRegion);
   };
 
   return (
@@ -201,14 +234,32 @@ const MonsterSearch = (props: IProps) => {
             <Typography variant="h3">Filter By CR</Typography>
             <Select
               fullWidth={true}
-              labelId="monster"
-              id="monster"
+              labelId="CR"
+              id="CR"
               value={selectedCR}
+              defaultValue="All"
               onChange={handleRatingChange}
             >
               {monsterRatings.map((rating) => (
                 <MenuItem value={rating}>
                   <Typography>{rating}</Typography>
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl sx={{ width: "250px" }}>
+            <Typography variant="h3">Filter By Region</Typography>
+            <Select
+              fullWidth={true}
+              labelId="Region"
+              id="Region"
+              value={selectedRegion}
+              onChange={handleRegionChange}
+              defaultValue="All"
+            >
+              {monsterRegions.map((region) => (
+                <MenuItem value={region}>
+                  <Typography>{region}</Typography>
                 </MenuItem>
               ))}
             </Select>
@@ -219,7 +270,7 @@ const MonsterSearch = (props: IProps) => {
               <Typography
                 sx={{ textDecoration: "underline", fontWeight: "bold" }}
               >
-                Monster Options with CR {selectedCR}
+                Monster Options with CR {selectedCR} & Region {selectedRegion}
               </Typography>
 
               <Box
@@ -231,14 +282,15 @@ const MonsterSearch = (props: IProps) => {
                 }}
                 className={classes.scrollBar}
               >
-                {monsterRatingList.map(
-                  (monstersWithRating) => {
-                    const forestMonsters = [
-                      "Animated Armor",
-                      "Brown Bear",
-                      "Bugbear",
-                    ] as string[];
-                    // if (forestMonsters.includes(monstersWithRating.name)) {
+                {monsterRatingList.map((monstersWithRating) => {
+                  if (
+                    allMonstersEnv.find((element) => {
+                      return (
+                        element.name === monstersWithRating.name &&
+                        element.environments.indexOf(selectedRegion) > -1
+                      );
+                    })
+                  ) {
                     return (
                       <Box>
                         <Button
@@ -259,9 +311,8 @@ const MonsterSearch = (props: IProps) => {
                       </Box>
                     );
                   }
-                  //   return <></>;
-                  // }
-                )}
+                  return <></>;
+                })}
               </Box>
             </Box>
           )}
