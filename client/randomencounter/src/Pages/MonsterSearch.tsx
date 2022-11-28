@@ -139,6 +139,12 @@ const MonsterSearch = (props: IProps) => {
     getAllMonsters();
   }, []);
 
+  const resetFilters = (): void => {
+    setSelectedCR("All");
+    setSelectedRegion("All");
+    setMonsterRatingList(monsterList);
+  };
+
   const getMonsterDetails = async (monsterName: string) => {
     let tempMonsterDetails: IMonsterDetails;
     if (monsterName !== null) {
@@ -230,7 +236,7 @@ const MonsterSearch = (props: IProps) => {
             </Select>
           </FormControl>
         </Box>
-        <Box sx={{ paddingTop: isDesktop ? "0px" : "16px" }}>
+        <Box sx={{ paddingTop: "16px" }}>
           <FormControl sx={{ width: "250px" }}>
             <Typography variant="h3">Filter By CR</Typography>
             <Select
@@ -265,6 +271,20 @@ const MonsterSearch = (props: IProps) => {
               ))}
             </Select>
           </FormControl>
+          <Box>
+            <Button
+              sx={{
+                "&:hover": {
+                  borderColor: "black",
+                  backgroundColor: "maroon",
+                  color: "white",
+                },
+              }}
+              onClick={() => resetFilters()}
+            >
+              Reset Filters
+            </Button>
+          </Box>
 
           {selectedCR && (
             <Box sx={{ width: "100%", paddingTop: "16px" }}>
