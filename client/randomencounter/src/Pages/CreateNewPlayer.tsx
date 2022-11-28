@@ -120,7 +120,7 @@ const CreateNewPlayer = (props: IProps): JSX.Element => {
                 type="number"
                 variant="outlined"
                 name="AC"
-                value={newPlayer?.characterAC}
+                value={Number(newPlayer?.characterAC).toString()}
                 // error={checkIfNameTaken(newCharacter?.Name)}
                 fullWidth
                 onChange={(
@@ -142,7 +142,7 @@ const CreateNewPlayer = (props: IProps): JSX.Element => {
                 type="number"
                 variant="outlined"
                 name="Health"
-                value={newPlayer?.characterHealth}
+                value={Number(newPlayer?.characterHealth).toString()}
                 // error={checkIfNameTaken(newCharacter?.Name)}
                 fullWidth
                 onChange={(
@@ -163,7 +163,7 @@ const CreateNewPlayer = (props: IProps): JSX.Element => {
                 type="number"
                 variant="outlined"
                 name="Level"
-                value={newPlayer?.characterLevel}
+                value={Number(newPlayer?.characterLevel).toString()}
                 // error={checkIfNameTaken(newCharacter?.Name)}
                 fullWidth
                 onChange={(
@@ -184,7 +184,7 @@ const CreateNewPlayer = (props: IProps): JSX.Element => {
                 type="number"
                 variant="outlined"
                 name="Initiative"
-                value={newPlayer?.characterInitative}
+                value={Number(newPlayer?.characterInitative).toString()}
                 // error={checkIfNameTaken(newCharacter?.Name)}
                 fullWidth
                 onChange={(

@@ -247,7 +247,7 @@ const QuickFight = (props: IProps) => {
           placeholder="how many players?"
           fullWidth
           variant="outlined"
-          value={numberOfPlayers}
+          value={Number(numberOfPlayers).toString()}
           type="number"
           disabled={loading !== null}
           inputProps={{ min: 1, style: { textAlign: "center" } }}
@@ -265,7 +265,7 @@ const QuickFight = (props: IProps) => {
           fullWidth
           variant="outlined"
           type="number"
-          value={averagePlayerLevel}
+          value={Number(averagePlayerLevel).toString()}
           disabled={loading !== null}
           inputProps={{ min: 1, style: { textAlign: "center" } }}
           onChange={(
