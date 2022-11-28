@@ -248,8 +248,9 @@ const QuickFight = (props: IProps) => {
           fullWidth
           variant="outlined"
           value={numberOfPlayers}
+          type="number"
           disabled={loading !== null}
-          inputProps={{ min: 0, style: { textAlign: "center" } }}
+          inputProps={{ min: 1, style: { textAlign: "center" } }}
           onChange={(
             event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
           ) => changeNumberOfPlayers(event.target.value)}
@@ -263,9 +264,10 @@ const QuickFight = (props: IProps) => {
           placeholder="average player level"
           fullWidth
           variant="outlined"
+          type="number"
           value={averagePlayerLevel}
           disabled={loading !== null}
-          inputProps={{ min: 0, style: { textAlign: "center" } }}
+          inputProps={{ min: 1, style: { textAlign: "center" } }}
           onChange={(
             event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
           ) => changeAveragePlayerLevel(event.target.value)}
