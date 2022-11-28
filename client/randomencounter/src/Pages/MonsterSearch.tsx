@@ -180,7 +180,7 @@ const MonsterSearch = (props: IProps) => {
       <Box className={classes.root}>
         <Box>
           <FormControl sx={{ width: "250px" }}>
-            <InputLabel id="demo-simple-select-label">Monster Name</InputLabel>
+            <Typography variant="h3">Search By Monster Name</Typography>
             <Select
               fullWidth={true}
               labelId="monster"
@@ -198,9 +198,7 @@ const MonsterSearch = (props: IProps) => {
         </Box>
         <Box sx={{ paddingTop: isDesktop ? "0px" : "16px" }}>
           <FormControl sx={{ width: "250px" }}>
-            <InputLabel id="demo-simple-select-label">
-              Monster Rating
-            </InputLabel>
+            <Typography variant="h3">Filter By CR</Typography>
             <Select
               fullWidth={true}
               labelId="monster"
@@ -233,13 +231,14 @@ const MonsterSearch = (props: IProps) => {
                 }}
                 className={classes.scrollBar}
               >
-                {monsterRatingList.map((monstersWithRating) => {
-                  const forestMonsters = [
-                    "Animated Armor",
-                    "Brown Bear",
-                    "Bugbear",
-                  ] as string[];
-                  if (forestMonsters.includes(monstersWithRating.name)) {
+                {monsterRatingList.map(
+                  (monstersWithRating) => {
+                    const forestMonsters = [
+                      "Animated Armor",
+                      "Brown Bear",
+                      "Bugbear",
+                    ] as string[];
+                    // if (forestMonsters.includes(monstersWithRating.name)) {
                     return (
                       <Box>
                         <Button
@@ -260,8 +259,9 @@ const MonsterSearch = (props: IProps) => {
                       </Box>
                     );
                   }
-                  return <></>;
-                })}
+                  //   return <></>;
+                  // }
+                )}
               </Box>
             </Box>
           )}

@@ -1,4 +1,10 @@
-import { Typography, TextField, Button, Box } from "@mui/material";
+import {
+  Typography,
+  TextField,
+  Button,
+  Box,
+  FormHelperText,
+} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -243,6 +249,7 @@ const QuickFight = (props: IProps) => {
         </Typography>
       </Box>
       <Box className={classes.root}>
+        <Typography variant="h3">Number Of Players</Typography>
         <TextField
           placeholder="how many players?"
           fullWidth
@@ -260,6 +267,14 @@ const QuickFight = (props: IProps) => {
           //   },
           // }}
         />
+        <Box sx={{ height: "24px" }}>
+          {numberOfPlayers !== undefined && numberOfPlayers < 1 && (
+            <FormHelperText id="component-helper-text" sx={{ color: "red" }}>
+              Number of players will default to 1
+            </FormHelperText>
+          )}
+        </Box>
+        <Typography variant="h3">Average Player Level</Typography>
         <TextField
           placeholder="average player level"
           fullWidth
@@ -277,6 +292,13 @@ const QuickFight = (props: IProps) => {
           //   },
           // }}
         />
+        <Box sx={{ height: "24px" }}>
+          {averagePlayerLevel !== undefined && averagePlayerLevel < 1 && (
+            <FormHelperText id="component-helper-text" sx={{ color: "red" }}>
+              Average player level will default to 1
+            </FormHelperText>
+          )}
+        </Box>
         <Button
           onClick={getMonsterWithRatingBtn}
           sx={{
