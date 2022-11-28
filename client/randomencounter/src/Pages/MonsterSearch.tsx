@@ -126,6 +126,7 @@ const MonsterSearch = (props: IProps) => {
     }
     if (tempList.length > 0) {
       setMonsterList(tempList);
+      setMonsterRatingList(tempList);
     } else {
       setMonsterList([]);
     }
