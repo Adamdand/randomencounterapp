@@ -55,7 +55,7 @@ const MonsterDetails: React.FC<IProps> = (props: IProps) => {
                 component="img"
                 height="max"
                 image={`dndMonsterPics/${monsterData.index}.jpeg`}
-                alt="monster image"
+                alt="no image at this time"
               />
               {/* <CardContent>
                             <Typography gutterBottom variant="h5" component="div">

@@ -4,6 +4,9 @@ import {
   Button,
   Box,
   FormHelperText,
+  FormControl,
+  MenuItem,
+  Select,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, { useEffect, useState } from "react";
@@ -13,6 +16,7 @@ import { IMonster, IMonsterDetails, IRandomMonster } from "../Context/Types";
 import monsterAPIs from "../API/monsterAPI";
 import { defaultMonsterDetails } from "../Context/DefaultTypes";
 import MonsterDetails from "./Common/MonsterDetails";
+import { allMonstersEnv, monsterRegions } from "../API/monsterSort";
 
 interface IProps {
   gameType: string;
@@ -58,6 +62,7 @@ const QuickFight = (props: IProps) => {
   const { showLoading, hideLoading, loading } = useLoading();
   const [monsterList, setMonsterList] = useState<IMonster[]>([]);
   const [monsterRatingList, setMonsterRatingList] = useState<IMonster[]>([]);
+  const [selectedRegion, setSelectedRegion] = useState<string>("All");
 
   const [monsterDetails, setMonsterDetails] = useState<IMonsterDetails>(
     defaultMonsterDetails
@@ -215,14 +220,46 @@ const QuickFight = (props: IProps) => {
           averagePlayerLevel
         );
         setMonsterRatingList(monstersWithCR);
-        if (monstersWithCR.length > 0) {
+        if (monstersWithCR.length > 0 && selectedRegion === "All") {
           findRandomEncounter(monstersWithCR);
           setNewMonsterActivity();
+        }
+        if (monstersWithCR.length > 0) {
+          const tempMonsterList = [] as IMonster[];
+          monstersWithCR.map((monster) => {
+            if (
+              allMonstersEnv.find((element): any => {
+                return (
+                  element.name === monster.name &&
+                  element.environments.indexOf(selectedRegion) > -1
+                );
+              })
+            ) {
+              tempMonsterList.push(monster);
+              return true;
+            }
+
+            return false;
+          });
+          if (
+            tempMonsterList.length > 0 &&
+            typeof tempMonsterList === typeof monsterList
+          ) {
+            findRandomEncounter(tempMonsterList);
+          }
         }
       } catch (error) {
         console.log("error: ", error);
       }
     }
+  };
+
+  const handleRegionChange = (event: any) => {
+    const tempRegion = event.target.value;
+    setSelectedRegion(tempRegion);
+  };
+  const resetFilters = (): void => {
+    setSelectedRegion("All");
   };
 
   console.log("verage player level: ", averagePlayerLevel);
@@ -298,6 +335,40 @@ const QuickFight = (props: IProps) => {
               Average player level will default to 1
             </FormHelperText>
           )}
+        </Box>
+        <Box>
+          <FormControl sx={{ width: "250px" }}>
+            <Typography variant="h3">Filter By Region</Typography>
+            <Typography variant="caption">(optional)</Typography>
+            <Select
+              fullWidth={true}
+              labelId="Region"
+              id="Region"
+              value={selectedRegion}
+              onChange={handleRegionChange}
+              defaultValue="All"
+            >
+              {monsterRegions.map((region) => (
+                <MenuItem value={region}>
+                  <Typography>{region}</Typography>
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Box>
+            <Button
+              sx={{
+                "&:hover": {
+                  borderColor: "black",
+                  backgroundColor: "maroon",
+                  color: "white",
+                },
+              }}
+              onClick={() => resetFilters()}
+            >
+              Reset Filter
+            </Button>
+          </Box>
         </Box>
         <Button
           onClick={getMonsterWithRatingBtn}
