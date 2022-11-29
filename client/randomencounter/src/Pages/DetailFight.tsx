@@ -1,5 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -23,6 +31,7 @@ import MonsterDetails from "./Common/MonsterDetails";
 import ActionsInfo from "./InfoPages/ActionsInfo";
 import SetUpInfo from "./InfoPages/SetUpInfo";
 import useResponsiveHelper from "../Hooks/useResponsiveHelper";
+import { allMonstersEnv, monsterRegions } from "../API/monsterSort";
 
 interface IProps {
   gameType: string;
@@ -158,6 +167,7 @@ const DetailedFight = (props: IProps) => {
   const [openSetUp, setUpOpen] = React.useState(false);
   const [openActionsInfo, setActionsOpen] = React.useState(false);
   const [hoveredPlayer, setHoveredPlayer] = useState<IPlayer>();
+  const [selectedRegion, setSelectedRegion] = useState<string>("All");
 
   const [isDamageOneVisible, setDamageOneVisible] = React.useState(false);
   const [isDamageTwoVisible, setDamageTwoVisible] = React.useState(false);
@@ -555,9 +565,33 @@ const DetailedFight = (props: IProps) => {
           averagePlayerLevel
         );
         setMonsterRatingList(monstersWithCR);
-        if (monstersWithCR.length > 0) {
+        if (monstersWithCR.length > 0 && selectedRegion === "All") {
           await findRandomEncounter(monstersWithCR);
           setNewMonsterActivity();
+        }
+        if (monstersWithCR.length > 0) {
+          const tempMonsterList = [] as IMonster[];
+          monstersWithCR.map((monster) => {
+            if (
+              allMonstersEnv.find((element): any => {
+                return (
+                  element.name === monster.name &&
+                  element.environments.indexOf(selectedRegion) > -1
+                );
+              })
+            ) {
+              tempMonsterList.push(monster);
+              return true;
+            }
+
+            return false;
+          });
+          if (
+            tempMonsterList.length > 0 &&
+            typeof tempMonsterList === typeof monsterList
+          ) {
+            findRandomEncounter(tempMonsterList);
+          }
         }
       } catch (error) {
         console.log("error: ", error);
@@ -572,6 +606,14 @@ const DetailedFight = (props: IProps) => {
     }
 
     setTestList(updatePlayerList);
+  };
+
+  const handleRegionChange = (event: any) => {
+    const tempRegion = event.target.value;
+    setSelectedRegion(tempRegion);
+  };
+  const resetFilters = (): void => {
+    setSelectedRegion("All");
   };
 
   return (
@@ -725,6 +767,45 @@ const DetailedFight = (props: IProps) => {
                 />
               </Box>
               <SetUpInfo open={openSetUp} handleClose={handleCloseSetUpInfo} />
+              <Box>
+                <FormControl
+                  sx={{
+                    width: "250px",
+                    paddingTop: "16px",
+                  }}
+                >
+                  <Typography variant="body1">Filter By Region</Typography>
+                  <Typography variant="caption">(optional)</Typography>
+                  <Select
+                    fullWidth={true}
+                    labelId="Region"
+                    id="Region"
+                    value={selectedRegion}
+                    onChange={handleRegionChange}
+                    defaultValue="All"
+                  >
+                    {monsterRegions.map((region) => (
+                      <MenuItem value={region}>
+                        <Typography>{region}</Typography>
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                <Box sx={{ paddingBottom: "16px" }}>
+                  <Button
+                    sx={{
+                      "&:hover": {
+                        borderColor: "black",
+                        backgroundColor: "maroon",
+                        color: "white",
+                      },
+                    }}
+                    onClick={() => resetFilters()}
+                  >
+                    Reset Filter
+                  </Button>
+                </Box>
+              </Box>
               <Button
                 sx={{
                   "&:hover": {
