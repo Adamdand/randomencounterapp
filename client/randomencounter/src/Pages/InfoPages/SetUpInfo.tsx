@@ -49,6 +49,30 @@ const SetUpInfo = (props: IProps): JSX.Element => {
                       textDecoration: "underline",
                     }}
                   >
+                    Filter By Region - Filter *optional*
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography variant="bodyRegular">
+                    Choose which type of region/terrain youd like to find
+                    monsters for, and we will try to find a reasonable monster
+                    for your team to fight.
+                    <p>
+                      click the &apos;reset filter&apos; button to go back to
+                      having the deault &apos;All&apos; regions selected.
+                    </p>
+                  </Typography>
+                </Box>
+              </Box>
+              <Box sx={{ paddingTop: "16px" }}>
+                <Box>
+                  <Typography
+                    variant="bodyRegular"
+                    sx={{
+                      fontWeight: "600",
+                      textDecoration: "underline",
+                    }}
+                  >
                     Get Monsters - Button
                   </Typography>
                 </Box>
