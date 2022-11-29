@@ -781,26 +781,36 @@ const DetailedFight = (props: IProps) => {
               <Box>
                 <FormControl
                   sx={{
-                    width: "250px",
+                    width: "100%",
                     paddingTop: "16px",
                   }}
                 >
                   <Typography variant="body1">Filter By Region</Typography>
                   <Typography variant="caption">(optional)</Typography>
-                  <Select
-                    fullWidth={true}
-                    labelId="Region"
-                    id="Region"
-                    value={selectedRegion}
-                    onChange={handleRegionChange}
-                    defaultValue="All"
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      paddingLeft: "25%",
+                      paddingRight: "25%",
+                    }}
                   >
-                    {monsterRegions.map((region) => (
-                      <MenuItem value={region}>
-                        <Typography>{region}</Typography>
-                      </MenuItem>
-                    ))}
-                  </Select>
+                    <Select
+                      fullWidth={true}
+                      labelId="Region"
+                      id="Region"
+                      value={selectedRegion}
+                      onChange={handleRegionChange}
+                      defaultValue="All"
+                    >
+                      {monsterRegions.map((region) => (
+                        <MenuItem value={region}>
+                          <Typography>{region}</Typography>
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </Box>
                 </FormControl>
                 <Box sx={{ paddingBottom: "16px" }}>
                   <Button
