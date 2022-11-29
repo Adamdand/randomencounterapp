@@ -274,7 +274,6 @@ const DetailedFight = (props: IProps) => {
       });
     }
     setTestList(newList);
-    console.log("testList", newList);
   };
 
   const turnOver = () => {
@@ -287,7 +286,6 @@ const DetailedFight = (props: IProps) => {
     }
     setTestList(newList);
     setSelectedPlayer(testList[1]);
-    console.log("testList", newList);
   };
 
   const changeValue = (
@@ -315,7 +313,6 @@ const DetailedFight = (props: IProps) => {
 
         return player;
       });
-      console.log(newArr);
       setTestList(newArr);
     }
   };
@@ -336,7 +333,6 @@ const DetailedFight = (props: IProps) => {
 
         return player;
       });
-      console.log(newArr);
       setTestList(newArr);
     }
   };
@@ -358,7 +354,6 @@ const DetailedFight = (props: IProps) => {
 
       return player;
     });
-    console.log(newArr);
     setTestList(newArr);
   };
 
@@ -387,7 +382,6 @@ const DetailedFight = (props: IProps) => {
 
       return player;
     });
-    console.log(newArr);
     setTestList(newArr);
   };
 
@@ -408,7 +402,6 @@ const DetailedFight = (props: IProps) => {
 
   useEffect(() => {
     changeAveragePlayerLevel();
-    console.log("lvl: ", averagePlayerLevel);
   }, [testList]);
 
   const monsterActivities = [
@@ -462,24 +455,24 @@ const DetailedFight = (props: IProps) => {
           monsterName
         );
         setMonsterDetails(tempMonsterDetails);
-        console.log("monster details :", tempMonsterDetails);
       } catch (error) {
         console.log("error: ", error);
       }
     }
   };
 
-  const getRandomMonsterTypeOne = async (monsters: IMonster[]) => {
-    console.log("FUNCTION MONSTERS WITH RATING LIST", monsters);
+  const getRandomMonsterTypeOne = async (
+    monsters: IMonster[],
+    makeTwoMonsters: boolean
+  ) => {
     const monsterIndex = Math.floor(Math.random() * monsters.length);
     let rndInt: number;
-    if (twoTypeOfMonsters === true) {
+    if (makeTwoMonsters === true) {
       rndInt = Math.floor(Math.random() * 3) + 1;
     } else {
       rndInt = Math.floor(Math.random() * 6) + 1;
     }
     const monsterObject = monsters[monsterIndex];
-    console.log("monsterObject", monsterObject);
 
     const newRandomMonster = {
       ...monsterObject,
@@ -511,11 +504,13 @@ const DetailedFight = (props: IProps) => {
     } catch (error) {
       console.log(error);
     }
-    console.log("1 random monster: ", randomMonsterTypeOne);
   };
 
-  const getRandomMonsterTypeTwo = async (monsters: IMonster[]) => {
-    if (twoTypeOfMonsters === true && monsters.length > 1) {
+  const getRandomMonsterTypeTwo = async (
+    monsters: IMonster[],
+    makeTwoMonsters: boolean
+  ) => {
+    if (makeTwoMonsters === true && monsters.length > 1) {
       const monsterIndex = Math.floor(Math.random() * monsters.length);
       const rndInt = Math.floor(Math.random() * 3) + 1;
       const monsterObject = monsters[monsterIndex];
@@ -552,10 +547,25 @@ const DetailedFight = (props: IProps) => {
     }
   };
 
+  const createTwoMonsters = (): boolean => {
+    const randomChance = Math.random() < 0.5;
+    if (randomChance) {
+      settwoTypeOfMonsters(true);
+      return true;
+    }
+    settwoTypeOfMonsters(false);
+    return false;
+  };
+
   const findRandomEncounter = async (monsters: IMonster[]) => {
-    await settwoTypeOfMonsters(Math.random() < 0.5);
-    await getRandomMonsterTypeTwo(monsters);
-    await getRandomMonsterTypeOne(monsters);
+    const makeTwoMonsters = await createTwoMonsters();
+
+    if (makeTwoMonsters) {
+      getRandomMonsterTypeOne(monsters, makeTwoMonsters);
+      getRandomMonsterTypeTwo(monsters, makeTwoMonsters);
+    } else {
+      getRandomMonsterTypeOne(monsters, makeTwoMonsters);
+    }
   };
 
   const getMonsterWithRatingBtn = async () => {
@@ -569,7 +579,7 @@ const DetailedFight = (props: IProps) => {
           await findRandomEncounter(monstersWithCR);
           setNewMonsterActivity();
         }
-        if (monstersWithCR.length > 0) {
+        if (monstersWithCR.length > 0 && selectedRegion !== "All") {
           const tempMonsterList = [] as IMonster[];
           monstersWithCR.map((monster) => {
             if (
@@ -590,7 +600,8 @@ const DetailedFight = (props: IProps) => {
             tempMonsterList.length > 0 &&
             typeof tempMonsterList === typeof monsterList
           ) {
-            findRandomEncounter(tempMonsterList);
+            await findRandomEncounter(tempMonsterList);
+            setNewMonsterActivity();
           }
         }
       } catch (error) {

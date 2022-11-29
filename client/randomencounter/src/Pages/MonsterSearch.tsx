@@ -131,7 +131,7 @@ const MonsterSearch = (props: IProps) => {
       setMonsterList([]);
     }
     monsterList.map((monster) => {
-      return console.log("NAAAAME: ", monster.name);
+      return console.log("name: ", monster.name);
     });
   };
 

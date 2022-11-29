@@ -91,7 +91,6 @@ const QuickFight = (props: IProps) => {
   //     url: "null",
   //   });
   // const { state } = useContext(IdContext);
-  console.log("monsters on main page", monsterList);
 
   const changeNumberOfPlayers = (playerNumber: string) => {
     setNumberOfPlayers(Number(playerNumber));
@@ -152,7 +151,6 @@ const QuickFight = (props: IProps) => {
           monsterName
         );
         setMonsterDetails(tempMonsterDetails);
-        console.log("monster details :", tempMonsterDetails);
       } catch (error) {
         console.log("error: ", error);
       }
@@ -167,7 +165,6 @@ const QuickFight = (props: IProps) => {
   };
 
   const getRandomMonsterTypeOne = (monsters: IMonster[]) => {
-    console.log("FUNCTION MONSTERS WITH RATING LIST", monsters);
     const monsterIndex = Math.floor(Math.random() * monsters.length);
     let rndInt: number;
     if (twoTypeOfMonsters === true) {
@@ -176,7 +173,6 @@ const QuickFight = (props: IProps) => {
       rndInt = Math.floor(Math.random() * 6) + 1;
     }
     const monsterObject = monsters[monsterIndex];
-    console.log("monsterObject", monsterObject);
 
     const newRandomMonster = {
       ...monsterObject,
@@ -184,7 +180,6 @@ const QuickFight = (props: IProps) => {
     } as IRandomMonster;
     setRandomMonsterTypeOne(newRandomMonster);
   };
-  console.log("1 random monster: ", randomMonsterTypeOne);
 
   const getRandomMonsterTypeTwo = (monsters: IMonster[]) => {
     if (twoTypeOfMonsters === true && monsters.length > 1) {
@@ -224,7 +219,7 @@ const QuickFight = (props: IProps) => {
           findRandomEncounter(monstersWithCR);
           setNewMonsterActivity();
         }
-        if (monstersWithCR.length > 0) {
+        if (monstersWithCR.length > 0 && selectedRegion !== "All") {
           const tempMonsterList = [] as IMonster[];
           monstersWithCR.map((monster) => {
             if (
@@ -245,7 +240,8 @@ const QuickFight = (props: IProps) => {
             tempMonsterList.length > 0 &&
             typeof tempMonsterList === typeof monsterList
           ) {
-            findRandomEncounter(tempMonsterList);
+            await findRandomEncounter(tempMonsterList);
+            setNewMonsterActivity();
           }
         }
       } catch (error) {
@@ -261,8 +257,6 @@ const QuickFight = (props: IProps) => {
   const resetFilters = (): void => {
     setSelectedRegion("All");
   };
-
-  console.log("verage player level: ", averagePlayerLevel);
 
   return (
     <Box

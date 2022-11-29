@@ -85,7 +85,6 @@ const MainPage: React.FC = () => {
   //     url: "null",
   //   });
   // const { state } = useContext(IdContext);
-  console.log("monsters on main page", monsterList);
 
   const changeNumberOfPlayers = (playerNumber: string) => {
     setNumberOfPlayers(Number(playerNumber));
@@ -146,7 +145,6 @@ const MainPage: React.FC = () => {
           monsterName
         );
         setMonsterDetails(tempMonsterDetails);
-        console.log("monster details :", tempMonsterDetails);
       } catch (error) {
         console.log("error: ", error);
       }
@@ -155,7 +153,6 @@ const MainPage: React.FC = () => {
 
   const handleMonsterChange = (event: any) => {
     const tempSelectedMonster = event.target.value;
-    console.log("set selected Monster", tempSelectedMonster);
     setSelectedMonster(event.target.value);
     getMonsterDetails(tempSelectedMonster);
     setSelectedCR(undefined);
@@ -163,7 +160,6 @@ const MainPage: React.FC = () => {
 
   const selectMonsterFromCRList = (monsterName: string) => {
     const tempSelectedMonster = monsterName;
-    console.log("set selected Monster", tempSelectedMonster);
     // setSelectedMonster(event.target.value);
     getMonsterDetails(tempSelectedMonster);
   };
@@ -182,7 +178,6 @@ const MainPage: React.FC = () => {
   };
 
   const getRandomMonsterTypeOne = (monsters: IMonster[]) => {
-    console.log("FUNCTION MONSTERS WITH RATING LIST", monsters);
     const monsterIndex = Math.floor(Math.random() * monsters.length);
     let rndInt: number;
     if (twoTypeOfMonsters === true) {
@@ -191,7 +186,6 @@ const MainPage: React.FC = () => {
       rndInt = Math.floor(Math.random() * 6) + 1;
     }
     const monsterObject = monsters[monsterIndex];
-    console.log("monsterObject", monsterObject);
 
     const newRandomMonster = {
       ...monsterObject,
@@ -245,15 +239,11 @@ const MainPage: React.FC = () => {
     }
   };
 
-  console.log("verage player level: ", averagePlayerLevel);
-
   const handleRatingChange = (event: any) => {
     const tempMonsterRating = event.target.value;
     setSelectedCR(tempMonsterRating);
-    console.log("Monster Rating Selected", tempMonsterRating);
     if (tempMonsterRating !== undefined) {
       const monstersWithCR = getMonsterWithRating(tempMonsterRating);
-      console.log("monsterList with CR: ", monstersWithCR);
     }
   };
 

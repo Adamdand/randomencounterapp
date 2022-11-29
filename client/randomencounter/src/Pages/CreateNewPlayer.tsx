@@ -108,7 +108,6 @@ const CreateNewPlayer = (props: IProps): JSX.Element => {
                   >
                 ) => {
                   onChangeName(event.target.value);
-                  console.log("change");
                 }}
               />
             </Box>
@@ -129,7 +128,6 @@ const CreateNewPlayer = (props: IProps): JSX.Element => {
                   >
                 ) => {
                   onChangeAC(Number(event.target.value));
-                  console.log("change");
                 }}
               />
             </Box>
@@ -151,7 +149,6 @@ const CreateNewPlayer = (props: IProps): JSX.Element => {
                   >
                 ) => {
                   onChangeHealth(Number(event.target.value));
-                  console.log("change");
                 }}
               />
             </Box>
@@ -172,7 +169,6 @@ const CreateNewPlayer = (props: IProps): JSX.Element => {
                   >
                 ) => {
                   onChangeLevel(Number(event.target.value));
-                  console.log("change");
                 }}
               />
             </Box>
@@ -193,7 +189,6 @@ const CreateNewPlayer = (props: IProps): JSX.Element => {
                   >
                 ) => {
                   onChangeInitiative(Number(event.target.value));
-                  console.log("change");
                 }}
               />
             </Box>
