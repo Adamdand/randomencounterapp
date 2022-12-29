@@ -54,7 +54,7 @@ const MonsterDetails: React.FC<IProps> = (props: IProps) => {
               <CardMedia
                 component="img"
                 height="max"
-                image={`dndMonsterPics/${monsterData.index}.jpeg`}
+                image={`https://www.dnd5eapi.co${monsterData.image}`}
                 alt="no image at this time"
               />
               {/* <CardContent>

@@ -317,6 +317,7 @@ export interface IMonsterDetails {
   legendary_actions?: IActions[];
   url: string;
   xp: number;
+  image: string;
 }
 
 export interface ISpeed {
