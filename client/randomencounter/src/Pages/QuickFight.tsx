@@ -17,6 +17,11 @@ import monsterAPIs from "../API/monsterAPI";
 import { defaultMonsterDetails } from "../Context/DefaultTypes";
 import MonsterDetails from "./Common/MonsterDetails";
 import { allMonstersEnv, monsterRegions } from "../API/monsterSort";
+import {
+  getDifficulty,
+  getMaxMonsterCR,
+  getRandomCR,
+} from "../Hooks/useMonsterCalculations";
 
 interface IProps {
   gameType: string;
@@ -164,31 +169,66 @@ const QuickFight = (props: IProps) => {
     getMonsterDetails(tempSelectedMonster);
   };
 
-  const getRandomMonsterTypeOne = (monsters: IMonster[]) => {
+  const getRandomMonsterTypeOne = (
+    monsters: IMonster[],
+    difficulty: string
+  ) => {
     const monsterIndex = Math.floor(Math.random() * monsters.length);
-    let rndInt: number;
+    let monsterNum: number;
+    let maxMonsters = 1;
+    const minMonsters = 1;
+    if (difficulty === "Normal" || difficulty === "Hard") {
+      maxMonsters = 1;
+    }
+    if (difficulty === "Easy") {
+      maxMonsters = 4;
+    }
+    if (difficulty === "Very Easy") {
+      maxMonsters = 6;
+    }
     if (twoTypeOfMonsters === true) {
-      rndInt = Math.floor(Math.random() * 3) + 1;
+      monsterNum = Math.floor((Math.random() * maxMonsters) / 2) + minMonsters;
     } else {
-      rndInt = Math.floor(Math.random() * 6) + 1;
+      monsterNum = Math.floor(Math.random() * maxMonsters) + minMonsters;
     }
     const monsterObject = monsters[monsterIndex];
+    console.log("difficulty: ", difficulty);
+    console.log("maxMonsters: ", maxMonsters);
+    console.log("minMonsters: ", minMonsters);
+    console.log("monsterNum: ", monsterNum);
 
     const newRandomMonster = {
       ...monsterObject,
-      quantity: rndInt,
+      quantity: monsterNum,
     } as IRandomMonster;
     setRandomMonsterTypeOne(newRandomMonster);
   };
 
-  const getRandomMonsterTypeTwo = (monsters: IMonster[]) => {
+  const getRandomMonsterTypeTwo = (
+    monsters: IMonster[],
+    difficulty: string
+  ) => {
     if (twoTypeOfMonsters === true && monsters.length > 1) {
       const monsterIndex = Math.floor(Math.random() * monsters.length);
-      const rndInt = Math.floor(Math.random() * 3) + 1;
+
+      let maxMonsters = 1;
+      const minMonsters = 1;
+      if (difficulty === "Normal" || difficulty === "Hard") {
+        maxMonsters = 1;
+      }
+      if (difficulty === "Easy") {
+        maxMonsters = 4;
+      }
+      if (difficulty === "Very Easy") {
+        maxMonsters = 6;
+      }
+      const monsterNum =
+        Math.floor((Math.random() * maxMonsters) / 2) + minMonsters;
+
       const monsterObject = monsters[monsterIndex];
       const newRandomMonster = {
         ...monsterObject,
-        quantity: rndInt,
+        quantity: monsterNum,
       } as IRandomMonster;
       setRandomMonsterTypeTwo(newRandomMonster);
     } else {
@@ -201,22 +241,27 @@ const QuickFight = (props: IProps) => {
     }
   };
 
-  const findRandomEncounter = (monsters: IMonster[]) => {
-    settwoTypeOfMonsters(Math.random() < 0.5);
+  const findRandomEncounter = (monsters: IMonster[], difficulty: string) => {
+    settwoTypeOfMonsters(
+      Math.random() < 0.5 && difficulty !== "Normal" && difficulty !== "Hard"
+    );
 
-    getRandomMonsterTypeOne(monsters);
-    getRandomMonsterTypeTwo(monsters);
+    getRandomMonsterTypeOne(monsters, difficulty);
+    getRandomMonsterTypeTwo(monsters, difficulty);
   };
 
   const getMonsterWithRatingBtn = async () => {
-    if (averagePlayerLevel !== undefined) {
+    if (averagePlayerLevel !== undefined && numberOfPlayers !== undefined) {
       try {
+        const maxCR = getMaxMonsterCR(averagePlayerLevel, numberOfPlayers);
+        const randomCR = getRandomCR(1, maxCR);
+        const fightDifficulty = getDifficulty(randomCR, maxCR);
         const monstersWithCR = await monsterAPIs.getMonstersWithRating(
-          averagePlayerLevel
+          randomCR
         );
         setMonsterRatingList(monstersWithCR);
         if (monstersWithCR.length > 0 && selectedRegion === "All") {
-          findRandomEncounter(monstersWithCR);
+          findRandomEncounter(monstersWithCR, fightDifficulty);
           setNewMonsterActivity();
         }
         if (monstersWithCR.length > 0 && selectedRegion !== "All") {
@@ -240,7 +285,7 @@ const QuickFight = (props: IProps) => {
             tempMonsterList.length > 0 &&
             typeof tempMonsterList === typeof monsterList
           ) {
-            await findRandomEncounter(tempMonsterList);
+            await findRandomEncounter(tempMonsterList, fightDifficulty);
             setNewMonsterActivity();
           }
         }

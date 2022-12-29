@@ -32,6 +32,11 @@ import ActionsInfo from "./InfoPages/ActionsInfo";
 import SetUpInfo from "./InfoPages/SetUpInfo";
 import useResponsiveHelper from "../Hooks/useResponsiveHelper";
 import { allMonstersEnv, monsterRegions } from "../API/monsterSort";
+import {
+  getMaxMonsterCR,
+  getRandomCR,
+  getDifficulty,
+} from "../Hooks/useMonsterCalculations";
 
 interface IProps {
   gameType: string;
@@ -181,6 +186,7 @@ const DetailedFight = (props: IProps) => {
     defaultMonsterDetails
   );
   const [averagePlayerLevel, setAveragePlayerLevel] = useState<number>(3);
+  const [numberOfPlayers, setNumberOfPlayers] = useState<number>();
   const [randomActivityNumber, setRandomActivityNumber] = useState<number>(0);
   const [randomMonsterTypeOne, setRandomMonsterTypeOne] =
     useState<IRandomMonster>({
@@ -398,6 +404,7 @@ const DetailedFight = (props: IProps) => {
 
     const averageLevel = Math.trunc(levelSum / count);
     setAveragePlayerLevel(averageLevel);
+    setNumberOfPlayers(count);
   };
 
   useEffect(() => {
@@ -547,8 +554,9 @@ const DetailedFight = (props: IProps) => {
     }
   };
 
-  const createTwoMonsters = (): boolean => {
-    const randomChance = Math.random() < 0.5;
+  const createTwoMonsters = (difficulty: string): boolean => {
+    const randomChance =
+      Math.random() < 0.5 && difficulty !== "Normal" && difficulty !== "Hard";
     if (randomChance) {
       settwoTypeOfMonsters(true);
       return true;
@@ -557,8 +565,11 @@ const DetailedFight = (props: IProps) => {
     return false;
   };
 
-  const findRandomEncounter = async (monsters: IMonster[]) => {
-    const makeTwoMonsters = await createTwoMonsters();
+  const findRandomEncounter = async (
+    monsters: IMonster[],
+    difficulty: string
+  ) => {
+    const makeTwoMonsters = await createTwoMonsters(difficulty);
 
     if (makeTwoMonsters) {
       getRandomMonsterTypeOne(monsters, makeTwoMonsters);
@@ -569,14 +580,17 @@ const DetailedFight = (props: IProps) => {
   };
 
   const getMonsterWithRatingBtn = async () => {
-    if (averagePlayerLevel !== undefined) {
+    if (averagePlayerLevel !== undefined && numberOfPlayers !== undefined) {
       try {
+        const maxCR = getMaxMonsterCR(averagePlayerLevel, numberOfPlayers);
+        const randomCR = getRandomCR(1, maxCR);
+        const fightDifficulty = getDifficulty(randomCR, maxCR);
         const monstersWithCR = await monsterAPIs.getMonstersWithRating(
           averagePlayerLevel
         );
         setMonsterRatingList(monstersWithCR);
         if (monstersWithCR.length > 0 && selectedRegion === "All") {
-          await findRandomEncounter(monstersWithCR);
+          await findRandomEncounter(monstersWithCR, fightDifficulty);
           setNewMonsterActivity();
         }
         if (monstersWithCR.length > 0 && selectedRegion !== "All") {
@@ -600,7 +614,7 @@ const DetailedFight = (props: IProps) => {
             tempMonsterList.length > 0 &&
             typeof tempMonsterList === typeof monsterList
           ) {
-            await findRandomEncounter(tempMonsterList);
+            await findRandomEncounter(tempMonsterList, fightDifficulty);
             setNewMonsterActivity();
           }
         }
