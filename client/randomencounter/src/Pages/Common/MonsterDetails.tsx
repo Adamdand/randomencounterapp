@@ -36,10 +36,19 @@ const MonsterDetails: React.FC<IProps> = (props: IProps) => {
         <Box
           sx={{
             width: "100%",
-            paddingTop: "16px",
+            paddingTop: "8px",
           }}
         >
-          <Typography>Name = {monsterData.name}</Typography>
+          <Typography
+            sx={{
+              color: "black",
+              fontWeight: "bold",
+              textDecoration: "underline",
+              // textShadow: "-1px -1px 0 #ffffff, 1px -1px 0 #ffffff",
+            }}
+          >
+            Name = {monsterData.name}
+          </Typography>
           <Box
             sx={{
               width: "50%",
@@ -48,7 +57,7 @@ const MonsterDetails: React.FC<IProps> = (props: IProps) => {
           >
             <Card
               sx={{
-                margin: "32px",
+                margin: "8px",
               }}
             >
               <CardMedia
@@ -96,6 +105,7 @@ const MonsterDetails: React.FC<IProps> = (props: IProps) => {
             {monsterData.size !== "" && (
               <Typography>Size = {monsterData.size}</Typography>
             )}
+            <Typography>Kill XP = {monsterData.xp}</Typography>
             {monsterData.actions.length > 0 && (
               <Box sx={{ paddingTop: "8px" }}>
                 <Typography variant="h6">Actions:</Typography>

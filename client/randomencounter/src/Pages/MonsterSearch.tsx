@@ -341,6 +341,7 @@ const MonsterSearch = (props: IProps) => {
         <Box>
           <Box className={classes.monsterInfo}>
             <Typography
+              variant="h3"
               sx={{ textDecoration: "underline", fontWeight: "bold" }}
             >
               Stats
