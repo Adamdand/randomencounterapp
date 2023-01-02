@@ -43,8 +43,12 @@ const ButtonToggle = (props: IProps) => {
         </ToggleButton>
         <ToggleButton value="Monster Search" aria-label="monster search">
           <Typography color="white">
-            {" "}
-            {isMobile ? "Search" : "Monster Search"}
+            {isMobile ? "Monster Search" : "Monster Search"}
+          </Typography>
+        </ToggleButton>
+        <ToggleButton value="Item Search" aria-label="item search">
+          <Typography color="white">
+            {isMobile ? "Item Search" : "Item Search"}
           </Typography>
         </ToggleButton>
         <ToggleButton value="Quick Fight" aria-label="quick fight">
@@ -53,9 +57,9 @@ const ButtonToggle = (props: IProps) => {
         <ToggleButton value="Detailed Fight" aria-label="detailed fight">
           <Typography color="white">Detailed Fight</Typography>
         </ToggleButton>
-        <ToggleButton value="extra" aria-label="extra" disabled>
+        {/* <ToggleButton value="extra" aria-label="extra" disabled>
           <Typography color="white">extra</Typography>
-        </ToggleButton>
+        </ToggleButton> */}
       </ToggleButtonGroup>
     </Box>
   );

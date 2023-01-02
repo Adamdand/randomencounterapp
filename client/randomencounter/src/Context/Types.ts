@@ -354,3 +354,30 @@ export interface IMonsterEnvironments {
   name: string;
   environments: string[];
 }
+
+export interface IItem {
+  index: string;
+  name: string;
+  url: string;
+}
+
+export interface IItemList {
+  count: number;
+  results: IItem[];
+}
+export interface IItemDetails {
+  index: string;
+  name: string;
+  equipment_category: {
+    index: string;
+    name: string;
+    url: string;
+  };
+  rarity: {
+    name: string;
+  };
+  variants: string[];
+  variant: false;
+  desc: string[];
+  url: string;
+}

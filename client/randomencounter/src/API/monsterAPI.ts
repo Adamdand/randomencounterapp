@@ -6,7 +6,7 @@ const monsterAPI = {
     return axios
       .get("https://www.dnd5eapi.co/api//monsters")
       .then((response: AxiosResponse) => {
-        console.log("initial call", response.data);
+        // console.log("initial call", response.data);
         if (response.data.results.length > 0) {
           return response.data.results as IMonster[];
         }
@@ -34,7 +34,7 @@ const monsterAPI = {
       return axios
         .get("https://www.dnd5eapi.co/api//monsters")
         .then((response: AxiosResponse) => {
-          console.log("initial call", response.data);
+          // console.log("initial call", response.data);
           if (response.data.results.length > 0) {
             return response.data.results as IMonster[];
           }
@@ -48,7 +48,7 @@ const monsterAPI = {
         `https://www.dnd5eapi.co/api/monsters?challenge_rating=${monsterRating}`
       )
       .then((response: AxiosResponse) => {
-        console.log("monster Rating", response.data.results);
+        // console.log("monster Rating", response.data.results);
         return response.data.results as IMonster[];
       });
   },
