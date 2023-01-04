@@ -11,7 +11,12 @@ import { makeStyles } from "@mui/styles";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import useLoading from "../Hooks/useLoading";
-import { IItem, IItemDetails } from "../Context/Types";
+import {
+  IEquipError,
+  IEquipmentDetails,
+  IItem,
+  IItemDetails,
+} from "../Context/Types";
 import itemAPI from "../API/itemAPI";
 import { defaultMonsterDetails } from "../Context/DefaultTypes";
 import MonsterDetails from "./Common/MonsterDetails";
@@ -22,40 +27,6 @@ import ItemDetails from "./Common/ItemDetails";
 interface IProps {
   gameType: string;
 }
-
-const monsterRatings = [
-  "All",
-  1,
-  2,
-  3,
-  4,
-  5,
-  6,
-  7,
-  8,
-  9,
-  10,
-  11,
-  12,
-  13,
-  14,
-  15,
-  16,
-  17,
-  18,
-  19,
-  20,
-  21,
-  22,
-  23,
-  24,
-  25,
-  26,
-  27,
-  28,
-  29,
-  30,
-];
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -108,13 +79,21 @@ const ItemSearch = (props: IProps) => {
   const [itemList, setItemList] = useState<IItem[]>([]);
   // const [monsterRatingList, setMonsterRatingList] = useState<IItem[]>([]);
   const [selectedCR, setSelectedCR] = useState<number | string>("All");
-  const [selectedRegion, setSelectedRegion] = useState<string>("All");
-  const [selectedItem, setSelectedItem] = useState<IItem>({
+  const [selectedEquipment, setSelectedEquipment] =
+    useState<IEquipmentDetails | null>(null);
+  const [equipList, setEquipList] = useState<IItem[]>([]);
+  const [equipTypeList, setEquipTypeList] = useState<IItem[]>([]);
+  const [selectedItem, setSelectedItem] = useState<IItem | null>({
     index: "null",
     name: "null",
     url: "null",
   });
   const [itemDetails, setItemDetails] = useState<IItemDetails>();
+  const [equipDetails, setEquipDetails] = useState<IEquipmentDetails | null>(
+    null
+  );
+  const [basicEquipList, setBasicEquipList] = useState<IItem[]>([]);
+  const [selectedBasicItem, setSelectedBasicItem] = useState<IItem | null>();
 
   let tempList: IItem[];
   const getAllItems = async () => {
@@ -134,14 +113,44 @@ const ItemSearch = (props: IProps) => {
     });
   };
 
+  const getAllItemTypes = async () => {
+    try {
+      tempList = await itemAPI.getAllEquipmentTypesAxios();
+    } catch (error) {
+      console.log("error: ", error);
+    }
+    if (tempList.length > 0) {
+      setEquipList(tempList);
+      // setMonsterRatingList(tempList);
+    } else {
+      setEquipList([]);
+    }
+    itemList.map((item) => {
+      return console.log("types: ", item.name);
+    });
+  };
+
+  const getBasicEquipList = async () => {
+    let tempEquipList: IItem[];
+    try {
+      tempEquipList = await itemAPI.getBasicEquipListAxios();
+      setBasicEquipList(tempEquipList);
+      console.log("equip list :", tempEquipList);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+
   useEffect(() => {
     getAllItems();
+    getAllItemTypes();
+    getBasicEquipList();
   }, []);
 
   const resetFilters = (): void => {
-    setSelectedCR("All");
-    setSelectedRegion("All");
-    // setMonsterRatingList(itemList);
+    // setSelectedCR("All");
+    setSelectedEquipment(null);
+    setEquipTypeList([]);
   };
 
   const getItemDetails = async (itemName: string) => {
@@ -157,40 +166,62 @@ const ItemSearch = (props: IProps) => {
     }
   };
 
-  const handleMonsterChange = (event: any) => {
-    const tempSelectedItem = event.target.value;
-    console.log("set selected Monster", tempSelectedItem);
-    setSelectedItem(event.target.value);
-    getItemDetails(tempSelectedItem);
-    setSelectedCR("All");
-    setSelectedRegion("All");
+  const getEquipDetails = async (equipName: string) => {
+    let tempItemDetails: IEquipmentDetails;
+    console.log("equipName: ", equipName);
+    if (equipName !== null) {
+      try {
+        tempItemDetails = await itemAPI.getEquipDetailsAxios(equipName);
+
+        if (basicEquipList.some((el) => el.index === equipName)) {
+          setEquipDetails(tempItemDetails);
+          console.log("equip details :", tempItemDetails);
+        } else {
+          setEquipDetails(null);
+        }
+      } catch (error) {
+        console.log("error: ", error);
+      }
+    }
   };
 
-  // const getMonsterWithRating = async (monsterRating: number | string) => {
-  //   let monstersWithCR: IItem[];
-  //   monstersWithCR = [];
-  //   try {
-  //     monstersWithCR = await itemAPI.getMonstersWithRating(monsterRating);
-  //   } catch (error) {
-  //     console.log("error: ", error);
-  //   }
-  //   if (monstersWithCR.length > 0) {
-  //     setMonsterRatingList(monstersWithCR);
-  //   }
-  // };
+  const handleMagicItemChange = (event: any) => {
+    const tempSelectedItem = event.target.value;
+    console.log("set selected Item", tempSelectedItem);
+    setSelectedItem(event.target.value);
+    getItemDetails(tempSelectedItem);
+    setEquipDetails(null);
+    setSelectedEquipment(null);
+    setSelectedBasicItem(null);
+  };
 
-  // const handleRatingChange = (event: any) => {
-  //   const tempMonsterRating = event.target.value;
-  //   setSelectedCR(tempMonsterRating);
-  //   if (tempMonsterRating !== undefined) {
-  //     const monstersWithCR = getMonsterWithRating(tempMonsterRating);
-  //     console.log("itemList with CR: ", monstersWithCR);
-  //   }
-  // };
+  const handleBasicItemChange = (event: any) => {
+    const tempSelectedItem = event.target.value;
+    console.log("set selected Item", tempSelectedItem);
+    setSelectedBasicItem(tempSelectedItem);
+    getEquipDetails(tempSelectedItem);
+    setSelectedItem(null);
+    setItemDetails(undefined);
+    setSelectedEquipment(null);
+    setEquipDetails(null);
+  };
 
-  const handleRegionChange = (event: any) => {
-    const tempRegion = event.target.value;
-    setSelectedRegion(tempRegion);
+  const reformatString = (str: string) => {
+    const temp = str.replace(/\s+/g, "-").toLowerCase();
+    return temp;
+  };
+
+  const handleEquipmentTypeChange = async (event: any) => {
+    const tempItemType = event.target.value;
+    setSelectedEquipment(tempItemType);
+    if (tempItemType !== undefined) {
+      const formatedType = reformatString(tempItemType);
+      console.log("FOTMATED TYPE: ", formatedType);
+      const list = itemAPI.getEquipTypeAxios(formatedType);
+
+      setEquipTypeList(await list);
+      console.log("itemList with type: ", list);
+    }
   };
 
   return (
@@ -217,17 +248,35 @@ const ItemSearch = (props: IProps) => {
       <Box className={classes.root}>
         <Box>
           <FormControl sx={{ width: "250px" }}>
-            <Typography variant="h3">Search By Item Name</Typography>
+            <Typography variant="h3">Magical Items</Typography>
             <Select
               fullWidth={true}
-              labelId="monster"
-              id="monster"
+              labelId="item"
+              id="item"
               value={selectedItem}
-              onChange={handleMonsterChange}
+              onChange={handleMagicItemChange}
             >
-              {itemList.map((monster) => (
-                <MenuItem value={monster.index}>
-                  <Typography>{monster.name}</Typography>
+              {itemList.map((item) => (
+                <MenuItem value={item.index}>
+                  <Typography>{item.name}</Typography>
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Box>
+        <Box>
+          <FormControl sx={{ width: "250px" }}>
+            <Typography variant="h3">Basic Items</Typography>
+            <Select
+              fullWidth={true}
+              labelId="item"
+              id="item"
+              value={selectedBasicItem}
+              onChange={handleBasicItemChange}
+            >
+              {basicEquipList.map((item) => (
+                <MenuItem value={item.index}>
+                  <Typography>{item.name}</Typography>
                 </MenuItem>
               ))}
             </Select>
@@ -235,40 +284,28 @@ const ItemSearch = (props: IProps) => {
         </Box>
         <Box sx={{ paddingTop: "16px" }}>
           {/* <FormControl sx={{ width: "250px" }}>
-            <Typography variant="h3">Filter By CR</Typography>
-            <Select
-              fullWidth={true}
-              labelId="CR"
-              id="CR"
-              value={selectedCR}
-              defaultValue="All"
-              onChange={handleRatingChange}
-            >
-              {monsterRatings.map((rating) => (
-                <MenuItem value={rating}>
-                  <Typography>{rating}</Typography>
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl> */}
-          <FormControl sx={{ width: "250px" }}>
-            <Typography variant="h3">Filter By Region</Typography>
+            <Typography variant="h3">Equipment</Typography>
             <Select
               fullWidth={true}
               labelId="Region"
               id="Region"
-              value={selectedRegion}
-              onChange={handleRegionChange}
-              defaultValue="All"
+              value={selectedEquipment?.name}
+              onChange={handleEquipmentTypeChange}
+              defaultValue="None"
             >
-              {monsterRegions.map((region) => (
-                <MenuItem value={region}>
-                  <Typography>{region}</Typography>
+              {equipList.map((equip) => (
+                <MenuItem value={equip.name}>
+                  <Typography>{equip.name}</Typography>
                 </MenuItem>
               ))}
+
+              ///////
+
+
             </Select>
-          </FormControl>
-          <Box>
+          </FormControl> */}
+
+          {/* <Box>
             <Button
               sx={{
                 "&:hover": {
@@ -281,17 +318,17 @@ const ItemSearch = (props: IProps) => {
             >
               Reset Filters
             </Button>
-          </Box>
+          </Box> */}
 
-          {selectedCR && (
+          {/* {selectedCR && (
             <Box sx={{ width: "100%", paddingTop: "16px" }}>
               <Typography
                 sx={{ textDecoration: "underline", fontWeight: "bold" }}
               >
-                Item Options with CR {selectedCR} & Region {selectedRegion}
+                Item type {selectedEquipment} options
               </Typography>
 
-              {/* <Box
+              <Box
                 sx={{
                   height: "160px",
                   width: "100%",
@@ -300,39 +337,62 @@ const ItemSearch = (props: IProps) => {
                 }}
                 className={classes.scrollBar}
               >
-                {monsterRatingList.map((monstersWithRating) => {
-                  if (
-                    allMonstersEnv.find((element) => {
-                      return (
-                        element.name === monstersWithRating.name &&
-                        element.environments.indexOf(selectedRegion) > -1
-                      );
-                    })
-                  ) {
-                    return (
-                      <Box>
-                        <Button
-                        // onClick={() =>
-                        //   getMonsterDetails(monstersWithRating.index)
-                        // }
+                {equipTypeList.map((list) => {
+                  return (
+                    <Box>
+                      <Button onClick={() => getEquipDetails(list.index)}>
+                        <Typography
+                          display="flex"
+                          flexDirection="row"
+                          justifyContent="space-evenly"
+                          alignItems="center"
+                          style={{ cursor: "pointer" }}
                         >
-                          <Typography
-                            display="flex"
-                            flexDirection="row"
-                            justifyContent="space-evenly"
-                            alignItems="center"
-                            style={{ cursor: "pointer" }}
-                          >
-                            <Box>{monstersWithRating.name}</Box>
-                          </Typography>
-                        </Button>
-                      </Box>
-                    );
-                  }
-                  return <></>;
+                          <Box>{list.name}</Box>
+                        </Typography>
+                      </Button>
+                    </Box>
+                  );
                 })}
-              </Box> */}
+              </Box>
             </Box>
+          )} */}
+        </Box>
+        <Box>
+          {equipDetails !== undefined &&
+          equipDetails !== null &&
+          equipDetails.name ? (
+            <Box className={classes.monsterInfo}>
+              <Typography
+                variant="h3"
+                sx={{ textDecoration: "underline", fontWeight: "bold" }}
+              >
+                Stats
+              </Typography>
+              <Box>{equipDetails.name}</Box>
+              <Box>Desc: {equipDetails.desc}</Box>
+
+              <Box>
+                Cost: {equipDetails.cost.quantity}
+                {equipDetails.cost.unit}
+              </Box>
+              <Box>Weight: {equipDetails.weight}</Box>
+
+              <Box>Damage: {equipDetails.damage}</Box>
+              <Box>Props: {equipDetails.properties}</Box>
+              <Box>Range: {equipDetails.range}</Box>
+              <Box>Wep Range: {equipDetails.weapon_range}</Box>
+              <Box>Special: {equipDetails.special}</Box>
+              <Box>Category: {equipDetails.equipment_category.name}</Box>
+              {/* {equipDetails.name !== "" && (
+                <ItemDetails itemData={itemDetails} />
+              )}
+              {itemDetails.name === "" && (
+                <Typography>No Item Selected</Typography>
+              )} */}
+            </Box>
+          ) : (
+            <></>
           )}
         </Box>
         <Box>

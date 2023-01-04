@@ -381,3 +381,52 @@ export interface IItemDetails {
   desc: string[];
   url: string;
 }
+
+export interface IEquipmentDetails {
+  desc: string[];
+  special: string[];
+  index: string;
+  name: string;
+  equipment_category: {
+    index: string;
+    name: string;
+    url: string;
+  };
+  weapon_category: string;
+  weapon_range: string;
+  category_range: string;
+  cost: {
+    quantity: 1;
+    unit: string;
+  };
+  damage: {
+    damage_dice: string;
+    damage_type: {
+      index: string;
+      name: string;
+      url: string;
+    };
+  };
+  range: {
+    normal: 5;
+  };
+  weight: 2;
+  properties: [
+    {
+      index: string;
+      name: string;
+      url: string;
+    },
+    {
+      index: string;
+      name: string;
+      url: string;
+    }
+  ];
+  url: string;
+  contents: string[];
+}
+
+export interface IEquipError {
+  error: string;
+}
