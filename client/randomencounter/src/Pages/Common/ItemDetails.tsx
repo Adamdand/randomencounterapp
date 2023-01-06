@@ -24,14 +24,13 @@ const ItemDetails: React.FC<IProps> = (props: IProps) => {
   const theme = useTheme();
 
   return (
-    <Box
-      className={classes.root}
-      sx={{
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "flex-start",
-      }}
-    >
+    <Box>
+      <Typography
+        variant="h3"
+        sx={{ textDecoration: "underline", fontWeight: "bold" }}
+      >
+        Stats
+      </Typography>
       {itemData.name !== "" && (
         <Box
           sx={{
@@ -47,7 +46,7 @@ const ItemDetails: React.FC<IProps> = (props: IProps) => {
               // textShadow: "-1px -1px 0 #ffffff, 1px -1px 0 #ffffff",
             }}
           >
-            Name = {itemData.name}
+            {itemData.name}
           </Typography>
           <Box
             sx={{
@@ -84,35 +83,28 @@ const ItemDetails: React.FC<IProps> = (props: IProps) => {
             }}
           >
             <Typography>
-              Category = {itemData.equipment_category.name}
+              Category: {itemData.equipment_category.name}
             </Typography>
-            <Typography>Rarity = {itemData.rarity.name}</Typography>
+            <Typography>Rarity: {itemData.rarity.name}</Typography>
             {itemData.variants.map((variant) => {
               return (
                 <Box>
-                  <Typography>Variant Name = {variant}</Typography>
+                  <Typography>Variant Name: {variant}</Typography>
                   <Divider />
                 </Box>
               );
             })}
-            {itemData.desc.map((txt) => {
-              return (
-                <Box>
-                  <Typography>{txt}</Typography>
-                </Box>
-              );
-            })}
+            <Typography>
+              Desc:
+              {itemData.desc.map((txt) => {
+                return (
+                  <Box>
+                    <Typography>{txt}</Typography>
+                  </Box>
+                );
+              })}
+            </Typography>
           </Box>
-        </Box>
-      )}
-      {itemData.name === "" && (
-        <Box
-          sx={{
-            width: "100%",
-            paddingTop: "16px",
-          }}
-        >
-          <Typography>No Item Selected</Typography>
         </Box>
       )}
     </Box>
