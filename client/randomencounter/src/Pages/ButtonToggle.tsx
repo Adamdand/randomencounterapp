@@ -51,6 +51,11 @@ const ButtonToggle = (props: IProps) => {
             {isMobile ? "Item Search" : "Item Search"}
           </Typography>
         </ToggleButton>
+        <ToggleButton value="Random Item" aria-label="random item">
+          <Typography color="white">
+            {isMobile ? "Random Item" : "Random Item"}
+          </Typography>
+        </ToggleButton>
         <ToggleButton value="Quick Fight" aria-label="quick fight">
           <Typography color="white">Quick Fight</Typography>
         </ToggleButton>

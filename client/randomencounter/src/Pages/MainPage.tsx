@@ -12,6 +12,7 @@ import QuickFight from "./QuickFight";
 import DetailedFight from "./DetailFight";
 import Home from "./Home";
 import ItemSearch from "./ItemSearch";
+import RandomItem from "./RandomItem";
 
 // import { signInWithEmailAndPassword } from "firebase/auth";
 // import { authenticate } from "API/firebase";
@@ -281,6 +282,7 @@ const MainPage: React.FC = () => {
         )}
         {gameType === "Monster Search" && <MonsterSearch gameType={gameType} />}
         {gameType === "Item Search" && <ItemSearch gameType={gameType} />}
+        {gameType === "Random Item" && <RandomItem gameType={gameType} />}
         {gameType === "Quick Fight" && <QuickFight gameType={gameType} />}
         {gameType === "Detailed Fight" && <DetailedFight gameType={gameType} />}
       </Box>
