@@ -493,7 +493,7 @@ const DetailedFight = (props: IProps) => {
       while (monsterCount < rndInt) {
         testList.push({
           characterName: `${tempMonsterDetails.name}${monsterCount + 1}`,
-          characterAC: tempMonsterDetails.challenge_rating,
+          characterAC: tempMonsterDetails.armor_class[0].value,
           characterHealth: tempMonsterDetails.hit_points,
           characterInitative: Math.ceil(
             Math.round((tempMonsterDetails.dexterity - 10) / 2) +
@@ -533,7 +533,7 @@ const DetailedFight = (props: IProps) => {
         while (monsterCount < rndInt) {
           testList.push({
             characterName: `${tempMonsterDetails.name}${monsterCount + 1}`,
-            characterAC: tempMonsterDetails.challenge_rating,
+            characterAC: tempMonsterDetails.armor_class[0].value,
             characterHealth: tempMonsterDetails.hit_points,
             characterInitative: Math.ceil(
               Math.round((tempMonsterDetails.dexterity - 10) / 2) +
