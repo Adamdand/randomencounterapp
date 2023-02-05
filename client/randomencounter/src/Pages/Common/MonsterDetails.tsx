@@ -86,7 +86,7 @@ const MonsterDetails: React.FC<IProps> = (props: IProps) => {
             <Typography>
               Challenge Rating = {monsterData.challenge_rating}
             </Typography>
-            <Typography>AC = {monsterData.armor_class}</Typography>
+            {/* <Typography>AC = {monsterData.armor_class}</Typography> */}
             <Typography>HitPoints = {monsterData.hit_points}</Typography>
             {monsterData.alignment !== "" && (
               <Typography>Alignment = {monsterData.alignment}</Typography>

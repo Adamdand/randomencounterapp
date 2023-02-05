@@ -152,6 +152,7 @@ const MonsterSearch = (props: IProps) => {
         tempMonsterDetails = await monsterAPIs.getSpecificMonsterAxios(
           monsterName
         );
+        console.log("ADAM: ", tempMonsterDetails);
         setMonsterDetails(tempMonsterDetails);
         console.log("monster details :", tempMonsterDetails);
       } catch (error) {
