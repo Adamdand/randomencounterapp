@@ -4,7 +4,7 @@ import { IMonster, IMonsterDetails } from "../Context/Types";
 const monsterAPI = {
   getAllMonsterAxios: async (): Promise<IMonster[]> => {
     return axios
-      .get("https://www.dnd5eapi.co/api//monsters")
+      .get("https://www.dnd5eapi.co/api/monsters")
       .then((response: AxiosResponse) => {
         // console.log("initial call", response.data);
         if (response.data.results.length > 0) {
@@ -32,7 +32,7 @@ const monsterAPI = {
   ): Promise<IMonster[]> => {
     if (monsterRating === "All") {
       return axios
-        .get("https://www.dnd5eapi.co/api//monsters")
+        .get("https://www.dnd5eapi.co/api/monsters")
         .then((response: AxiosResponse) => {
           // console.log("initial call", response.data);
           if (response.data.results.length > 0) {

@@ -291,7 +291,7 @@ export interface IMonsterDetails {
   type: string;
   subtype: string | null;
   alignment: string | null;
-  armor_class: number;
+  // armor_class: number;
   hit_points: number;
   hit_dice: string;
   speed: ISpeed;
