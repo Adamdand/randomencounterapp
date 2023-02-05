@@ -2,7 +2,7 @@ import { IMonsterDetails } from "./Types";
 
 export const defaultMonsterDetails = {
   alignment: "",
-  // armor_class: 0,
+  armor_class: [{ value: 0, type: "" }],
   charisma: 0,
   constitution: 0,
   dexterity: 0,
