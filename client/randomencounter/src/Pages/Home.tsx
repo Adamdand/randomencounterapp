@@ -71,7 +71,7 @@ const Home = (props: IProps) => {
     { url: "/photo/grass1.jpg", width: "100%", top: "200px", speed: -10 },
     { url: "/photo/tree3.jpg", width: "100%", top: "-80px", speed: -15 },
     { url: "/photo/tree2.jpg", width: "100%", top: "0px", speed: -25 },
-    { url: "/photo/tree1.jpg", width: "100%", top: "80px", speed: -30 },
+    { url: "/photo/tree1.jpg", width: "100%", top: "0px", speed: -30 },
   ] as IParallaxImages[];
 
   return (
