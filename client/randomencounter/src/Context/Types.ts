@@ -435,3 +435,10 @@ export interface IEquipmentDetails {
 export interface IEquipError {
   error: string;
 }
+
+export interface IParallaxImages {
+  url: string;
+  width: string;
+  top: string;
+  speed: number;
+}
