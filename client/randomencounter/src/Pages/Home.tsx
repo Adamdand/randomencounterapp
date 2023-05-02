@@ -72,7 +72,7 @@ const Home = (props: IProps) => {
     { url: mnt4, width: "100%", top: "-300px", speed: -30 },
     { url: mnt3, width: "100%", top: "100px", speed: -20 },
     { url: mnt2, width: "100%", top: "400px", speed: -10 },
-    { url: mnt1, width: "25%", top: "660px", speed: -1 },
+    { url: mnt1, width: "25%", top: "680px", speed: -1 },
   ] as IParallaxImages[];
 
   const parallaxTwo = [
@@ -112,7 +112,7 @@ const Home = (props: IProps) => {
           imageList={parallaxOne}
         />
       </Box>
-      {/* <Box sx={{ height: "200px", backgroundColor: "black" }} /> */}
+      <Box sx={{ height: "50px", backgroundColor: "black" }} />
 
       <Box>
         <ParalaxComponent
@@ -144,7 +144,7 @@ const Home = (props: IProps) => {
           imageList={parallaxTwo}
         />
       </Box> */}
-      {/* <Box sx={{ height: "200px", backgroundColor: "black" }} /> */}
+      <Box sx={{ height: "50px", backgroundColor: "black" }} />
       <Box>
         <ParalaxComponent
           title="Detailed Fight"
