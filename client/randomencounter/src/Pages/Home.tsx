@@ -6,6 +6,24 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ParalaxComponent from "./Common/ParalaxComponent";
 import { IParallaxImages } from "../Context/Types";
 import ZoomParalax from "./Common/ZoomParalax";
+import dune6 from "./SVGs/dune6.svg";
+import dune5 from "./SVGs/dune5.svg";
+import dune4 from "./SVGs/dune4.svg";
+import dune3 from "./SVGs/dune3.svg";
+import dune2 from "./SVGs/dune2.svg";
+import dune1 from "./SVGs/dune1.svg";
+
+import sky1 from "./SVGs/sky1.svg";
+import grass1 from "./SVGs/grass1.svg";
+
+import mnt1 from "./SVGs/mnt1.svg";
+import mnt2 from "./SVGs/mnt2.svg";
+import mnt3 from "./SVGs/mnt3.svg";
+import mnt4 from "./SVGs/mnt4.svg";
+
+import tree1 from "./SVGs/tree1.svg";
+import tree2 from "./SVGs/tree2.svg";
+import tree3 from "./SVGs/tree3.svg";
 
 interface IProps {
   gameType: string;
@@ -51,27 +69,27 @@ const Home = (props: IProps) => {
   };
 
   const parallaxOne = [
-    { url: "/photo/mnt4.jpg", width: "100%", top: "-300px", speed: -30 },
-    { url: "/photo/mnt3.jpg", width: "100%", top: "100px", speed: -20 },
-    { url: "/photo/mnt2.jpg", width: "100%", top: "400px", speed: -10 },
-    { url: "/photo/mnt1.jpg", width: "25%", top: "660px", speed: -1 },
+    { url: mnt4, width: "100%", top: "-300px", speed: -30 },
+    { url: mnt3, width: "100%", top: "100px", speed: -20 },
+    { url: mnt2, width: "100%", top: "400px", speed: -10 },
+    { url: mnt1, width: "25%", top: "660px", speed: -1 },
   ] as IParallaxImages[];
 
   const parallaxTwo = [
-    { url: "/photo/dune6.jpg", width: "100%", top: "-300px", speed: -30 },
-    { url: "/photo/dune5.jpg", width: "100%", top: "-60px", speed: -25 },
-    { url: "/photo/dune4.jpg", width: "100%", top: "100px", speed: -20 },
-    { url: "/photo/dune3.jpg", width: "100%", top: "200px", speed: -15 },
-    { url: "/photo/dune2.jpg", width: "100%", top: "400px", speed: -10 },
-    { url: "/photo/dune1.jpg", width: "100%", top: "700px", speed: -5 },
+    { url: dune6, width: "100%", top: "-300px", speed: -30 },
+    { url: dune5, width: "100%", top: "-60px", speed: -25 },
+    { url: dune4, width: "100%", top: "100px", speed: -20 },
+    { url: dune3, width: "100%", top: "200px", speed: -15 },
+    { url: dune2, width: "100%", top: "400px", speed: -10 },
+    { url: dune1, width: "100%", top: "700px", speed: -5 },
   ] as IParallaxImages[];
 
   const parallaxThree = [
-    { url: "/photo/sky1.jpg", width: "100%", top: "-60px", speed: -5 },
-    { url: "/photo/grass1.jpg", width: "100%", top: "200px", speed: -10 },
-    { url: "/photo/tree3.jpg", width: "100%", top: "-80px", speed: -15 },
-    { url: "/photo/tree2.jpg", width: "100%", top: "0px", speed: -25 },
-    { url: "/photo/tree1.jpg", width: "100%", top: "0px", speed: -30 },
+    { url: sky1, width: "100%", top: "-60px", speed: -5 },
+    { url: grass1, width: "100%", top: "200px", speed: -10 },
+    { url: tree3, width: "100%", top: "-80px", speed: -15 },
+    { url: tree2, width: "100%", top: "0px", speed: -25 },
+    { url: tree1, width: "100%", top: "0px", speed: -30 },
   ] as IParallaxImages[];
 
   return (
