@@ -41,7 +41,7 @@ const ButtonToggle = (props: IProps) => {
           sx={{
             backgroundColor: "maroon",
             boxShadow:
-              "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
+              "inset 0 0 35px 5px rgba(0,0,0,0.25), inset 0 2px 1px 1px red, inset 0 -2px 1px black",
           }}
         >
           <Typography color="white">Home</Typography>
@@ -52,7 +52,7 @@ const ButtonToggle = (props: IProps) => {
           sx={{
             backgroundColor: "maroon",
             boxShadow:
-              "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
+              "inset 0 0 35px 5px rgba(0,0,0,0.25), inset 0 2px 1px 1px red, inset 0 -2px 1px black",
           }}
         >
           <Typography color="white">
@@ -65,7 +65,7 @@ const ButtonToggle = (props: IProps) => {
           sx={{
             backgroundColor: "maroon",
             boxShadow:
-              "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
+              "inset 0 0 35px 5px rgba(0,0,0,0.25), inset 0 2px 1px 1px red, inset 0 -2px 1px black",
           }}
         >
           <Typography color="white">
@@ -78,7 +78,7 @@ const ButtonToggle = (props: IProps) => {
           sx={{
             backgroundColor: "maroon",
             boxShadow:
-              "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
+              "inset 0 0 35px 5px rgba(0,0,0,0.25), inset 0 2px 1px 1px red, inset 0 -2px 1px black",
           }}
         >
           <Typography color="white">
@@ -91,7 +91,7 @@ const ButtonToggle = (props: IProps) => {
           sx={{
             backgroundColor: "maroon",
             boxShadow:
-              "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
+              "inset 0 0 35px 5px rgba(0,0,0,0.25), inset 0 2px 1px 1px red, inset 0 -2px 1px black",
           }}
         >
           <Typography color="white">Quick Fight</Typography>
@@ -102,7 +102,7 @@ const ButtonToggle = (props: IProps) => {
           sx={{
             backgroundColor: "maroon",
             boxShadow:
-              "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
+              "inset 0 0 35px 5px rgba(0,0,0,0.25), inset 0 2px 1px 1px red, inset 0 -2px 1px black",
           }}
         >
           <Typography color="white">Detailed Fight</Typography>
