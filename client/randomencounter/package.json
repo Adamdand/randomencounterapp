@@ -16,7 +16,6 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.25.0",
-    "eslint": "^8.7.0",
     "firebase": "^9.4.1",
     "formik": "^2.2.9",
     "libphonenumber-js": "^1.9.19",
@@ -35,7 +34,7 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

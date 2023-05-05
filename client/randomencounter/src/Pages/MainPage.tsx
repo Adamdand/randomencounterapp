@@ -268,13 +268,7 @@ const MainPage: React.FC = () => {
           width: "100%",
         }}
       >
-        <Box
-          sx={{
-            paddingBottom: "20px",
-            paddingTop: "40px",
-            backgroundColor: "black",
-          }}
-        >
+        <Box>
           <ButtonToggle onClick={handleGameType} gameType={gameType} />
         </Box>
         {gameType === "Home" && (

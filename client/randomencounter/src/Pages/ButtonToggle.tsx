@@ -25,7 +25,8 @@ const ButtonToggle = (props: IProps) => {
         diaplay: "flex",
         flexDirection: "row",
         width: "100%",
-        backgroundColor: "maroon",
+        backgroundColor: "indianred",
+        overflowX: "scroll",
       }}
     >
       <ToggleButtonGroup
@@ -36,30 +37,74 @@ const ButtonToggle = (props: IProps) => {
       >
         <ToggleButton
           value="Home"
-          className={classes.toggleButton}
           aria-label="home"
+          sx={{
+            backgroundColor: "maroon",
+            boxShadow:
+              "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
+          }}
         >
           <Typography color="white">Home</Typography>
         </ToggleButton>
-        <ToggleButton value="Monster Search" aria-label="monster search">
+        <ToggleButton
+          value="Monster Search"
+          aria-label="monster search"
+          sx={{
+            backgroundColor: "maroon",
+            boxShadow:
+              "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
+          }}
+        >
           <Typography color="white">
             {isMobile ? "Monster Search" : "Monster Search"}
           </Typography>
         </ToggleButton>
-        <ToggleButton value="Item Search" aria-label="item search">
+        <ToggleButton
+          value="Item Search"
+          aria-label="item search"
+          sx={{
+            backgroundColor: "maroon",
+            boxShadow:
+              "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
+          }}
+        >
           <Typography color="white">
             {isMobile ? "Item Search" : "Item Search"}
           </Typography>
         </ToggleButton>
-        <ToggleButton value="Random Item" aria-label="random item">
+        <ToggleButton
+          value="Random Item"
+          aria-label="random item"
+          sx={{
+            backgroundColor: "maroon",
+            boxShadow:
+              "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
+          }}
+        >
           <Typography color="white">
             {isMobile ? "Random Item" : "Random Item"}
           </Typography>
         </ToggleButton>
-        <ToggleButton value="Quick Fight" aria-label="quick fight">
+        <ToggleButton
+          value="Quick Fight"
+          aria-label="quick fight"
+          sx={{
+            backgroundColor: "maroon",
+            boxShadow:
+              "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
+          }}
+        >
           <Typography color="white">Quick Fight</Typography>
         </ToggleButton>
-        <ToggleButton value="Detailed Fight" aria-label="detailed fight">
+        <ToggleButton
+          value="Detailed Fight"
+          aria-label="detailed fight"
+          sx={{
+            backgroundColor: "maroon",
+            boxShadow:
+              "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
+          }}
+        >
           <Typography color="white">Detailed Fight</Typography>
         </ToggleButton>
         {/* <ToggleButton value="extra" aria-label="extra" disabled>
