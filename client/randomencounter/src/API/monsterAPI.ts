@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { IMonster, IMonsterDetails } from "../Context/Types";
+import { IMonster, IMonsterDetails } from "../context/Types";
 
 const monsterAPI = {
   getAllMonsterAxios: async (): Promise<IMonster[]> => {

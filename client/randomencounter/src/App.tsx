@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { ParallaxProvider } from "react-scroll-parallax";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import BaseTheme from "./Themes/ThemeProvider";
-import Routes from "./Routes/Routes";
+import BaseTheme from "./themes/ThemeProvider";
+import Routes from "./lib/routes/Routes";
 import "./App.css";
 
 // import DefaultCustomerProvider from './Context/DefaultCustomerContext';

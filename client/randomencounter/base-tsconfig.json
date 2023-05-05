@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "typeRoots": ["src/images.d.ts"],
+    "baseUrl": "src"
+  },
+  "include": ["src"]
+}

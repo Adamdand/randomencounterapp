@@ -1,4 +1,4 @@
-import { IMonsterEnvironments } from "../Context/Types";
+import { IMonsterEnvironments } from "../context/Types";
 
 export const monsterRegions = [
   "All",

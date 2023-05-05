@@ -1,4 +1,4 @@
-import { IPlayer } from "../Context/Types";
+import { IPlayer } from "../context/Types";
 
 export const defaultUserData = [
   {

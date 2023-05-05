@@ -1,5 +1,5 @@
 import React, { createContext } from "react";
-import { defaultUserData } from "../API/DummyData";
+import { defaultUserData } from "../api/DummyData";
 import { IPlayer } from "./Types";
 
 interface IProps {
