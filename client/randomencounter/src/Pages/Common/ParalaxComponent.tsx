@@ -61,7 +61,6 @@ const ParalaxComponent: React.FC<IProps> = (props: IProps) => {
           height: "100vh",
           perspective: "1px",
           overflowX: "hidden",
-          overflowY: "auto",
         }}
       >
         {imageList.map((paralaxData: IParallaxImages) => {
