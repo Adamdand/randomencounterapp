@@ -271,6 +271,7 @@ const ItemSearch = (props: IProps) => {
         <Box>
           <FormControl sx={{ width: "250px" }}>
             <Typography variant="h3">Basic Items</Typography>
+
             <Select
               fullWidth={true}
               labelId="item"
@@ -286,6 +287,13 @@ const ItemSearch = (props: IProps) => {
             </Select>
           </FormControl>
         </Box>
+        <Typography variant="body1" color="red">
+          Warning: occasion items may cause search function to crash - in such
+          an occurance, please refresh the page.
+        </Typography>
+        <Typography variant="body1" color="red">
+          We are looking into this bug. Thank you.
+        </Typography>
         <Box>
           {equipDetails !== undefined &&
           equipDetails !== null &&

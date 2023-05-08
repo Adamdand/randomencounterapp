@@ -204,7 +204,15 @@ const RandomItem = (props: IProps) => {
           </FormControl> */}
           <Button onClick={handleMagicItemChange}>Random</Button>
         </Box>
-
+        <Box>
+          <Typography variant="body1" color="red">
+            Warning: occasion items may cause page to crash - in such an
+            occurance, please refresh the page.
+          </Typography>
+          <Typography variant="body1" color="red">
+            We are looking into this bug. Thank you.
+          </Typography>
+        </Box>
         <Box>
           {itemDetails !== null && itemDetails !== undefined ? (
             <Box className={classes.monsterInfo}>
