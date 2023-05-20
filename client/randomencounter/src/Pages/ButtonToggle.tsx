@@ -26,7 +26,7 @@ const ButtonToggle = (props: IProps) => {
         flexDirection: "row",
         width: "100%",
         backgroundColor: "indianred",
-        overflowX: "scroll",
+        overflowX: "auto",
       }}
     >
       <ToggleButtonGroup
